@@ -5,8 +5,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -25,7 +23,7 @@ public class SubmitPracticeFormTest {
     }
 
     @Test
-    void submitStudentRegistrationForm() {
+    void submitStudentRegistrationFormTest() {
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String email = "ivanov@ivan.ru";
@@ -35,7 +33,6 @@ public class SubmitPracticeFormTest {
         String gender = "Male";
         String sport = "Sports";
         String music = "Music";
-        File file = new File("/home/vladimir/Downloads/Repository/PetProjects/temp/qaguru-java/src/test/resources/test.jpg");
         String state = "Uttar Pradesh";
         String city = "Lucknow";
 
@@ -67,7 +64,7 @@ public class SubmitPracticeFormTest {
         hobbies.filterBy(text(music)).first().click();
 
 
-        $("#uploadPicture").uploadFile(file);
+        $("#uploadPicture").uploadFromClasspath("test.jpg");
         $("#currentAddress").setValue(address);
 
         $("#state").click();
