@@ -11,6 +11,11 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
 dependencies {
     testImplementation(
             'com.codeborne:selenide:7.5.1',
