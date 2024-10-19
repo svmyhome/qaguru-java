@@ -9,3 +9,4 @@
 ``` $("#repository-container-header nav ul li a#wiki-tab")```
 
 ![Screenshot from 2024-10-16 19-32-47.png](src/test/resources/Screenshot%20from%202024-10-16%2019-32-47.png)
+![Screenshot from 2024-10-17 20-32-02.png](src/test/resources/Screenshot%20from%202024-10-17%2020-32-02.png)
