@@ -18,7 +18,7 @@ public class FindSolutionsTests {
     }
 
     @Test
-    void hoverSolutionTest() {
+    void goToEnterpriseUseHoverTest() {
 
         open("/");
         $$(".HeaderMenu-nav li").findBy(text("Solutions")).hover();
