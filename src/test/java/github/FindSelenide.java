@@ -23,7 +23,7 @@ public class FindSelenide {
         pages.setValue("SoftAssertions");
         SelenideElement rightbar = $(".wiki-rightbar");
         rightbar.shouldHave(text("SoftAssertions"));
-        rightbar.find(byText("SoftAssertions")).click();
+            rightbar.find(byText("SoftAssertions")).click();
         $("#wiki-body").shouldHave(text("JUnit5"));
     }
 }
