@@ -30,7 +30,4 @@ public class DragAndDropTests {
         $("#column-a").dragAndDrop(DragAndDropOptions.to($("#column-b")));
         $("#column-b header").shouldHave(text("A"));
     }
-
 }
-
-// В Selenide есть команда $(element).dragAndDrop($(to-element))
