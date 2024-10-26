@@ -41,7 +41,6 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setState(state)
                 .selectCity(city)
                 .submitButton();
-        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
         registrationPage.checkResultAllFields(firstName, lastName, email, gender,
                 subjects, sport, music, address, state, city);
     }
@@ -61,7 +60,6 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setNumber(userNumber)
                 .setDateOfBirth("November", "1996", "07")
                 .submitButton();
-        $(".modal-title").shouldHave(text("Thanks for submitting the form"));
         registrationPage.checkResultRequiredFields(firstName, lastName, gender);
     }
 

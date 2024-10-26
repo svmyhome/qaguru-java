@@ -2,6 +2,7 @@ package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$$;
@@ -30,7 +31,7 @@ public class CheckResults {
         $$(".table-responsive tbody tr").filterBy(text("Mobile")).first().shouldHave(text("Mobile 7953678765"));
         $$(".table-responsive tbody tr").filterBy(text("Date of Birth")).first().shouldHave(text("07 November,1996"));
     }
-    
+
     public void checkElementColor(SelenideElement element, String cssElement, String color) {
         element.shouldHave((cssValue(cssElement, color)));
     }

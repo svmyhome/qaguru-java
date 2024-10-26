@@ -7,6 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -62,8 +63,6 @@ public class SubmitPracticeFormTest {
         $(".react-datepicker__day--0" + date + ":not(.react-datepicker__day--outside-month)").click();
 
 
-
-
         $("#subjectsInput").setValue("h");
         $$("div[id^='react-select-2-option-']").filterBy(text(subjects)).first().click();
 
@@ -84,6 +83,11 @@ public class SubmitPracticeFormTest {
 
         $(".modal-title").shouldHave(text("Thanks for submitting the form"));
 
+        ElementsCollection resultTable = $$(".table-responsive tbody tr");
+        resultTable.shouldHave(texts(firstName + " " + lastName, email, gender, "Mobile 7953678765",
+                "07 November,1996", subjects, sport + ", " + music, "Picture test.jpg", address, state + " " + city));
+
+    // OR
 //        ElementsCollection resultTable = $$(".table-responsive tbody tr");
 //        resultTable.filterBy(text("Student Name")).first().shouldHave(text(firstName + " " + lastName));
 //        resultTable.filterBy(text("Student Email")).first().shouldHave(text(email));
@@ -95,9 +99,11 @@ public class SubmitPracticeFormTest {
 //        resultTable.filterBy(text("Picture")).first().shouldHave(text("Picture test.jpg"));
 //        resultTable.filterBy(text("Address")).first().shouldHave(text(address));
 //        resultTable.filterBy(text("State and City")).first().shouldHave(text(state + " " + city));
-        $(".table-responsive").shouldHave(text(firstName + " " + lastName), text(email), text(gender),
-                text("Mobile 7953678765"), text("07 November,1996"), text(subjects), text(sport + ", " + music),
-                text("Picture test.jpg"), text(state + " " + city));
+
+        // OR
+//        $(".table-responsive").shouldHave(text(firstName + " " + lastName), text(email), text(gender),
+//                text("Mobile 7953678765"), text("07 November,1996"), text(subjects), text(sport + ", " + music),
+//                text("Picture test.jpg"), text(state + " " + city));
 
     }
 
