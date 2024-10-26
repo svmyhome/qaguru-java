@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class SubmitPracticeFormTest {
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1900*2400";
+        Configuration.browserSize = "1000x1900";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
 
