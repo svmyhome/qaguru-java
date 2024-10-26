@@ -130,23 +130,22 @@ public class RegistrationPage {
     }
 
     public RegistrationPage checkFirsNameInputColor(String cssElement, String color) {
-//        firstNameInput.shouldHave((cssValue(cssElement, color)));
-        checkColor.checkElementColor(firstNameInput, cssElement,color);
+        checkColor.checkElementColor(firstNameInput, cssElement, color);
         return this;
     }
 
     public RegistrationPage checkLastNameInputColor(String cssElement, String color) {
-        lastNameInput.shouldHave((cssValue(cssElement, color)));
+        checkColor.checkElementColor(lastNameInput, cssElement, color);
         return this;
     }
 
     public RegistrationPage checkGenderColor(String cssElement, String color) {
-        gender.shouldHave((cssValue(cssElement, color)));
+        checkColor.checkElementColor(gender, cssElement, color);
         return this;
     }
 
     public RegistrationPage checkPhoneInputColor(String cssElement, String color) {
-        numberInput.shouldHave((cssValue(cssElement, color)));
+        checkColor.checkElementColor(numberInput, cssElement, color);
         return this;
     }
 
