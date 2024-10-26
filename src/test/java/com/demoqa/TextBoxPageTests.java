@@ -19,6 +19,6 @@ public class TextBoxPageTests extends TestBase {
                 .fillPermanentAddress("Spb nevsky 19")
                 .clickSubmit();
 
-        $$("#output").shouldHave(texts("Иванов Иван", "afdsdas@mail.ru", "Spb nevsky 19", "Spb nevsky 19"));
+        $$("#output p").shouldHave(texts("Иванов Иван", "afdsdas@mail.ru", "Spb nevsky 19", "Spb nevsky 19"));
     }
 }
