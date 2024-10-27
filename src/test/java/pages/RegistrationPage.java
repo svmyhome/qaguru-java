@@ -30,8 +30,8 @@ public class RegistrationPage {
             selectSubject = $$("div[id^='react-select-2-option-']"),
             hobbies = $$("label[for^='hobbies-checkbox']"),
             selectState = $$("div[id^=react-select-3-option-"),
-            selectCity = $$("div[id^=react-select-4-option-"),
-            resultTable = $$(".table-responsive tbody tr");
+            selectCity = $$("div[id^=react-select-4-option-");
+
 
     Calendar calendar = new Calendar();
     CheckResults checkTable = new CheckResults();
@@ -114,18 +114,18 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkResultAllFields(String firstName, String lastName, String email, String gender,
+    public RegistrationPage checkResultAllFields(String firstName, String lastName, String email, String gender, String dateOfBirth,
                                                  String subjects, String sport, String music, String address,
                                                  String state, String city) {
         submitFrom.shouldHave(text("Thanks for submitting the form"));
-        checkTable.checkTableResult(firstName, lastName, email, gender,
+        checkTable.checkTableResult(firstName, lastName, email, gender, dateOfBirth,
                 subjects, sport, music, address, state, city);
         return this;
     }
 
-    public RegistrationPage checkResultRequiredFields(String firstName, String lastName, String gender) {
+    public RegistrationPage checkResultRequiredFields(String firstName, String lastName, String gender, String dateOfBirth) {
         submitFrom.shouldHave(text("Thanks for submitting the form"));
-        checkTable.checkRequiredFielsTableResult(firstName, lastName, gender);
+        checkTable.checkRequiredFieldsTableResult(firstName, lastName, gender, dateOfBirth);
         return this;
     }
 

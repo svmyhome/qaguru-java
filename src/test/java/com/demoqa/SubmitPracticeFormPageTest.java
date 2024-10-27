@@ -1,31 +1,32 @@
 package com.demoqa;
 
 import org.junit.jupiter.api.Test;
-
 import pages.RegistrationPage;
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
 
 public class SubmitPracticeFormPageTest extends TestBase {
 
+    String firstName = "Ivan";
+    String lastName = "Ivanov";
+    String email = "ivanov@ivan.ru";
+    String userNumber = "79536787656";
+    String subjects = "Maths";
+    String address = "СПБ, невский проспект 16";
+    String gender = "Male";
+    String sport = "Sports";
+    String music = "Music";
+    String state = "Uttar Pradesh";
+    String city = "Lucknow";
+    String photo = "test.jpg";
+    String date = "07";
+    String month = "November";
+    String year = "1996";
+    String dateMonthYear = String.format("%s %s,%s", date, month, year); //date + " " + month+;
 
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void submitStudentRegistrationFormFillAllFieldsTest() {
-        String firstName = "Ivan";
-        String lastName = "Ivanov";
-        String email = "ivanov@ivan.ru";
-        String userNumber = "79536787656";
-        String subjects = "Maths";
-        String address = "СПБ, невский проспект 16";
-        String gender = "Male";
-        String sport = "Sports";
-        String music = "Music";
-        String state = "Uttar Pradesh";
-        String city = "Lucknow";
-        String photo = "test.jpg";
+
 
         registrationPage.openPage()
                 .setFirstName(firstName)
@@ -33,7 +34,7 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setEmail(email)
                 .setGender(gender)
                 .setNumber(userNumber)
-                .setDateOfBirth("November", "1996", "07")
+                .setDateOfBirth(month, year, date)
                 .setSubjects("h", subjects)
                 .selectHobbies(sport, music)
                 .uploadPicture(photo)
@@ -41,26 +42,21 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setState(state)
                 .selectCity(city)
                 .submitButton();
-        registrationPage.checkResultAllFields(firstName, lastName, email, gender,
+        registrationPage.checkResultAllFields(firstName, lastName, email, gender, dateMonthYear,
                 subjects, sport, music, address, state, city);
     }
 
     @Test
     void submitStudentRegistrationFormFillRequiredFieldsTest() {
-        String firstName = "Ivan";
-        String lastName = "Ivanov";
-        String userNumber = "79536787656";
-        String gender = "Male";
-
 
         registrationPage.openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setGender(gender)
                 .setNumber(userNumber)
-                .setDateOfBirth("November", "1996", "07")
+                .setDateOfBirth(month, year, date)
                 .submitButton();
-        registrationPage.checkResultRequiredFields(firstName, lastName, gender);
+        registrationPage.checkResultRequiredFields(firstName, lastName, gender, dateMonthYear);
     }
 
     @Test
