@@ -81,9 +81,9 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage selectHobbies(String sport, String music) {
-        hobbies.filterBy(text(sport)).first().click(); //todo
-        hobbies.filterBy(text(music)).first().click();
+
+    public RegistrationPage setHobby(String value) {
+        hobbies.filterBy(text(value)).first().click();
         return this;
     }
 
@@ -123,7 +123,6 @@ public class RegistrationPage {
         tableCheck.checkRow(key, value);
         return this;
     }
-
 
     public RegistrationPage checkFirsNameInputColor(String cssElement, String color) {
         colorCheck.checkElementColor(firstNameInput, cssElement, color);
