@@ -3,8 +3,6 @@ package com.demoqa;
 import org.junit.jupiter.api.Test;
 import pages.TextBoxPage;
 
-import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class TextBoxPageTests extends TestBase {
 
@@ -26,6 +24,5 @@ public class TextBoxPageTests extends TestBase {
                 .clickSubmit();
 
         textBoxPage.checkSubmitForm(name, email, current_address, permanent_address);
-//        $$("#output p").shouldHave(texts(name, email, address, address)); //TODO
     }
 }
