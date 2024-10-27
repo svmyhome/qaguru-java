@@ -6,9 +6,9 @@ import com.codeborne.selenide.SelenideElement;
 import pages.components.Calendar;
 import pages.components.CheckResults;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
 
@@ -34,8 +34,8 @@ public class RegistrationPage {
 
 
     Calendar calendar = new Calendar();
-    CheckResults checkTable = new CheckResults();
-    CheckResults checkColor = new CheckResults();
+    CheckResults tableCheck = new CheckResults();
+    CheckResults colorCheck = new CheckResults();
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -82,7 +82,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage selectHobbies(String sport, String music) {
-        hobbies.filterBy(text(sport)).first().click();
+        hobbies.filterBy(text(sport)).first().click(); //todo
         hobbies.filterBy(text(music)).first().click();
         return this;
     }
@@ -114,38 +114,34 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage checkResultAllFields(String firstName, String lastName, String email, String gender, String dateOfBirth,
-                                                 String subjects, String sport, String music, String address,
-                                                 String state, String city) {
+    public RegistrationPage checkSubmitFormTitle() {
         submitFrom.shouldHave(text("Thanks for submitting the form"));
-        checkTable.checkTableResult(firstName, lastName, email, gender, dateOfBirth,
-                subjects, sport, music, address, state, city);
         return this;
     }
 
-    public RegistrationPage checkResultRequiredFields(String firstName, String lastName, String gender, String dateOfBirth) {
-        submitFrom.shouldHave(text("Thanks for submitting the form"));
-        checkTable.checkRequiredFieldsTableResult(firstName, lastName, gender, dateOfBirth);
+    public RegistrationPage tableRowCheck(String key, String value) {
+        tableCheck.checkRow(key, value);
         return this;
     }
+
 
     public RegistrationPage checkFirsNameInputColor(String cssElement, String color) {
-        checkColor.checkElementColor(firstNameInput, cssElement, color);
+        colorCheck.checkElementColor(firstNameInput, cssElement, color);
         return this;
     }
 
     public RegistrationPage checkLastNameInputColor(String cssElement, String color) {
-        checkColor.checkElementColor(lastNameInput, cssElement, color);
+        colorCheck.checkElementColor(lastNameInput, cssElement, color);
         return this;
     }
 
     public RegistrationPage checkGenderColor(String cssElement, String color) {
-        checkColor.checkElementColor(gender, cssElement, color);
+        colorCheck.checkElementColor(gender, cssElement, color);
         return this;
     }
 
     public RegistrationPage checkPhoneInputColor(String cssElement, String color) {
-        checkColor.checkElementColor(numberInput, cssElement, color);
+        colorCheck.checkElementColor(numberInput, cssElement, color);
         return this;
     }
 

@@ -20,9 +20,10 @@ public class SubmitPracticeFormPageTest extends TestBase {
     String date = "07";
     String month = "November";
     String year = "1996";
-    String dateMonthYear = String.format("%s %s,%s", date, month, year); //date + " " + month+;
+    String dateMonthYear = String.format("%s %s,%s", date, month, year);
 
     RegistrationPage registrationPage = new RegistrationPage();
+
 
     @Test
     void submitStudentRegistrationFormFillAllFieldsTest() {
@@ -42,8 +43,18 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setState(state)
                 .selectCity(city)
                 .submitButton();
-        registrationPage.checkResultAllFields(firstName, lastName, email, gender, dateMonthYear,
-                subjects, sport, music, address, state, city);
+
+        registrationPage.checkSubmitFormTitle()
+                .tableRowCheck("Student Name", firstName + " " + lastName)
+                .tableRowCheck("Student Email", email)
+                .tableRowCheck("Gender", gender)
+                .tableRowCheck("Mobile", "Mobile 7953678765")
+                .tableRowCheck("Date of Birth", dateMonthYear)
+                .tableRowCheck("Subjects", subjects)
+                .tableRowCheck("Hobbies", sport + ", " + music)
+                .tableRowCheck("Picture", "Picture test.jpg")
+                .tableRowCheck("Address", address)
+                .tableRowCheck("State and City", state + " " + city);
     }
 
     @Test
@@ -56,7 +67,11 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setNumber(userNumber)
                 .setDateOfBirth(month, year, date)
                 .submitButton();
-        registrationPage.checkResultRequiredFields(firstName, lastName, gender, dateMonthYear);
+        registrationPage.checkSubmitFormTitle()
+                .tableRowCheck("Student Name", firstName + " " + lastName)
+                .tableRowCheck("Gender", gender)
+                .tableRowCheck("Mobile", "Mobile 7953678765")
+                .tableRowCheck("Date of Birth", dateMonthYear);
     }
 
     @Test
