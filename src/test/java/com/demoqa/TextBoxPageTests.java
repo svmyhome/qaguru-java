@@ -14,7 +14,7 @@ public class TextBoxPageTests extends TestBase {
     String permanent_address = "Spb nevsky 19";
 
     @Test
-    void fillAllField1Test() {
+    void fillAllFieldTest() {
 
         textBoxPage.openPage()
                 .fillFullName(name)
