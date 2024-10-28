@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class CheckResults {
 
     public static final ElementsCollection tablePracticeForm = $$(".table-responsive tbody tr"),
-            tableTextBox = $$("#output p");
+            formTextBox = $$("#output");
 
     public void checkRow(String key, String value) {
         tablePracticeForm.filterBy(text(key)).first().shouldHave(text(value));
@@ -21,7 +21,7 @@ public class CheckResults {
         element.shouldHave((cssValue(cssElement, color)));
     }
 
-    public void checkTextBoxResults(String name, String email, String current_address, String permanent_address) {
-        tableTextBox.shouldHave(texts(name, email, current_address, permanent_address));
+    public void checkTextBoxResults(String value) {
+        formTextBox.shouldHave(texts(value));
     }
 }

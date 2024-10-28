@@ -2,7 +2,6 @@ package pages;
 
 import pages.components.CheckResults;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -39,8 +38,8 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage checkSubmitForm(String name, String email, String current_address, String permanent_address) {
-        checkResults.checkTextBoxResults(name, email, current_address, permanent_address);
+    public TextBoxPage checkTextBoxString(String value) {
+        checkResults.checkTextBoxResults(value);
         return this;
     }
 }
