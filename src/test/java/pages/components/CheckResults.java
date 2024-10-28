@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class CheckResults {
 
-    public static final ElementsCollection tablePracticeForm = $$(".table-responsive tbody tr"),
+    private static final ElementsCollection tablePracticeForm = $$(".table-responsive tbody tr"),
             formTextBox = $$("#output");
 
     public void checkRow(String key, String value) {
