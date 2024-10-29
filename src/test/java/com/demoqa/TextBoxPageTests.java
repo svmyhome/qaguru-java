@@ -7,7 +7,6 @@ public class TextBoxPageTests extends TestBase {
 
     String name = fakerRu.name().firstName();
     String email = fakerEng.internet().emailAddress();
-    ;
     String current_address = fakerRu.address().streetAddress();
     String permanent_address = fakerRu.address().streetAddress();
 
