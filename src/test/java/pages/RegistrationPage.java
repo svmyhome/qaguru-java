@@ -37,10 +37,14 @@ public class RegistrationPage {
     CheckResults tableCheck = new CheckResults();
     CheckResults colorCheck = new CheckResults();
 
-    public RegistrationPage openPage() {
-        open("/automation-practice-form");
+    public void removeAds() {
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
+    }
+
+    public RegistrationPage openPage() {
+        open("/automation-practice-form");
+        removeAds();
         return this;
     }
 

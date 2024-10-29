@@ -1,16 +1,24 @@
 package com.demoqa;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
-public class SubmitPracticeFormPageTest extends TestBase {
+import java.util.Locale;
 
-    String firstName = "Ivan";
-    String lastName = "Ivanov";
-    String email = "ivanov@ivan.ru";
-    String userNumber = "79536787656";
+public class SubmitPracticeFormPageTest extends TestBase {
+    RegistrationPage registrationPage = new RegistrationPage();
+    Faker fakerRu = new Faker(new Locale("ru"));
+    Faker fakerEng = new Faker(new Locale("en-US"));
+
+
+    String firstName = fakerRu.name().firstName();
+    String lastName = fakerRu.name().lastName();
+    String email = fakerEng.internet().emailAddress();
+    String userNumber = fakerRu.phoneNumber().subscriberNumber(10);
+    String charSubject = "m";
     String subjects = "Maths";
-    String address = "СПБ, невский проспект 16";
+    String address = fakerRu.address().streetAddress();
     String gender = "Male";
     String sport = "Sports";
     String music = "Music";
@@ -20,9 +28,15 @@ public class SubmitPracticeFormPageTest extends TestBase {
     String date = "07";
     String month = "November";
     String year = "1996";
-    String dateMonthYear = String.format("%s %s,%s", date, month, year);
+    String dateOfBirth = String.format("%s %s,%s", date, month, year);
+    String redColor = "rgb(220, 53, 69)";
 
-    RegistrationPage registrationPage = new RegistrationPage();
+
+    String studentName = firstName + " " + lastName,
+            mobile = "Mobile " + userNumber,
+            hobbies = sport + ", " + music,
+            picture = "Picture test.jpg",
+            stateCity = state + " " + city;
 
 
     @Test
@@ -36,7 +50,7 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setGender(gender)
                 .setNumber(userNumber)
                 .setDateOfBirth(month, year, date)
-                .setSubjects("h", subjects)
+                .setSubjects(charSubject, subjects)
                 .setHobby(sport)
                 .setHobby(music)
                 .uploadPicture(photo)
@@ -46,16 +60,16 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .submitButton();
 
         registrationPage.checkSubmitFormTitle()
-                .tableRowCheck("Student Name", firstName + " " + lastName)
+                .tableRowCheck("Student Name", studentName)
                 .tableRowCheck("Student Email", email)
                 .tableRowCheck("Gender", gender)
-                .tableRowCheck("Mobile", "Mobile 7953678765")
-                .tableRowCheck("Date of Birth", dateMonthYear)
+                .tableRowCheck("Mobile", mobile)
+                .tableRowCheck("Date of Birth", dateOfBirth)
                 .tableRowCheck("Subjects", subjects)
-                .tableRowCheck("Hobbies", sport + ", " + music)
-                .tableRowCheck("Picture", "Picture test.jpg")
+                .tableRowCheck("Hobbies", hobbies)
+                .tableRowCheck("Picture", picture)
                 .tableRowCheck("Address", address)
-                .tableRowCheck("State and City", state + " " + city);
+                .tableRowCheck("State and City", stateCity);
     }
 
     @Test
@@ -69,20 +83,20 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setDateOfBirth(month, year, date)
                 .submitButton();
         registrationPage.checkSubmitFormTitle()
-                .tableRowCheck("Student Name", firstName + " " + lastName)
+                .tableRowCheck("Student Name", studentName)
                 .tableRowCheck("Gender", gender)
-                .tableRowCheck("Mobile", "Mobile 7953678765")
-                .tableRowCheck("Date of Birth", dateMonthYear);
+                .tableRowCheck("Mobile", mobile)
+                .tableRowCheck("Date of Birth", dateOfBirth);
     }
 
     @Test
     void submitStudentRegistrationFormFillRequiredFieldsNegativeTest() {
         registrationPage.openPage()
                 .submitButton()
-                .checkFirsNameInputColor("border-color", "rgb(220, 53, 69)")
-                .checkLastNameInputColor("border-color", "rgb(220, 53, 69)")
-                .checkGenderColor("border-color", "rgb(220, 53, 69)")
-                .checkPhoneInputColor("border-color", "rgb(220, 53, 69)")
+                .checkFirsNameInputColor("border-color", redColor)
+                .checkLastNameInputColor("border-color", redColor)
+                .checkGenderColor("border-color", redColor)
+                .checkPhoneInputColor("border-color", redColor)
                 .checkSubmitFormNotVisible();
     }
 
