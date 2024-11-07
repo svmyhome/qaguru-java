@@ -11,9 +11,6 @@ public class TestBase {
     static void beforeAll() {
         Configuration.browserSize = "1920x1200";
         Configuration.baseUrl = "https://lenta.com/";
-//        Configuration.pageLoadStrategy = "eager";
-//        Configuration.holdBrowserOpen = true;
-//        Configuration.timeout = 10000;
     }
 
 
