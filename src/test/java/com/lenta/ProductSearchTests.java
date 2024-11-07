@@ -16,8 +16,8 @@ public class ProductSearchTests extends TestBase {
 
 
     @Tags({@Tag("SEARCH"), @Tag("SMOKE")})
-    @DisplayName("Товар не должен быть пустым VALUE Source")
-    @ParameterizedTest(name = "Товар {0} должен находится")
+    @DisplayName("Товар найден через строку поиска")
+    @ParameterizedTest(name = "Товар {0} найден через строку поиска")
     @ValueSource(strings = {"молоко", "кефир", "сметана"})
     void searchResultShouldNotBeEmpty(String item) throws InterruptedException {
         mainPage.openMainPage();
@@ -28,10 +28,10 @@ public class ProductSearchTests extends TestBase {
     }
 
     @Tag("BLOCKER")
-    @DisplayName("Товар не должен быть пустым CSVSOURCE")
-    @ParameterizedTest(name = "Товар {0} должен находится")
+    @DisplayName("Товар найден через строку поиска и тег существует")
+    @ParameterizedTest(name = "Товар {0} найден через строку поиска и тег {1} существует")
     @CsvSource(value = {"молоко,  Молоко и сливки", "кефир, Кисломолочные продукты", "сметана, Сметана"})
-    void searchResultShouldNotBeEmptyCSV(String item, String tag) throws InterruptedException {
+    void searchResultShouldNotBeEmptyTagExist(String item, String tag) throws InterruptedException {
         mainPage.openMainPage();
         sleep(3000);
         mainPage.openSearch().fillItemSearchEnter(item);
@@ -42,14 +42,14 @@ public class ProductSearchTests extends TestBase {
 
 
     @Tag("BLOCKER")
-    @DisplayName("Товар не должен быть пустым CSVSOURCE")
-    @ParameterizedTest(name = "Товар {0} должен находится")
+    @DisplayName("Товар найден через строку поиска и тег существует")
+    @ParameterizedTest(name = "Товар {0} найден через строку поиска и тег {1} существует")
     @CsvSource(value = {
             "молоко|  Молоко и сливки",
             "кефир| Кисломолочные продукты",
             "сметана| Сметана"},
             delimiter = '|')
-    void searchResultShouldNotBeEmptyDelimeter(String item, String tag) throws InterruptedException {
+    void searchResultShouldNotBeEmptyTagExistDelimeter(String item, String tag) throws InterruptedException {
         mainPage.openMainPage();
         sleep(3000);
         mainPage.openSearch().fillItemSearchEnter(item);
@@ -59,10 +59,10 @@ public class ProductSearchTests extends TestBase {
     }
 
     @Tag("BLOCKER")
-    @DisplayName("Товар не должен быть пустым CSVSOURCE")
-    @ParameterizedTest(name = "Товар {0} должен находится")
+    @DisplayName("Товар найден через строку поиска и тег существует")
+    @ParameterizedTest(name = "Товар {0} найден через строку поиска и тег {1} существует")
     @CsvFileSource(resources = "/test_data/searchResultShouldNotBeEmptyCSVFile.csv")
-    void searchResultShouldNotBeEmptyCSVFile(String item, String tag) throws InterruptedException {
+    void searchResultShouldNotBeEmptyTagExistCSVFile(String item, String tag) throws InterruptedException {
         mainPage.openMainPage();
         sleep(3000);
         mainPage.openSearch().fillItemSearchEnter(item);
@@ -73,8 +73,8 @@ public class ProductSearchTests extends TestBase {
 
 
     @Tags({@Tag("SEARCH"), @Tag("ADULT")})
-    @DisplayName("Товар для взрослых не должен быть пустым")
-    @ParameterizedTest(name = "Товар для взрослых {0} должен находится")
+    @DisplayName("Товар для взрослых найден через строку поиска")
+    @ParameterizedTest(name = "Товар для взрослых {0} найден через строку поиска")
     @EnumSource(AdultGoods.class)
     void adultSearchResultShouldNotBeEmpty(AdultGoods adultGoods) throws InterruptedException {
         mainPage.openMainPage();
@@ -85,7 +85,7 @@ public class ProductSearchTests extends TestBase {
                 .getNumberItems();
     }
 
-    static Stream<Arguments> adultMethod() {
+    static Stream<Arguments> adultSearchResultShouldNotBeEmptyTagsExist() {
         return Stream.of(
                 Arguments.of(AdultGoods.WHISKY, List.of("Виски", "Напитки", "Посуда для сервировки",
                         "Конфеты", "Конфеты и подарочные наборы", "Для тела", "до -40% на посуду Platinum Choice",
@@ -103,9 +103,9 @@ public class ProductSearchTests extends TestBase {
 
     @MethodSource
     @Tag("SMOKE")
-    @DisplayName("Товар")
-    @ParameterizedTest(name = "Товар для взрослых {0} должен находится")
-    void adultMethod(AdultGoods adultGoods, List<String> tags) throws InterruptedException {
+    @DisplayName("Товар для взрослых найден через строку поиска и тег существует")
+    @ParameterizedTest(name = "Товар для взрослых {0} найден через строку поиска и теги {1} существует")
+    void adultSearchResultShouldNotBeEmptyTagsExist(AdultGoods adultGoods, List<String> tags) throws InterruptedException {
         mainPage.openMainPage();
         sleep(3000);
         mainPage.openSearch()
