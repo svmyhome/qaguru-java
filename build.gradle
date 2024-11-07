@@ -27,5 +27,20 @@ dependencies {
 }
 
 test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"
+    }
     useJUnitPlatform()
+}
+
+tasks.register('test-by-tag', Test) {
+    useJUnitPlatform {
+        if (project.hasProperty("includedTags")) {
+            includeTags(project.properties.get("includedTags").toString())
+        }
+        if (project.hasProperty("excludedTags")) {
+            excludeTags(project.properties.get("excludedT`ags").toString())
+        }
+    }
 }

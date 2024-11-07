@@ -1,5 +1,6 @@
 package com.demoqa;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
@@ -7,10 +8,10 @@ public class TextBoxPageTests extends TestBase {
 
     String name = fakerRu.name().firstName();
     String email = fakerEng.internet().emailAddress();
-    ;
     String current_address = fakerRu.address().streetAddress();
     String permanent_address = fakerRu.address().streetAddress();
 
+    @DisplayName("")
     @Test
     void fillAllField1Test() {
 
