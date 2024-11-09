@@ -13,6 +13,7 @@
 
 Запуск тестов
 gradle test
+gradle dependencies - покажет список зависимостей на проекте
 https://habr.com/ru/companies/rostelecom/articles/748444/
 
 ```

@@ -16,7 +16,7 @@ public class SubmitPracticeFormPageTest extends TestBase {
     String music = "Music";
     String state = "Uttar Pradesh";
     String city = "Lucknow";
-    String photo = "test.jpg";
+    String photo = "images/test.jpg";
     String date = "07";
     String month = "November";
     String year = "1996";

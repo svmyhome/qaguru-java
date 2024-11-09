@@ -71,7 +71,7 @@ public class SubmitPracticeFormTest {
         hobbies.filterBy(text(music)).first().click();
 
 
-        $("#uploadPicture").uploadFromClasspath("test.jpg");
+        $("#uploadPicture").uploadFromClasspath("images/test.jpg");
         $("#currentAddress").setValue(address);
 
         $("#state").click();
