@@ -1,8 +1,10 @@
 package com.lenta;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.lenta.pages.MainPage;
 import com.lenta.pages.ProductSearchPage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
@@ -14,6 +16,12 @@ public class TestBase {
 //        Configuration.pageLoadStrategy = "eager";
 //        Configuration.holdBrowserOpen = true;
 //        Configuration.timeout = 10000;
+    }
+
+    @AfterEach
+    void afterEach() {
+        System.out.println("Close WEBDRIVER !!!");
+        Selenide.closeWebDriver();
     }
 
 
