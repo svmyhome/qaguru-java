@@ -2,7 +2,7 @@ package files;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import model.Glossary;
+import model.gson.Glossary;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class WorkWithJson {
-    private ClassLoader cl = WorkWithJson.class.getClassLoader();
+public class WorkWithJsonTest {
+    private ClassLoader cl = WorkWithJsonTest.class.getClassLoader();
     private final static Gson gson = new Gson();
 
     @Test
@@ -45,5 +45,6 @@ public class WorkWithJson {
             Assertions.assertEquals("SGML", actual.getGlossary().getAcronym());
         }
     }
+
 
 }
