@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class WorkWithJsonTest {
-    private ClassLoader cl = WorkWithJsonTest.class.getClassLoader();
+public class WorkWithJsonTests {
+    private ClassLoader cl = WorkWithJsonTests.class.getClassLoader();
     private final static Gson gson = new Gson();
 
     @Test

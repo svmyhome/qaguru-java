@@ -15,8 +15,8 @@ import java.io.Reader;
 
 // https://www.springcloud.io/post/2022-07/jackson/#gsc.tab=0
 
-public class WorkJacksonTest {
-    private ClassLoader cl = WorkWithJsonTest.class.getClassLoader();
+public class WorkJacksonTests {
+    private ClassLoader cl = WorkWithJsonTests.class.getClassLoader();
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test

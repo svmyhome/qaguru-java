@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class WorkWithCSV {
-    private ClassLoader cl = WorkWithCSV.class.getClassLoader();
+public class WorkWithCSVTests {
+    private ClassLoader cl = WorkWithCSVTests.class.getClassLoader();
 
     @Test
     @DisplayName("Чтение из CSV")

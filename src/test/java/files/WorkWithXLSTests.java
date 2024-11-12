@@ -10,7 +10,7 @@ import java.io.File;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class WorkWithXLS {
+public class WorkWithXLSTests {
     @Test
     @DisplayName("Чтение из XLS")
     void readXlsx() throws Exception {

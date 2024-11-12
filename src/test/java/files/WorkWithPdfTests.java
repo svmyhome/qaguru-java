@@ -10,7 +10,7 @@ import java.io.File;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class WorkWithPdf {
+public class WorkWithPdfTests {
     @Test
     @DisplayName("Чтение из PDF")
     void readPdf() throws Exception {
