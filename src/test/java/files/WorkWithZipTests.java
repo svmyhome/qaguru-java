@@ -15,7 +15,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class WorkWithZipTests {
-    private ClassLoader cl = getClass().getClassLoader();
+    private final ClassLoader cl = getClass().getClassLoader();
+    private final WorkWithZip getZip = new WorkWithZip();
 
     private InputStream getFileFromZip(String fileExtension) throws Exception {
         ZipInputStream zis = new ZipInputStream(cl.getResourceAsStream("example.zip"));
@@ -44,33 +45,10 @@ public class WorkWithZipTests {
     }
 
     @Test
-    @DisplayName("Чтение данных из ZIP")
-    void readZipAndAssert() throws Exception {
-        try (InputStream is = cl.getResourceAsStream("example.zip");
-             ZipInputStream zis = new ZipInputStream(is)) {
-
-            ZipEntry zipEntry;
-
-            while ((zipEntry = zis.getNextEntry()) != null) {
-                String name = zipEntry.getName();
-                if (name.contains(".pdf")) {
-                    System.out.println(name);
-                    try (InputStream is1 = cl.getResourceAsStream(name)) {
-                        byte[] data = is1.readAllBytes();
-                        PDF pdf = new PDF(data);
-                        System.out.println(pdf);
-                    }
-                }
-
-            }
-        }
-    }
-
-    @Test
     @DisplayName("В архиве есть pdf, xlsx, json")
     void readZipAndAssert1() throws Exception {
         List<String> expectedResult = List.of("example.csv", "example.pdf", "hyperlink.xlsx");
-        List<String> actualResult = WorkWithZip.getListNames("example.zip");
+        List<String> actualResult = getZip.getListNames("example.zip");
         Assertions.assertEquals(expectedResult, actualResult);
     }
 
