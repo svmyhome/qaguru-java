@@ -53,7 +53,6 @@ public class WorkWithZipTests {
 
             while ((zipEntry = zis.getNextEntry()) != null) {
                 String name = zipEntry.getName();
-//                System.out.println(name);
                 if (name.contains(".pdf")) {
                     System.out.println(name);
                     try (InputStream is1 = cl.getResourceAsStream(name)) {
@@ -70,7 +69,7 @@ public class WorkWithZipTests {
     @Test
     @DisplayName("В архиве есть pdf, xlsx, json")
     void readZipAndAssert1() throws Exception {
-        List<String> expectedResult = List.of("ATTACK_SHARK_X85PRO_User_Manual.pdf", "example.csv", "hyperlink.xlsx");
+        List<String> expectedResult = List.of("example.csv", "example.pdf", "hyperlink.xlsx");
         List<String> actualResult = WorkWithZip.getListNames("example.zip");
         Assertions.assertEquals(expectedResult, actualResult);
     }
@@ -80,7 +79,7 @@ public class WorkWithZipTests {
     void readPdfFromZip() throws Exception {
         try (InputStream pdfInputStream = getFileFromZip(".pdf")) {
             PDF pdf = new PDF(pdfInputStream);
-            Assertions.assertEquals("X85PRO说明书转曲20240603", pdf.title);
+            Assertions.assertEquals("Adobe PDF Library 15.0", pdf.producer);
         }
     }
 
