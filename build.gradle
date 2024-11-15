@@ -63,6 +63,7 @@ test {
         exceptionFormat "full"
     }
     useJUnitPlatform()
+    systemProperties(System.getProperty())
 }
 
 //tasks.register('test-by-tag', Test) {
