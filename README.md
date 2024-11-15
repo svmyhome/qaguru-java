@@ -30,3 +30,55 @@ tasks.register('test-by-tag', Test) {
 ```
 
 gradle test-by-tag -PincludedTags=SMOKE
+
+## ALLURE
+
+```
+plugins {
+    id 'io.qameta.allure' version '2.12.0'
+}
+allure {
+    report { // секция репора
+        version.set("2.29.0")
+    }
+    adapter {  // отвечает за появление папки build/allure-results
+        aspectjWeaver.set(true) //  обработка аннотации @step
+        frameworks {
+            junit5 { //название фреймворка
+                adapterVersion.set("2.29.0") // версия интеграции фреимворка и Aallure
+            }
+        }
+    }
+
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+
+    testImplementation 'io.qameta.allure:allure-selenide:2.29.0'
+}
+```
+
+build/allure-result файлы с настройками
+например ....
+"testCaseName": "SelenideTest()",
+"fullName": "allure.SelenideAllureTest.SelenideTest",
+"
+"name": "SelenideTest()",
+"status": "passed",
+"stage": "finished",
+"description": "",
+"steps": [],
+"attachments": [],
+"parameters": [],
+"start": 1731601321612,
+"stop": 1731601329281
+
