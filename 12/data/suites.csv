@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","21","Issue c номером 92 существует в eroshenkoam/allure-example","","Sat Nov 16 18:00:09 GMT 2024","passed","Sat Nov 16 18:00:09 GMT 2024","","allure.AllureLabelsTest","allure.AllureLabelsTest","staticLabelsTest"
-"","2","Создание ISSUE для авторизованного пользователя","","Sat Nov 16 18:00:09 GMT 2024","passed","Sat Nov 16 18:00:09 GMT 2024","","allure.AllureLabelsTest","allure.AllureLabelsTest","dynamicLabelsTest"
-"","7789","Issue c номером 92 существует в eroshenkoam/allure-example","","Sat Nov 16 18:00:21 GMT 2024","passed","Sat Nov 16 18:00:28 GMT 2024","","allure.AllureWebStepsTest","allure.AllureWebStepsTest","issueShouldExistAnnotatedStepTest"
-"","7508","Issue c номером 92 существует в eroshenkoam/allure-example","","Sat Nov 16 18:00:28 GMT 2024","passed","Sat Nov 16 18:00:36 GMT 2024","","allure.SelenideAllureListenerTest","allure.SelenideAllureListenerTest","issueShouldExistListenerTest"
-"","11218","Issue c номером 92 существует в eroshenkoam/allure-example","","Sat Nov 16 18:00:09 GMT 2024","passed","Sat Nov 16 18:00:21 GMT 2024","","allure.AllureLambdaStepsTest","allure.AllureLambdaStepsTest","issueShouldExistLambdaTest"
