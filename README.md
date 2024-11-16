@@ -85,4 +85,3 @@ build/allure-result файлы с настройками
 ### GitHUB Actions
 
 https://habr.com/ru/companies/flant/articles/803251/
-
