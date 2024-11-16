@@ -82,3 +82,6 @@ build/allure-result файлы с настройками
 "start": 1731601321612,
 "stop": 1731601329281
 
+### GitHUB Actions
+
+https://habr.com/ru/companies/flant/articles/803251/
