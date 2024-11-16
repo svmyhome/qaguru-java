@@ -19,6 +19,7 @@ public class AllureLabelsTest {
 
     }
 
+
     @Test
     public void dynamicLabelsTest() {
         Allure.getLifecycle().updateTestCase(
