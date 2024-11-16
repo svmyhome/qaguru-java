@@ -4,22 +4,23 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@Feature("ISSUE в репозитории")
+@Story("Создание ISSUE")
+@Owner("sarychev")
+@Link(value = "Issue JIRA", url = "https://Jira.com/123")
 public class AllureLabelsTest {
     private static final String REPOSITORY = "eroshenkoam/allure-example";
     private static final int ISSUE = 92;
 
     @Test
-    @Feature("ISSUE в репозитории")
-    @Story("Создание ISSUE")
-    @Owner("sarychev")
     @Severity(SeverityLevel.BLOCKER)
-    @Link(value = "Testing", url = "https://google.com")
-    @DisplayName("Создание ISSUE для авторизованного пользователя")
+    @DisplayName("Issue c номером " + ISSUE + " существует в " + REPOSITORY)
     public void staticLabelsTest() {
 
     }
 
     @Test
+    @Severity(SeverityLevel.BLOCKER)
     public void dynamicLabelsTest() {
         Allure.getLifecycle().updateTestCase(
                 t -> t.setName("Создание ISSUE для авторизованного пользователя")

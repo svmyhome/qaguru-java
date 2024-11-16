@@ -70,7 +70,7 @@ dependencies {
 build/allure-result файлы с настройками
 например ....
 "testCaseName": "SelenideTest()",
-"fullName": "allure.SelenideAllureTest.SelenideTest",
+"fullName": "allure.SelenideAllureListenerTest.SelenideTest",
 "
 "name": "SelenideTest()",
 "status": "passed",
