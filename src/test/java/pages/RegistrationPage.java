@@ -4,7 +4,12 @@ package pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.Calendar;
-import pages.components.CheckResults;
+import pages.components.CssComponents;
+import pages.components.TableComponents;
+
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -34,8 +39,8 @@ public class RegistrationPage {
 
 
     Calendar calendar = new Calendar();
-    CheckResults tableCheck = new CheckResults();
-    CheckResults colorCheck = new CheckResults();
+    TableComponents tableCheck = new TableComponents();
+    CssComponents colorCheck = new CssComponents();
 
     public void removeAds() {
         executeJavaScript("$('#fixedban').remove()");
@@ -54,7 +59,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setLastName(String value) {
-        lastNameInput.type(value);
+        lastNameInput.setValue(value);
         return this;
     }
 
@@ -73,15 +78,16 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setDateOfBirth(String month, String year, String date) {
+    public RegistrationPage setDateOfBirth(LocalDate birthday) {
         dateOfBirthInput.click();
-        calendar.setDate(month, year, date);
+        calendar.setDate(String.format("%02d", birthday.getDayOfMonth()),
+                birthday.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH),
+                String.valueOf(birthday.getYear()));
         return this;
     }
 
-    public RegistrationPage setSubjects(String value, String subjects) {
-        subjectInput.setValue(value);
-        selectSubject.filterBy(text(subjects)).first().click();
+    public RegistrationPage setSubjects(String subjects) {
+        subjectInput.setValue(subjects).pressEnter();
         return this;
     }
 

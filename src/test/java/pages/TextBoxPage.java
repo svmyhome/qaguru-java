@@ -1,12 +1,12 @@
 package pages;
 
-import pages.components.CheckResults;
+import pages.components.TextBoxComponents;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxPage {
-    CheckResults checkResults = new CheckResults();
+    TextBoxComponents checkResults = new TextBoxComponents();
 
     public TextBoxPage openPage() {
         open("https://demoqa.com/text-box");

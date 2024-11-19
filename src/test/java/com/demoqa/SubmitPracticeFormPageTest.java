@@ -1,50 +1,45 @@
 package com.demoqa;
 
+import helpers.RandomUtils;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class SubmitPracticeFormPageTest extends TestBase {
+    RegistrationPage registrationPage = new RegistrationPage();
+    RandomUtils randomUtils = new RandomUtils();
+    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM,yyyy", Locale.ENGLISH);
 
-    String firstName = fakerRu.name().firstName();
-    String lastName = fakerRu.name().lastName();
-    String email = fakerEng.internet().emailAddress();
-    String userNumber = fakerRu.phoneNumber().subscriberNumber(10);
-    String charSubject = "m";
-    String subjects = "Maths";
-    String address = fakerRu.address().streetAddress();
-    String gender = "Male";
-    String sport = "Sports";
-    String music = "Music";
-    String state = "Uttar Pradesh";
-    String city = "Lucknow";
-    String photo = "test.jpg";
-    String date = "07";
-    String month = "November";
-    String year = "1996";
-    String dateOfBirth = String.format("%s %s,%s", date, month, year);
+    String firstName = randomUtils.getRandomFirstName();
+    String lastName = randomUtils.getRandomLastName();
+    String email = randomUtils.getRandomEmail();
+
+    String userNumber = randomUtils.getRandomPhoneNumber(10);
+    String subjects = randomUtils.getRandomSubjects();
+    String address = randomUtils.getRandomAddress();
+    String gender = randomUtils.getRandomGender();
+    String hobby = randomUtils.getRandomHobby();
+    String state = randomUtils.getRandomState();
+    String city = randomUtils.getRandomCity(state);
+    String photo = randomUtils.getRandomPicture();
+    LocalDate dateOfBirth = randomUtils.getRandomBirthDay(15, 70);
     String redColor = "rgb(220, 53, 69)";
-
-
-    String studentName = firstName + " " + lastName,
-            mobile = "Mobile " + userNumber,
-            hobbies = sport + ", " + music,
-            picture = "Picture test.jpg",
-            stateCity = state + " " + city;
 
 
     @Test
     void submitStudentRegistrationFormFillAllFieldsTest() {
-
-
         registrationPage.openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
                 .setGender(gender)
                 .setNumber(userNumber)
-                .setDateOfBirth(month, year, date)
-                .setSubjects(charSubject, subjects)
-                .setHobby(sport)
-                .setHobby(music)
+                .setDateOfBirth(dateOfBirth)
+                .setSubjects(subjects)
+                .setHobby(hobby)
                 .uploadPicture(photo)
                 .currentAddress(address)
                 .setState(state)
@@ -52,16 +47,16 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .submitButton();
 
         registrationPage.checkSubmitFormTitle()
-                .tableRowCheck("Student Name", studentName)
+                .tableRowCheck("Student Name", firstName + " " + lastName)
                 .tableRowCheck("Student Email", email)
                 .tableRowCheck("Gender", gender)
-                .tableRowCheck("Mobile", mobile)
-                .tableRowCheck("Date of Birth", dateOfBirth)
+                .tableRowCheck("Mobile", "Mobile " + userNumber)
+                .tableRowCheck("Date of Birth", dateOfBirth.format(formatter))
                 .tableRowCheck("Subjects", subjects)
-                .tableRowCheck("Hobbies", hobbies)
-                .tableRowCheck("Picture", picture)
+                .tableRowCheck("Hobbies", hobby)
+                .tableRowCheck("Picture", "Picture " + photo)
                 .tableRowCheck("Address", address)
-                .tableRowCheck("State and City", stateCity);
+                .tableRowCheck("State and City", state + " " + city);
     }
 
     @Test
@@ -72,13 +67,13 @@ public class SubmitPracticeFormPageTest extends TestBase {
                 .setLastName(lastName)
                 .setGender(gender)
                 .setNumber(userNumber)
-                .setDateOfBirth(month, year, date)
+                .setDateOfBirth(dateOfBirth)
                 .submitButton();
         registrationPage.checkSubmitFormTitle()
-                .tableRowCheck("Student Name", studentName)
+                .tableRowCheck("Student Name", firstName + " " + lastName)
                 .tableRowCheck("Gender", gender)
-                .tableRowCheck("Mobile", mobile)
-                .tableRowCheck("Date of Birth", dateOfBirth);
+                .tableRowCheck("Mobile", "Mobile " + userNumber)
+                .tableRowCheck("Date of Birth", dateOfBirth.format(formatter));
     }
 
     @Test
