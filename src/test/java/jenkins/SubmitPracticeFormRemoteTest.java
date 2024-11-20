@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,6 +28,10 @@ public class SubmitPracticeFormRemoteTest {
 
     @AfterEach
     void afterEach() {
+        Attach.screenshotAs("Финальный скриншот");
+        Attach.pageSource();
+        Attach.attachAsText("Тестовые логи", "text/ plain");
+        Attach.browserConsoleLogs();
         Selenide.closeWebDriver();
     }
 
