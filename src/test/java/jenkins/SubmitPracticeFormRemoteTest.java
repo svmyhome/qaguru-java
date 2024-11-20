@@ -19,6 +19,7 @@ public class SubmitPracticeFormRemoteTest {
         Configuration.browserSize = "1000x1900";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
     }
 
