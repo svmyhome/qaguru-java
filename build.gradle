@@ -57,13 +57,23 @@ dependencies {
 //    )
 }
 
-test {
-    testLogging {
-        events "passed", "skipped", "failed", "standardOut", "standardError"
-        exceptionFormat "full"
-    }
+tasks.withType(Test) {
     useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "passed", "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+
     systemProperties(System.getProperties())
+}
+
+task simple_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("SIMPLE")
+    }
 }
 
 //tasks.register('test-by-tag', Test) {
