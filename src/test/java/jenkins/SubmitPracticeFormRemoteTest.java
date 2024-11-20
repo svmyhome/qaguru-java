@@ -3,6 +3,8 @@ package jenkins;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
@@ -31,6 +33,8 @@ public class SubmitPracticeFormRemoteTest {
     @Test
     @Tag("DEMOQA")
     void submitStudentRegistrationFormTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+
         String firstName = "Ivan";
         String lastName = "Ivanov";
         String email = "ivanov@ivan.ru";
