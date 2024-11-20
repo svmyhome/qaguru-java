@@ -30,7 +30,7 @@ public class AllureLambdaStepsTest {
     public void issueShouldExistLambdaTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
 
-        step("Открываем главную страницу", () -> {
+        step("Открыть главную страницу Github", () -> {
             open("https://github.com");
         });
 
@@ -40,15 +40,15 @@ public class AllureLambdaStepsTest {
             $("#query-builder-test").pressEnter();
         });
 
-        step("Кликаем по ссылке репозитория " + REPOSITORY, () -> {
+        step("Переход в репозиторий " + REPOSITORY, () -> {
             $(By.linkText(REPOSITORY)).click();
         });
 
-        step("Открываем таб Issues", () -> {
+        step("Открыть таб Issues", () -> {
             $("#issues-tab").click();
         });
 
-        step("Проверяем наличие Issues с номером " + ISSUE, () -> {
+        step("Issues с номером " + ISSUE + " существует", () -> {
             $("#issue_" + ISSUE).should(exist);
             attachment("Source", webdriver().driver().source()); // прикладывает аттачментс
             addAttachment("Screenshot", "image/png", new ByteArrayInputStream(screenshot(OutputType.BYTES)), "png");

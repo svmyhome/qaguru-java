@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class WebSteps {
 
 
-    @Step("Открываем главную страницу")
+    @Step("Открыть главную страницу Github")
     public void openMainPage() {
         open("https://github.com");
     }
@@ -27,17 +27,17 @@ public class WebSteps {
         $("#query-builder-test").pressEnter();
     }
 
-    @Step("Кликаем по ссылке репозитория {repo}")
+    @Step("Переход в репозиторий {repo}")
     public void clickForLink(String repo) {
         $(By.linkText(repo)).click();
     }
 
-    @Step("Открываем таб Issues")
+    @Step("Открыть таб Issues")
     public void openIssueTab() {
         $("#issues-tab").click();
     }
 
-    @Step("Проверяем наличие Issues с номером {issue}")
+    @Step("Issues с номером {issue} существует")
     public void shouldSeeIssue(int issue) {
         $("#issue_" + issue).should(exist);
     }
