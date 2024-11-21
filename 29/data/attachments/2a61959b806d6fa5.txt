@@ -1,0 +1,6 @@
+[2024-11-21T16:42:10.249Z] [WARNING] https://github.com/ - [.WebGL-0xb2002664000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2024-11-21T16:42:10.249Z] [WARNING] https://github.com/ - [.WebGL-0xb200048b800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2024-11-21T16:42:10.249Z] [WARNING] https://github.com/ - [.WebGL-0xb2004026900]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2024-11-21T16:42:10.336Z] [WARNING] https://github.com/ - [.WebGL-0xb2002664000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[2024-11-21T16:42:18.974Z] [WARNING] https://github.githubassets.com/assets/vendors-node_modules_three_build_three_module_js-5d880871cb6c.js 185:239768 "THREE.RingBufferGeometry has been renamed to THREE.RingGeometry."
+[2024-11-21T16:42:23.284Z] [SEVERE] https://cdn.ad.plus/player/adplus.js 426:309 Uncaught TypeError: c(...).setup is not a function
