@@ -1,8 +1,8 @@
 package com.demoqa;
 
-import helpers.RandomUtils;
+import com.demoqa.helpers.RandomUtils;
+import com.demoqa.pages.TextBoxPage;
 import org.junit.jupiter.api.Test;
-import pages.TextBoxPage;
 
 
 public class TextBoxPageTests extends TestBase {

@@ -1,4 +1,4 @@
-package helpers;
+package com.demoqa.helpers;
 
 import com.github.javafaker.Faker;
 

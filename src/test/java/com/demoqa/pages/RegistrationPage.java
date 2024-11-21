@@ -1,11 +1,11 @@
-package pages;
+package com.demoqa.pages;
 
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import pages.components.Calendar;
-import pages.components.CssComponents;
-import pages.components.TableComponents;
+import com.demoqa.pages.components.CalendarComponents;
+import com.demoqa.pages.components.CssComponents;
+import com.demoqa.pages.components.TableComponents;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -38,7 +38,7 @@ public class RegistrationPage {
             selectCity = $$("div[id^=react-select-4-option-");
 
 
-    Calendar calendar = new Calendar();
+    CalendarComponents calendar = new CalendarComponents();
     TableComponents tableCheck = new TableComponents();
     CssComponents colorCheck = new CssComponents();
 

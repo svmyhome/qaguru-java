@@ -1,8 +1,8 @@
 package com.demoqa;
 
-import helpers.RandomUtils;
+import com.demoqa.helpers.RandomUtils;
+import com.demoqa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
-import pages.RegistrationPage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
