@@ -6,10 +6,12 @@ import com.github.javafaker.Faker;
 import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import pages.RegistrationPage;
 import pages.TextBoxPage;
 
 import java.util.Locale;
+import java.util.Map;
 
 public class TestBase {
     protected RegistrationPage registrationPage;
@@ -30,6 +32,12 @@ public class TestBase {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        Configuration.browserCapabilities = capabilities;
     }
 
     @AfterEach
@@ -37,6 +45,7 @@ public class TestBase {
         Attach.screenshotAs("Финальный скриншот");
         Attach.pageSource();
         Attach.browserConsoleLogs();
+        Attach.addVideo();
         Selenide.closeWebDriver();
     }
 }
