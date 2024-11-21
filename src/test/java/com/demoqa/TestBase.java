@@ -3,6 +3,7 @@ package com.demoqa;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
+import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import pages.RegistrationPage;
@@ -33,6 +34,9 @@ public class TestBase {
 
     @AfterEach
     void afterEach() {
+        Attach.screenshotAs("Финальный скриншот");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
         Selenide.closeWebDriver();
     }
 }
