@@ -1,8 +1,10 @@
 package com.demoqa;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag("REGRESS")
 public class SubmitPracticeFormPageTest extends TestBase {
 
     String firstName = fakerRu.name().firstName();
@@ -31,7 +33,7 @@ public class SubmitPracticeFormPageTest extends TestBase {
             picture = "Picture test.jpg",
             stateCity = state + " " + city;
 
-
+    @Tag("SMOKE")
     @Test
     @DisplayName("Регистрация студента, все поля заполнены")
     void submitStudentRegistrationFormFillAllFieldsTest() {

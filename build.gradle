@@ -85,6 +85,18 @@ task demoqa_test(type: Test) {
     }
 }
 
+task regress_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("REGRESS")
+    }
+}
+
+task smoke_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("SMOKE")
+    }
+}
+
 //tasks.register('test-by-tag', Test) {
 //    useJUnitPlatform {
 //        if (project.hasProperty("includedTags")) {
