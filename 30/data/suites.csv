@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","10588","submitStudentRegistrationFormFillRequiredFieldsNegativeTest()","","Thu Nov 21 16:45:08 GMT 2024","passed","Thu Nov 21 16:45:19 GMT 2024","","com.demoqa.SubmitPracticeFormPageTest","com.demoqa.SubmitPracticeFormPageTest","submitStudentRegistrationFormFillRequiredFieldsNegativeTest"
+"","40482","Регистрация студента, все поля заполнены","","Thu Nov 21 16:44:27 GMT 2024","passed","Thu Nov 21 16:45:08 GMT 2024","","com.demoqa.SubmitPracticeFormPageTest","com.demoqa.SubmitPracticeFormPageTest","submitStudentRegistrationFormFillAllFieldsTest"
+"","21288","submitStudentRegistrationFormFillRequiredFieldsTest()","","Thu Nov 21 16:44:05 GMT 2024","passed","Thu Nov 21 16:44:26 GMT 2024","","com.demoqa.SubmitPracticeFormPageTest","com.demoqa.SubmitPracticeFormPageTest","submitStudentRegistrationFormFillRequiredFieldsTest"
+"","14063","fillAllField1Test()","","Thu Nov 21 16:45:19 GMT 2024","passed","Thu Nov 21 16:45:33 GMT 2024","","com.demoqa.TextBoxPageTests","com.demoqa.TextBoxPageTests","fillAllField1Test"
