@@ -97,6 +97,7 @@ task property_test(type: Test) {
     }
 }
 
+
 //tasks.register('test-by-tag', Test) {
 //    useJUnitPlatform {
 //        if (project.hasProperty("includedTags")) {
