@@ -85,6 +85,18 @@ task demoqa_test(type: Test) {
     }
 }
 
+task smoke_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("SMOKE")
+    }
+}
+
+task property_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("property")
+    }
+}
+
 //tasks.register('test-by-tag', Test) {
 //    useJUnitPlatform {
 //        if (project.hasProperty("includedTags")) {
