@@ -23,20 +23,20 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages
-          path: gh-pages
+          ref: gh-com.demoqa.pages
+          path: gh-com.demoqa.pages
       # генерируем отчет
       - uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          gh_pages: gh-pages
+          gh_pages: gh-com.demoqa.pages
           allure_results: build/allure-results
           allure_report: allure-report
           allure_history: allure-history
       # публикуем отчет
-      - uses: peaceiris/actions-gh-pages@v2
+      - uses: peaceiris/actions-gh-com.demoqa.pages@v2
         if: always()
         env:
           PERSONAL_TOKEN: ${{ secrets.VOVA_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
+          PUBLISH_BRANCH: gh-com.demoqa.pages
           PUBLISH_DIR: allure-history

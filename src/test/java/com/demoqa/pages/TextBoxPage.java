@@ -1,6 +1,6 @@
-package pages;
+package com.demoqa.pages;
 
-import pages.components.CheckResults;
+import com.demoqa.pages.components.CheckResults;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;

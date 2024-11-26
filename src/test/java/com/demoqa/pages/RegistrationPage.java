@@ -1,11 +1,11 @@
-package pages;
+package com.demoqa.pages;
 
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.demoqa.pages.components.Calendar;
+import com.demoqa.pages.components.CheckResults;
 import io.qameta.allure.Step;
-import pages.components.Calendar;
-import pages.components.CheckResults;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;

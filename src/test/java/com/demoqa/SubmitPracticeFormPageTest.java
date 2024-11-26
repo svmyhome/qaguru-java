@@ -1,6 +1,7 @@
 package com.demoqa;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class SubmitPracticeFormPageTest extends TestBase {
@@ -31,7 +32,7 @@ public class SubmitPracticeFormPageTest extends TestBase {
             picture = "Picture test.jpg",
             stateCity = state + " " + city;
 
-
+    @Tag("DEMOQA")
     @Test
     @DisplayName("Регистрация студента, все поля заполнены")
     void submitStudentRegistrationFormFillAllFieldsTest() {
