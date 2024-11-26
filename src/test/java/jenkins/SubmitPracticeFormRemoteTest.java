@@ -25,7 +25,8 @@ public class SubmitPracticeFormRemoteTest {
         Configuration.browserSize = "1000x1900";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+//        String remote = System.getProperty("remote");
+        Configuration.remote = System.getProperty("remote");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
