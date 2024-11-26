@@ -22,6 +22,9 @@ import static io.qameta.allure.Allure.step;
 public class SubmitPracticeFormRemoteTest {
     @BeforeAll
     static void beforeAll() {
+
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("browserVersion", "100.0");
         Configuration.browserSize = System.getProperty("browserSize", "1000x1900");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
