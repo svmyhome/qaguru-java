@@ -91,12 +91,18 @@ task smoke_test(type: Test) {
     }
 }
 
+
 task property_test(type: Test) {
     useJUnitPlatform {
         includeTags("property")
     }
 }
 
+task regress_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("regress")
+    }
+}
 
 //tasks.register('test-by-tag', Test) {
 //    useJUnitPlatform {
