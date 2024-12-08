@@ -1,0 +1,8 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","599","CreateUserTest()","","Sun Dec 08 18:10:29 GMT 2024","passed","Sun Dec 08 18:10:30 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","CreateUserTest"
+"","193","DeleteUserTest()","","Sun Dec 08 18:10:30 GMT 2024","passed","Sun Dec 08 18:10:30 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","DeleteUserTest"
+"","1393","SingleUserNotFoundTest()","","Sun Dec 08 18:10:27 GMT 2024","passed","Sun Dec 08 18:10:28 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","SingleUserNotFoundTest"
+"","359","LoginUnsuccessfulTest()","","Sun Dec 08 18:10:30 GMT 2024","passed","Sun Dec 08 18:10:30 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","LoginUnsuccessfulTest"
+"","723","GetSingleUserTest()","","Sun Dec 08 18:10:28 GMT 2024","passed","Sun Dec 08 18:10:29 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","GetSingleUserTest"
+"","259","LoginSuccessfulTest()","","Sun Dec 08 18:10:30 GMT 2024","passed","Sun Dec 08 18:10:30 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","LoginSuccessfulTest"
+"","449","GetListUsersTest()","","Sun Dec 08 18:10:30 GMT 2024","passed","Sun Dec 08 18:10:31 GMT 2024","","api.reqres.ReqresApiTest","api.reqres.ReqresApiTest","GetListUsersTest"
