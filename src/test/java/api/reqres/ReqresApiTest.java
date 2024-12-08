@@ -1,182 +1,94 @@
 package api.reqres;
 
 import apiPages.config.TestConfig;
-import io.restassured.http.Headers;
-import io.restassured.response.Response;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import model.jackson.CreateUser;
+import model.jackson.LoginUser;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Map;
 
 import static apiPages.constants.Constants.Actions.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 
 public class ReqresApiTest extends TestConfig {
 
     @Test
-    public void FirstTest() {
-        given()
-                .when().get("https://reqres.in/api/users?page=2")
-                .then().statusCode(200);
-    }
-
-    @Test
-    public void ComplexAllLogsTest() {
-        given().log().all()
-                .when().get(USERS + "2")
-                .then().log().all().statusCode(200);
-    }
-
-    @Test
-    public void ComplexIfFailLogsTest() {
-        given().log().ifValidationFails()
-                .when().get(USERS + "2")
-                .then().log().ifValidationFails().statusCode(200);
-    }
-
-    // default ReQuest Spec
-    @Test
-    public void ComplexMinLogsTest() {
-        given().log().uri()
-                .when().get(USERS + "2")
-                .then().log().body().statusCode(200);
-    }
-
-    //  Separate ReQuest Spec
-    @Test
-    public void SwapiSpecTest() {
-        given().log().uri()
-                .when().get(SWAPI_PEOPLE + "1")
-                .then().spec(responseSpecificationGet).log().body();
-    }
-
-    @Test
-    public void GetQueryTest() {
-        given().queryParam("page", 2).log().uri()
+    public void GetListUsersTest() {
+        given().queryParam("page", 2)
+                .log().uri().log().params()
                 .when().get(LIST_USERS)
-                .then().log().body().statusCode(200);
+                .then().body(matchesJsonSchemaInClasspath("JsonSchemas/ListUsersSchema.json"))
+                .log().body().statusCode(200);
     }
 
     @Test
-    public void PostCreateUserTest() {
-        String body = "{\n" +
-                "    \"name\": \"morpheus\",\n" +
-                "    \"job\": \"leader\"\n" +
-                "}";
+    public void GetSingleUserTest() {
+        given().log().uri()
+                .when().get(USERS + "2")
+                .then()
+                .body("data.email", is("janet.weaver@reqres.in"))
+                .body("data.first_name", is("Janet"))
+                .body("data.last_name", is("Weaver"))
+                .log().body().statusCode(200);
+    }
 
-        given().body(body).log().uri()
+    @Test
+    public void SingleUserNotFoundTest() {
+        given().log().uri()
+                .when().get(USERS + "22")
+                .then().log().body().statusCode(404);
+    }
+
+    @Test
+    public void CreateUserTest() throws Exception {
+        CreateUser user = new CreateUser("morpheus", "leader");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonBody = objectMapper.writeValueAsString(user);
+
+        given().body(jsonBody).log().uri().log().body()
                 .when().post(USERS)
-                .then().spec(responseSpecificationPost).log().body();
+                .then().spec(responseSpecificationPost)
+                .body("name", is("morpheus"))
+                .body("job", is("leader"))
+                .log().body();
     }
 
     @Test
-    public void PutUpdateUserTest() {
-        String body = "{\n" +
-                "    \"name\": \"morpheus\",\n" +
-                "    \"job\": \"zion resident\"\n" +
-                "}";
+    public void LoginSuccessfulTest() throws Exception {
+        LoginUser loginUser = new LoginUser("eve.holt@reqres.in", "cityslicka");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonBody = objectMapper.writeValueAsString(loginUser);
 
-        given().body(body).log().uri()
-                .when().put(USERS)
-                .then().log().body().statusCode(200);
+        given().body(jsonBody).log().uri().log().body()
+                .when().post(LOGIN)
+                .then()
+                .body("token", is("QpwL5tke4Pnpja7X4"))
+                .log().body().statusCode(200);
     }
+
+    @Test
+    public void LoginUnsuccessfulTest() throws Exception {
+
+        LoginUser loginUser = new LoginUser("eve.holt@reqres.in");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonBody = objectMapper.writeValueAsString(loginUser);
+
+
+        given().body(jsonBody).log().uri().log().body()
+                .when().post(LOGIN)
+                .then()
+                .body("error", containsString("Missing password"))
+                .log().body().statusCode(400);
+    }
+
 
     @Test
     public void DeleteUserTest() {
         given().log().uri()
                 .when().delete(USERS + "2")
                 .then().spec(responseSpecificationDelete).log().body();
-    }
-
-    // TEST
-
-    @Test
-    public void SwapiAssertNameTest() {
-        given().log().uri()
-                .when().get(SWAPI_PEOPLE)
-                .then()
-                .body("total", equalTo(12))
-                .body("data.name[0]", equalTo("cerulean"))
-                .body("data.name[0]", is("cerulean"))
-                .body("support.text", equalTo("Tired of writing endless social media content? Let Content Caddy generate it for you."))
-                .body("support.text", containsString("Let Content Caddy generate it for you."))
-                .spec(responseSpecificationGet)
-                .log().body();
-    }
-
-    @Test
-    public void GetBodyTest() {
-        Response response = given().log().uri()
-                .when().get(SWAPI_PEOPLE)
-                .then()
-                .extract().response();
-        System.out.println("BODY ---->>> " + response.asString());
-    }
-
-    @Test
-    public void GetCookiesTest() {
-        Response response = given().log().all()
-                .when().get(SWAPI_PEOPLE)
-                .then().log().all()
-                .extract().response();
-        Map<String, String> cookies = response.getCookies();
-
-        System.out.println("Cookies ---->>> " + cookies);
-
-        String someCookies = response.getCookie("report_to");
-        System.out.println("Cookie ---->>> " + someCookies);
-    }
-
-    @Test
-    public void GetHeadersTest() {
-        Response response = given().log().all()
-                .when().get(SWAPI_PEOPLE)
-                .then().log().all()
-                .extract().response();
-        Headers headers = response.getHeaders();
-
-        System.out.println("Headers ---->>> " + headers);
-
-        String someHeader = response.getHeader("server-timing");
-        System.out.println("SomeHeader ---->>> " + someHeader);
-
-        String contentType = response.contentType();
-        System.out.println("contentType ---->>> " + contentType);
-    }
-
-    @Test
-    public void SchemaValidateTest() {
-        given().log().all()
-                .when().get(SWAPI_PEOPLE)
-                .then().body(matchesJsonSchemaInClasspath("responseSchema.json")).log().body();
-
-    }
-
-    // GPATH
-
-    @Test
-    public void GetMapElementTest() {
-        Response response = given().spec(requestSpecificationSwapi).log().uri()
-                .when().get(SWAPI_PEOPLE)
-                .then().extract().response();
-        System.out.println(response.asString());
-        Map<String, ?> someObject = response
-                .path("result.find {it.name = 'Luke Skywalker'}");
-        System.out.println("---->>>>> " + someObject);
-    }
-
-    @Test
-    public void GetSingleElementWithSomeKeyTest() {
-        Response response = given().spec(requestSpecificationSwapi).log().uri()
-                .when().get(SWAPI_PEOPLE)
-                .then().extract().response();
-        System.out.println(response.asString());
-
-        List films = response
-                .path("results.findAll {it.films}.name");
-        System.out.println("---->>>>> " + films);
     }
 
 }

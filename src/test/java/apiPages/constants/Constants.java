@@ -22,6 +22,7 @@ public class Constants {
     public static class Actions {
         public static String USERS = "users/";
         public static String LIST_USERS = "users";
+        public static String LOGIN = "login";
 
         // SWAPI
 

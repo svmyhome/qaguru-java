@@ -53,13 +53,6 @@ dependencies {
     testImplementation "io.rest-assured:json-schema-validator:5.5.0"
 
 
-//    testImplementation(
-//            'com.codeborne:selenide:7.5.1',
-//            'org.junit.jupiter:junit-jupiter:5.11.2',
-//            'com.github.javafaker:javafaker:1.0.2',
-//            'org.slf4j:slf4j-simple:2.0.16'
-//
-//    )
 }
 
 tasks.withType(Test) {
@@ -74,45 +67,3 @@ tasks.withType(Test) {
 
     systemProperties(System.getProperties())
 }
-
-task simple_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("SIMPLE")
-    }
-}
-
-task demoqa_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("DEMOQA")
-    }
-}
-
-task smoke_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("SMOKE")
-    }
-}
-
-
-task property_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("property")
-    }
-}
-
-task regress_test(type: Test) {
-    useJUnitPlatform {
-        includeTags("regress")
-    }
-}
-
-//tasks.register('test-by-tag', Test) {
-//    useJUnitPlatform {
-//        if (project.hasProperty("includedTags")) {
-//            includeTags(project.properties.get("includedTags").toString())
-//        }
-//        if (project.hasProperty("excludedTags")) {
-//            excludeTags(project.properties.get("excludedT`ags").toString())
-//        }
-//    }
-//}
