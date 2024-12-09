@@ -1,12 +1,12 @@
 package api.reqres;
 
-import apiPages.config.TestConfig;
+import apipages.config.TestConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.jackson.CreateUser;
 import model.jackson.LoginUser;
 import org.junit.jupiter.api.Test;
 
-import static apiPages.constants.Constants.Actions.*;
+import static apipages.constants.Constants.Actions.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.containsString;
@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.is;
 public class ReqresApiTest extends TestConfig {
 
     @Test
-    public void GetListUsersTest() {
+    public void getListUsersTest() {
         given().queryParam("page", 2)
                 .log().uri().log().params()
                 .when().get(LIST_USERS)
@@ -24,7 +24,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void GetSingleUserTest() {
+    public void getSingleUserTest() {
         given().log().uri()
                 .when().get(USERS + "2")
                 .then()
@@ -35,14 +35,14 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void SingleUserNotFoundTest() {
+    public void singleUserNotFoundTest() {
         given().log().uri()
                 .when().get(USERS + "22")
                 .then().log().body().statusCode(404);
     }
 
     @Test
-    public void CreateUserTest() throws Exception {
+    public void createUserTest() throws Exception {
         CreateUser user = new CreateUser("morpheus", "leader");
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(user);
@@ -56,7 +56,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void LoginSuccessfulTest() throws Exception {
+    public void loginSuccessfulTest() throws Exception {
         LoginUser loginUser = new LoginUser("eve.holt@reqres.in", "cityslicka");
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(loginUser);
@@ -69,7 +69,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void LoginUnsuccessfulTest() throws Exception {
+    public void loginUnsuccessfulTest() throws Exception {
 
         LoginUser loginUser = new LoginUser("eve.holt@reqres.in");
         ObjectMapper objectMapper = new ObjectMapper();
@@ -85,7 +85,7 @@ public class ReqresApiTest extends TestConfig {
 
 
     @Test
-    public void DeleteUserTest() {
+    public void deleteUserTest() {
         given().log().uri()
                 .when().delete(USERS + "2")
                 .then().spec(responseSpecificationDelete).log().body();
