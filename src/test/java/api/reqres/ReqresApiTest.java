@@ -23,14 +23,14 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void ComplexAllLogsTest() {
+    public void complexAllLogsTest() {
         given().log().all()
                 .when().get(USERS + "2")
                 .then().log().all().statusCode(200);
     }
 
     @Test
-    public void ComplexIfFailLogsTest() {
+    public void complexIfFailLogsTest() {
         given().log().ifValidationFails()
                 .when().get(USERS + "2")
                 .then().log().ifValidationFails().statusCode(200);
@@ -38,7 +38,7 @@ public class ReqresApiTest extends TestConfig {
 
     // default ReQuest Spec
     @Test
-    public void ComplexMinLogsTest() {
+    public void complexMinLogsTest() {
         given().log().uri()
                 .when().get(USERS + "2")
                 .then().log().body().statusCode(200);
@@ -46,21 +46,21 @@ public class ReqresApiTest extends TestConfig {
 
     //  Separate ReQuest Spec
     @Test
-    public void SwapiSpecTest() {
+    public void swapiSpecTest() {
         given().log().uri()
                 .when().get(SWAPI_PEOPLE + "1")
                 .then().spec(responseSpecificationGet).log().body();
     }
 
     @Test
-    public void GetQueryTest() {
+    public void getQueryTest() {
         given().queryParam("page", 2).log().uri()
                 .when().get(LIST_USERS)
                 .then().log().body().statusCode(200);
     }
 
     @Test
-    public void PostCreateUserTest() {
+    public void postCreateUserTest() {
         String body = "{\n" +
                 "    \"name\": \"morpheus\",\n" +
                 "    \"job\": \"leader\"\n" +
@@ -72,7 +72,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void PutUpdateUserTest() {
+    public void putUpdateUserTest() {
         String body = "{\n" +
                 "    \"name\": \"morpheus\",\n" +
                 "    \"job\": \"zion resident\"\n" +
@@ -84,7 +84,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void DeleteUserTest() {
+    public void deleteUserTest() {
         given().log().uri()
                 .when().delete(USERS + "2")
                 .then().spec(responseSpecificationDelete).log().body();
@@ -93,7 +93,7 @@ public class ReqresApiTest extends TestConfig {
     // TEST
 
     @Test
-    public void SwapiAssertNameTest() {
+    public void swapiAssertNameTest() {
         given().log().uri()
                 .when().get(SWAPI_PEOPLE)
                 .then()
@@ -107,7 +107,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void GetBodyTest() {
+    public void getBodyTest() {
         Response response = given().log().uri()
                 .when().get(SWAPI_PEOPLE)
                 .then()
@@ -116,7 +116,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void GetCookiesTest() {
+    public void getCookiesTest() {
         Response response = given().log().all()
                 .when().get(SWAPI_PEOPLE)
                 .then().log().all()
@@ -130,7 +130,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void GetHeadersTest() {
+    public void getHeadersTest() {
         Response response = given().log().all()
                 .when().get(SWAPI_PEOPLE)
                 .then().log().all()
@@ -147,7 +147,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void SchemaValidateTest() {
+    public void schemaValidateTest() {
         given().log().all()
                 .when().get(SWAPI_PEOPLE)
                 .then().body(matchesJsonSchemaInClasspath("responseSchema.json")).log().body();
@@ -157,7 +157,7 @@ public class ReqresApiTest extends TestConfig {
     // GPATH
 
     @Test
-    public void GetMapElementTest() {
+    public void getMapElementTest() {
         Response response = given().spec(requestSpecificationSwapi).log().uri()
                 .when().get(SWAPI_PEOPLE)
                 .then().extract().response();
@@ -168,7 +168,7 @@ public class ReqresApiTest extends TestConfig {
     }
 
     @Test
-    public void GetSingleElementWithSomeKeyTest() {
+    public void getSingleElementWithSomeKeyTest() {
         Response response = given().spec(requestSpecificationSwapi).log().uri()
                 .when().get(SWAPI_PEOPLE)
                 .then().extract().response();

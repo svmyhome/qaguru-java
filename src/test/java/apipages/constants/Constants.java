@@ -6,8 +6,8 @@ import static apipages.constants.Constants.Servers.REQRES;
 public class Constants {
 
     public static class RunVariables {
-        public static String server = REQRES;
-        public static String path = PATH;
+        final public static String server = REQRES;
+        final public static String path = PATH;
     }
 
     public static class Servers {
