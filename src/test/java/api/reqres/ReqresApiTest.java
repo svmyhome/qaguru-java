@@ -1,6 +1,6 @@
 package api.reqres;
 
-import apiPages.config.TestConfig;
+import apipages.config.TestConfig;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static apiPages.constants.Constants.Actions.*;
+import static apipages.constants.Constants.Actions.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.*;
@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 public class ReqresApiTest extends TestConfig {
 
     @Test
-    public void FirstTest() {
+    public void firstTest() {
         given()
                 .when().get("https://reqres.in/api/users?page=2")
                 .then().statusCode(200);

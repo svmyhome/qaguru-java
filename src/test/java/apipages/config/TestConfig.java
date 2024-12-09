@@ -1,4 +1,4 @@
-package apiPages.config;
+package apipages.config;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -7,9 +7,9 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.BeforeAll;
 
-import static apiPages.constants.Constants.RunVariables.path;
-import static apiPages.constants.Constants.RunVariables.server;
-import static apiPages.constants.Constants.Servers.SWAPI;
+import static apipages.constants.Constants.RunVariables.path;
+import static apipages.constants.Constants.RunVariables.server;
+import static apipages.constants.Constants.Servers.SWAPI;
 
 public class TestConfig {
 

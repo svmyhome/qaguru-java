@@ -1,0 +1,30 @@
+package apipages.constants;
+
+import static apipages.constants.Constants.Path.PATH;
+import static apipages.constants.Constants.Servers.REQRES;
+
+public class Constants {
+
+    public static class RunVariables {
+        public static String server = REQRES;
+        public static String path = PATH;
+    }
+
+    public static class Servers {
+        final public static String REQRES = "https://reqres.in/";
+        final public static String SWAPI = "https://swapi.dev/";
+    }
+
+    public static class Path {
+        final public static String PATH = "api/";
+    }
+
+    public static class Actions {
+        final public static String USERS = "users/";
+        final public static String LIST_USERS = "users";
+
+        // SWAPI
+
+        final public static String SWAPI_PEOPLE = "people";
+    }
+}
