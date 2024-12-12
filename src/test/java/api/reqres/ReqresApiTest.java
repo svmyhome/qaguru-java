@@ -1,9 +1,9 @@
 package api.reqres;
 
 import apipages.config.TestConfig;
+import apipages.models.jackson.CreateUser;
+import apipages.models.jackson.LoginUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.jackson.CreateUser;
-import model.jackson.LoginUser;
 import org.junit.jupiter.api.Test;
 
 import static apipages.constants.Constants.Actions.*;

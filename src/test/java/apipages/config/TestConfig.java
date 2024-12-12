@@ -9,14 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 
 import static apipages.constants.Constants.RunVariables.path;
 import static apipages.constants.Constants.RunVariables.server;
-import static apipages.constants.Constants.Servers.SWAPI;
 
 public class TestConfig {
-
-    protected RequestSpecification requestSpecificationSwapi = new RequestSpecBuilder()
-            .setBaseUri(SWAPI)
-            .addHeader("Content-Type", "application/json")
-            .addCookie("TestCookies", "SWAPI").build();
 
     protected ResponseSpecification responseSpecificationPost = new ResponseSpecBuilder()
             .expectHeader("Content-Type", "application/json; charset=utf-8")
