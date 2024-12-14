@@ -9,6 +9,7 @@ import apipages.models.login_user.FailLoginUserResponseBodyModel;
 import apipages.models.login_user.LoginUserRequestBodyModel;
 import apipages.models.login_user.LoginUserResponseBodyModel;
 import apipages.models.login_user.UseNotFoundResponseBodyModel;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static apipages.constants.Constants.Actions.*;
@@ -17,6 +18,8 @@ import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpecs.*;
 
+
+@Tag("API")
 public class ReqResApiTest extends TestConfig {
 
     @Test
