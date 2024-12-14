@@ -1,11 +1,9 @@
-package apipages.models.lombok;
+package apipages.models.create_user;
 
 import lombok.Data;
 
 @Data
-public class CreateUserBodyModelLombok {
-
+public class CreateUserRequestBodyModel {
     private final String name;
     private final String job;
-
 }

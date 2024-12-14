@@ -1,4 +1,4 @@
-package apipages.models.lombok;
+package apipages.models.login_user;
 
 import lombok.Data;
 
