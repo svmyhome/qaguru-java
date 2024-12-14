@@ -95,31 +95,4 @@ public class LoginSpecs {
             .log(BODY)
             .build();
 
-
-    public static RequestSpecification deleteUserRequestSpecification = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .log().body();
-
-    public static ResponseSpecification deleteUserResponseSpecification = new ResponseSpecBuilder()
-            .expectStatusCode(204)
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
-
-    public static RequestSpecification loginRequestSpecification = with()
-            .filter(withCustomTemplates())
-            .log().uri()
-            .log().body()
-            .log().headers();
-
-    public static ResponseSpecification loginResponseSpecification = new ResponseSpecBuilder()
-            .expectStatusCode(201)
-            .expectHeader("Content-type", "application/json; charset=utf-8")
-            .log(STATUS)
-            .log(BODY)
-            .build();
-
 }
