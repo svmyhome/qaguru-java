@@ -1,22 +1,24 @@
 package github;
+
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class FindRepoSelenideTests {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize="1980x1200";
-        Configuration.baseUrl="https://github.com";
-        Configuration.pageLoadStrategy="eager";
+        Configuration.browserSize = "1980x1200";
+        Configuration.baseUrl = "https://github.com";
+        Configuration.pageLoadStrategy = "eager";
     }
+
     @Test
     void findJunitFromSelenideTest() {
         open("/selenide/selenide");
