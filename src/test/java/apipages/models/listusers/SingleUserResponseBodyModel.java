@@ -1,4 +1,4 @@
-package apipages.models.list_users;
+package apipages.models.listusers;
 
 import lombok.Data;
 

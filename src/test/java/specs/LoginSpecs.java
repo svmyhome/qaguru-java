@@ -14,10 +14,8 @@ public class LoginSpecs {
 
     public static RequestSpecification listUsersRequestSpecification = with()
             .filter(withCustomTemplates())
-            .log().uri()
-            .log().params()
-            .log().headers()
-            .log().body();
+            .contentType("application/json")
+            .log().all();
 
     public static ResponseSpecification listUsersResponseSpecification = new ResponseSpecBuilder()
             .expectStatusCode(200)
@@ -28,6 +26,7 @@ public class LoginSpecs {
 
     public static RequestSpecification singleUserRequestSpecification = with()
             .filter(withCustomTemplates())
+            .contentType("application/json")
             .log().uri()
             .log().headers()
             .log().body();
@@ -42,6 +41,7 @@ public class LoginSpecs {
 
     public static RequestSpecification notFoundUserRequestSpecification = with()
             .filter(withCustomTemplates())
+            .contentType("application/json")
             .log().uri()
             .log().headers()
             .log().body();
@@ -56,6 +56,7 @@ public class LoginSpecs {
 
     public static RequestSpecification createUserRequestSpecification = with()
             .filter(withCustomTemplates())
+            .contentType("application/json")
             .log().uri()
             .log().headers()
             .log().body();
@@ -70,9 +71,8 @@ public class LoginSpecs {
 
     public static RequestSpecification loginSuccessfulRequestSpecification = with()
             .filter(withCustomTemplates())
-            .log().uri()
-            .log().headers()
-            .log().body();
+            .contentType("application/json")
+            .log().all();
 
     public static ResponseSpecification loginSuccessfulResponseSpecification = new ResponseSpecBuilder()
             .expectStatusCode(200)
@@ -84,6 +84,7 @@ public class LoginSpecs {
 
     public static RequestSpecification loginUnsuccessfulRequestSpecification = with()
             .filter(withCustomTemplates())
+            .contentType("application/json")
             .log().uri()
             .log().headers()
             .log().body();
