@@ -1,4 +1,4 @@
-package com.demoqa.pages.components;
+package com.demoqa.pages.component;
 
 import com.codeborne.selenide.ElementsCollection;
 

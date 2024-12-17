@@ -1,6 +1,6 @@
 package com.demoqa.pages;
 
-import com.demoqa.pages.components.TextBoxComponents;
+import com.demoqa.pages.component.TextBoxComponents;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;

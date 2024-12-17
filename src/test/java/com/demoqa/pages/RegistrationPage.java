@@ -3,9 +3,9 @@ package com.demoqa.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.demoqa.pages.components.CalendarComponents;
-import com.demoqa.pages.components.CssComponents;
-import com.demoqa.pages.components.TableComponents;
+import com.demoqa.pages.component.CalendarComponents;
+import com.demoqa.pages.component.CssComponents;
+import com.demoqa.pages.component.TableComponents;
 
 import java.time.LocalDate;
 import java.time.format.TextStyle;
