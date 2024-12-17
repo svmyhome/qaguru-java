@@ -6,21 +6,21 @@ import static apipages.constants.Constants.Servers.REQRES;
 public class Constants {
 
     public static class RunVariables {
-        final public static String server = REQRES;
-        final public static String path = PATH;
+        public final static String server = REQRES;
+        public final static String path = PATH;
     }
 
     public static class Servers {
-        final public static String REQRES = "https://reqres.in/";
+        public final static String REQRES = "https://reqres.in/";
     }
 
     public static class Path {
-        final public static String PATH = "api/";
+        public final static String PATH = "api/";
     }
 
     public static class Actions {
-        final public static String USERS = "users/";
-        final public static String LIST_USERS = "users";
-        final public static String LOGIN = "login";
+        public final static String USERS = "users/";
+        public final static String LIST_USERS = "users";
+        public final static String LOGIN = "login";
     }
 }
