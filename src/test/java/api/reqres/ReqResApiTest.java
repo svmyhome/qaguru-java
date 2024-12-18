@@ -1,18 +1,17 @@
 package api.reqres;
 
-import apipages.config.TestConfig;
-import apipages.models.createuser.CreateUserRequestBodyModel;
-import apipages.models.createuser.CreateUserResponseBodyModel;
-import apipages.models.listusers.ListUsersResponseBodyModel;
-import apipages.models.listusers.SingleUserResponseBodyModel;
-import apipages.models.loginuser.FailLoginUserResponseBodyModel;
-import apipages.models.loginuser.LoginUserRequestBodyModel;
-import apipages.models.loginuser.LoginUserResponseBodyModel;
-import apipages.models.loginuser.UseNotFoundResponseBodyModel;
+import config.TestConfig;
+import models.createuser.CreateUserRequestBodyModel;
+import models.createuser.CreateUserResponseBodyModel;
+import models.listusers.ListUsersResponseBodyModel;
+import models.listusers.SingleUserResponseBodyModel;
+import models.loginuser.FailLoginUserResponseBodyModel;
+import models.loginuser.LoginUserRequestBodyModel;
+import models.loginuser.LoginUserResponseBodyModel;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static apipages.constants.Constants.Actions.*;
+import static constants.Constants.Actions.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,10 +53,9 @@ public class ReqResApiTest extends TestConfig {
 
     @Test
     public void singleUserNotFoundTest() {
-        UseNotFoundResponseBodyModel response = step("Make response", () -> given(notFoundUserRequestSpecification)
+        step("Make response", () -> given(notFoundUserRequestSpecification)
                 .when().get(USERS + "22")
-                .then().spec(notFoundUserResponseSpecification)
-                .extract().as(UseNotFoundResponseBodyModel.class));
+                .then().spec(notFoundUserResponseSpecification));
     }
 
     @Test
@@ -77,11 +75,10 @@ public class ReqResApiTest extends TestConfig {
     }
 
     @Test
-    public void loginSuccessfulTest() throws Exception {
+    public void loginSuccessfulTest() {
         LoginUserRequestBodyModel authData = new LoginUserRequestBodyModel("eve.holt@reqres.in", "cityslicka");
 
-        LoginUserResponseBodyModel response = step("Make response", () -> given()
-                .spec(loginSuccessfulRequestSpecification)
+        LoginUserResponseBodyModel response = step("Make response", () -> given(loginSuccessfulRequestSpecification)
                 .body(authData)
                 .when().post(LOGIN)
                 .then()
@@ -92,17 +89,15 @@ public class ReqResApiTest extends TestConfig {
     }
 
     @Test
-    public void loginUnsuccessfulTest() throws Exception {
+    public void loginUnsuccessfulTest() {
 
         LoginUserRequestBodyModel authData = new LoginUserRequestBodyModel("eve.holt@reqres.in", null);
 
-        FailLoginUserResponseBodyModel response = step("Make response", () -> {
-            return given(loginUnsuccessfulRequestSpecification).body(authData)
-                    .when().post(LOGIN)
-                    .then()
-                    .spec(loginUnsuccessfulResponseSpecification)
-                    .extract().as(FailLoginUserResponseBodyModel.class);
-        });
+        FailLoginUserResponseBodyModel response = step("Make response", () -> given(loginUnsuccessfulRequestSpecification).body(authData)
+                .when().post(LOGIN)
+                .then()
+                .spec(loginUnsuccessfulResponseSpecification)
+                .extract().as(FailLoginUserResponseBodyModel.class));
 
         step("Check response", () -> assertEquals("Missing password", response.getError()));
     }

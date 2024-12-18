@@ -1,4 +1,4 @@
-package apipages.models.listusers;
+package models.listusers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package apipages.constants;
+package constants;
 
-import static apipages.constants.Constants.Path.PATH;
-import static apipages.constants.Constants.Servers.REQRES;
+import static constants.Constants.Path.PATH;
+import static constants.Constants.Servers.REQRES;
 
 public class Constants {
 

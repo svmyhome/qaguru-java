@@ -1,10 +1,10 @@
-package apipages.config;
+package config;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeAll;
 
-import static apipages.constants.Constants.RunVariables.path;
-import static apipages.constants.Constants.RunVariables.server;
+import static constants.Constants.RunVariables.path;
+import static constants.Constants.RunVariables.server;
 
 public class TestConfig {
 

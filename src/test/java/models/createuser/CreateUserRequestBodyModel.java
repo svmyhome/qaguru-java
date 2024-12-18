@@ -1,4 +1,4 @@
-package apipages.models.createuser;
+package models.createuser;
 
 import lombok.Data;
 
