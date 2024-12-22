@@ -5,10 +5,10 @@ import io.restassured.response.Response;
 import models.login.LoginRequestBodyModel;
 
 import static constants.Constants.Actions.LOGIN;
-import static constants.Constants.HEADERS.APPLICATION_JSON;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
 public class SupportRequest {
@@ -17,7 +17,7 @@ public class SupportRequest {
     public static Response getRequest(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
         Response authResponse = step("Authorize user", () -> given().log().all()
-                .contentType(APPLICATION_JSON)
+                .contentType(JSON)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().log().all()

@@ -7,6 +7,7 @@ import models.books.AddBookRequestModel;
 import models.books.DeleteBookRequestModel;
 import models.books.Isbn;
 import models.login.LoginRequestBodyModel;
+import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -14,14 +15,15 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static constants.Constants.Actions.*;
-import static constants.Constants.HEADERS.APPLICATION_JSON;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static constants.Constants.Path.BOOKSTORE_V1;
 import static helpers.SupportRequest.getRequest;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static specs.LoginSpecs.account_v1_login_request_specification;
+import static specs.LoginSpecs.account_v1_login_response_specification;
 
 @Tag("API")
 public class DemoQaApiNewTests extends TestConfig {
@@ -40,13 +42,16 @@ public class DemoQaApiNewTests extends TestConfig {
     @Test
     public void AuthorizeDemoQa() {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        step("Authorize user", () -> given().log().all()
-                .contentType(APPLICATION_JSON)
+        LoginResponseBodyModel response = step("Authorize user", () -> given(account_v1_login_request_specification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
-                .then().log().all()
-                .statusCode(200)
-                .body("username", is(userName)));
+                .then().spec(account_v1_login_response_specification)
+                .extract().as(LoginResponseBodyModel.class));
+
+        step("Assert that ", () -> {
+            assertEquals(authBody.getUserName(), response.getUsername());
+            assertEquals("false", response.getIsActive());
+        });
     }
 
     @Test
@@ -133,7 +138,7 @@ public class DemoQaApiNewTests extends TestConfig {
 
     }
 
-    // TODO ASSERT FROM UI
+// TODO ASSERT FROM UI
 
 }
 //    {

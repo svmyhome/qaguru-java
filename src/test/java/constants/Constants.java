@@ -25,6 +25,6 @@ public class Constants {
     }
 
     public static class HEADERS {
-        final public static String APPLICATION_JSON = "application/json";
+        final public static String APPLICATION_JSON_UTF_8 = "application/json; charset=utf-8";
     }
 }
