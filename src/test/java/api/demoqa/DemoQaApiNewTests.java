@@ -15,8 +15,11 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static constants.Constants.Actions.*;
+import static constants.Constants.CREDENTIALS.PASSWORD;
+import static constants.Constants.CREDENTIALS.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static constants.Constants.Path.BOOKSTORE_V1;
+import static helpers.SupportRequest.getAuthorizationToken;
 import static helpers.SupportRequest.getRequest;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -36,12 +39,10 @@ public class DemoQaApiNewTests extends TestConfig {
 
     String firstName = "Vin";
     String lastName = "Dsel";
-    String userName = "vindisel";
-    String password = "!Qaz2wsx";
 
     @Test
     public void AuthorizeDemoQa() {
-        LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
+        LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
         LoginResponseBodyModel response = step("Authorize user", () -> given(account_v1_login_request_specification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
@@ -56,11 +57,12 @@ public class DemoQaApiNewTests extends TestConfig {
 
     @Test
     public void AddItemToCartDemoQa() {
-        LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        Response authResponse = getRequest(userName, password);
+        LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
+        Response authResponse = getRequest(USER_NAME, PASSWORD);
+        String authResponse1 = getAuthorizationToken(USER_NAME, PASSWORD);
 
         String userId = authResponse.path("userId");
-        String token = authResponse.path("token");
+        String token = getAuthorizationToken(USER_NAME, PASSWORD);
 
         Isbn isbn = new Isbn("9781449365035");
         List<Isbn> listIsbn = List.of(isbn);

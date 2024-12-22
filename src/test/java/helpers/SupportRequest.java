@@ -25,4 +25,15 @@ public class SupportRequest {
         return authResponse;
     }
 
+    @Step("Получить респонс для {userName} ")
+    public static String getAuthorizationToken(String userName, String password) {
+        LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
+        String getToken = step("Authorize user", () -> given(account_v1_login_request_specification)
+                .body(authBody)
+                .when().post(ACCOUNT_V1 + LOGIN)
+                .then().spec(account_v1_login_response_specification)
+                .body("username", is(userName)).extract().response().path("token"));
+        return getToken;
+    }
+
 }

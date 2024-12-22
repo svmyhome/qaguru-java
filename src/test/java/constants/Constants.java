@@ -5,26 +5,31 @@ import static constants.Constants.Servers.DEMOQA;
 public class Constants {
 
     public static class RunVariables {
-        final public static String server = DEMOQA;
+        public static final String server = DEMOQA;
     }
 
     public static class Servers {
-        final public static String DEMOQA = "https://demoqa.com";
+        public static final String DEMOQA = "https://demoqa.com";
     }
 
     public static class Path {
-        final public static String ACCOUNT_V1 = "/Account/v1";
-        final public static String BOOKSTORE_V1 = "/BookStore/v1";
+        public static final String ACCOUNT_V1 = "/Account/v1";
+        public static final String BOOKSTORE_V1 = "/BookStore/v1";
     }
 
     public static class Actions {
-        final public static String LOGIN = "/Login";
-        final public static String USER = "/User/";
-        final public static String BOOK = "/Book";
-        final public static String BOOKS = "/Books";
+        public static final String LOGIN = "/Login";
+        public static final String USER = "/User/";
+        public static final String BOOK = "/Book";
+        public static final String BOOKS = "/Books";
     }
 
     public static class HEADERS {
-        final public static String APPLICATION_JSON_UTF_8 = "application/json; charset=utf-8";
+        public static final String APPLICATION_JSON_UTF_8 = "application/json; charset=utf-8";
+    }
+
+    public static class CREDENTIALS {
+        public static final String USER_NAME = "vindisel";
+        public static final String PASSWORD = "!Qaz2wsx";
     }
 }
