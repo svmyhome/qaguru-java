@@ -57,13 +57,6 @@ public class DemoQaApiNewTests extends TestConfig {
     @Test
     public void AddItemToCartDemoQa() {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-//        Response authResponse = step("Authorize user", () -> given().log().all()
-//                .contentType(APPLICATION_JSON)
-//                .body(authBody)
-//                .when().post(ACCOUNT_V1 + LOGIN)
-//                .then().log().all()
-//                .statusCode(200)
-//                .body("username", is(userName)).extract().response());
         Response authResponse = getRequest(userName, password);
 
         String userId = authResponse.path("userId");
