@@ -1,6 +1,6 @@
 package api.reqres;
 
-import apipages.config.TestConfig;
+import config.TestConfig;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static apipages.constants.Constants.Actions.*;
+import static constants.Constants.Actions.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.*;

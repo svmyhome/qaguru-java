@@ -1,4 +1,4 @@
-package apipages.models.pojo;
+package models.pojo;
 
 public class LoginBodyModel {
     public LoginBodyModel(String name, String job) {

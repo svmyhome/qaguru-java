@@ -1,13 +1,13 @@
 package api.reqres;
 
-import apipages.config.TestConfig;
-import apipages.models.lombok.LoginBodyModelLombok;
-import apipages.models.lombok.LoginBodyResponseLombok;
-import apipages.models.pojo.LoginBodyModel;
-import apipages.models.pojo.LoginBodyResponse;
+import config.TestConfig;
+import models.lombok.LoginBodyModelLombok;
+import models.lombok.LoginBodyResponseLombok;
+import models.pojo.LoginBodyModel;
+import models.pojo.LoginBodyResponse;
 import org.junit.jupiter.api.Test;
 
-import static apipages.constants.Constants.Actions.USERS;
+import static constants.Constants.Actions.USERS;
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
