@@ -17,6 +17,7 @@ import static constants.Constants.Actions.*;
 import static constants.Constants.HEADERS.APPLICATION_JSON;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static constants.Constants.Path.BOOKSTORE_V1;
+import static helpers.SupportRequest.getRequest;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -51,17 +52,21 @@ public class DemoQaApiNewTests extends TestConfig {
     @Test
     public void AddItemToCartDemoQa() {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        Response authResponse = step("Authorize user", () -> given().log().all()
-                .contentType(APPLICATION_JSON)
-                .body(authBody)
-                .when().post(ACCOUNT_V1 + LOGIN)
-                .then().log().all()
-                .statusCode(200)
-                .body("username", is(userName)).extract().response());
+//        Response authResponse = step("Authorize user", () -> given().log().all()
+//                .contentType(APPLICATION_JSON)
+//                .body(authBody)
+//                .when().post(ACCOUNT_V1 + LOGIN)
+//                .then().log().all()
+//                .statusCode(200)
+//                .body("username", is(userName)).extract().response());
+        Response authResponse = getRequest(userName, password);
+
+        String userId = authResponse.path("userId");
+        String token = authResponse.path("token");
 
         Isbn isbn = new Isbn("9781449365035");
         List<Isbn> listIsbn = List.of(isbn);
-        AddBookRequestModel bookData1 = new AddBookRequestModel(authResponse.path("userId"), listIsbn);
+        AddBookRequestModel bookData1 = new AddBookRequestModel(userId, listIsbn);
 
         // TODO VERIFY THAT CART EMPTY
         List<String> response = given()
@@ -69,9 +74,9 @@ public class DemoQaApiNewTests extends TestConfig {
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .header("Authorization", "Bearer " + authResponse.path("token"))
+                .header("Authorization", "Bearer " + token)
                 .when()
-                .get(ACCOUNT_V1 + USER + authResponse.path("userId"))
+                .get(ACCOUNT_V1 + USER + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -80,13 +85,13 @@ public class DemoQaApiNewTests extends TestConfig {
 
         // TODO DELETE BOOK
         if (response.size() == 1) {
-            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), authResponse.path("userId"));
+            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
             given()
                     .log().uri()
                     .log().method()
                     .log().body()
                     .contentType(JSON)
-                    .header("Authorization", "Bearer " + authResponse.path("token"))
+                    .header("Authorization", "Bearer " + token)
                     .body(bookDataDelete)
                     .when()
                     .delete(BOOKSTORE_V1 + BOOK)
@@ -100,8 +105,8 @@ public class DemoQaApiNewTests extends TestConfig {
                     .log().method()
                     .log().body()
                     .contentType(JSON)
-                    .header("Authorization", "Bearer " + authResponse.path("token"))
-                    .queryParam("UserId", "5b831716-0b1e-4c33-8ab7-c85429a698e7")
+                    .header("Authorization", "Bearer " + token)
+                    .queryParam("UserId", userId)
                     .when()
                     .delete(BOOKSTORE_V1 + BOOKS)
                     .then()
@@ -117,7 +122,7 @@ public class DemoQaApiNewTests extends TestConfig {
                 .log().method()
                 .log().body()
                 .contentType(JSON)
-                .header("Authorization", "Bearer " + authResponse.path("token"))
+                .header("Authorization", "Bearer " + token)
                 .body(bookData1)
                 .when()
                 .post(BOOKSTORE_V1 + BOOKS)
