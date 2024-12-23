@@ -17,7 +17,7 @@ public class Constants {
         public static final String BOOKSTORE_V1 = "/BookStore/v1";
     }
 
-    public static class Actions {
+    public static class ApiActions {
         public static final String LOGIN = "/Login";
         public static final String USER = "/User/";
         public static final String BOOK = "/Book";

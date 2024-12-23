@@ -25,4 +25,16 @@ public class LoginSpecs {
             .log(BODY)
             .build();
 
+    public static RequestSpecification bookStoreV1LoginRequestSpecification = with()
+            .filter(withCustomTemplates())
+            .contentType(JSON)
+            .log().all();
+
+
+    public static ResponseSpecification bookStoreV1LoginResponseSpecification = new ResponseSpecBuilder()
+            .expectStatusCode(201)
+            .expectHeader("Content-type", APPLICATION_JSON_UTF_8)
+            .log(STATUS)
+            .log(BODY)
+            .build();
 }

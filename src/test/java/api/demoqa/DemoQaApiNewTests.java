@@ -11,16 +11,20 @@ import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Cookie;
 
 import java.util.List;
 
-import static constants.Constants.Actions.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static constants.Constants.ApiActions.*;
 import static constants.Constants.CREDENTIALS.PASSWORD;
 import static constants.Constants.CREDENTIALS.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static constants.Constants.Path.BOOKSTORE_V1;
-import static helpers.SupportRequest.getAuthorizationToken;
-import static helpers.SupportRequest.getRequest;
+import static helpers.SupportRequest.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -62,13 +66,14 @@ public class DemoQaApiNewTests extends TestConfig {
         String authResponse1 = getAuthorizationToken(USER_NAME, PASSWORD);
 
         String userId = authResponse.path("userId");
+        String expires = authResponse.path("expires");
         String token = getAuthorizationToken(USER_NAME, PASSWORD);
-
-        Isbn isbn = new Isbn("9781449365035");
+        String bookIsbn = "9781449365035";
+        Isbn isbn = new Isbn(bookIsbn);
         List<Isbn> listIsbn = List.of(isbn);
         AddBookRequestModel bookData1 = new AddBookRequestModel(userId, listIsbn);
 
-        // TODO VERIFY THAT CART EMPTY
+        // VERIFY THAT CART EMPTY
         List<String> response = given()
                 .log().uri()
                 .log().method()
@@ -83,7 +88,7 @@ public class DemoQaApiNewTests extends TestConfig {
                 .statusCode(200).extract().path("books");
 
 
-        // TODO DELETE BOOK
+        // DELETE BOOK
         if (response.size() == 1) {
             DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
             given()
@@ -116,33 +121,33 @@ public class DemoQaApiNewTests extends TestConfig {
         }
 
 
-        // TODO ADD BOOK
-        given()
-                .log().uri()
-                .log().method()
-                .log().body()
-                .contentType(JSON)
-                .header("Authorization", "Bearer " + token)
-                .body(bookData1)
-                .when()
-                .post(BOOKSTORE_V1 + BOOKS)
-                .then()
-                .log().status()
-                .log().body()
-                .statusCode(201);
+        // ADD BOOK
+
+        addBook(token, bookData1); // TODO Возможно не стоит убирать мы же тест на добавление как раз делдаем
+//        step("Добавлена книга с ISBN {bookIsbn}", () -> {
+//            given(bookStoreV1LoginRequestSpecification)
+//                    .header("Authorization", "Bearer " + token)
+//                    .body(bookData1)
+//                    .when()
+//                    .post(BOOKSTORE_V1 + BOOKS)
+//                    .then()
+//                    .spec(bookStoreV1LoginResponseSpecification);
+//        });
+
+
+        // ASSERT FROM UI
+        step("Открыта страница профиля и подложены куки", () -> {
+            open("/favicon.ico");
+            getWebDriver().manage().addCookie(new Cookie("userID", userId));
+            getWebDriver().manage().addCookie(new Cookie("expires", expires));
+            getWebDriver().manage().addCookie(new Cookie("token", token));
+            open("/profile");
+        });
+
+        step("В профиле есть книга", () ->
+                $(".ReactTable").shouldHave(text("Speaking JavaScript")));
 
     }
 
-// TODO ASSERT FROM UI
 
 }
-//    {
-//        "userId": "5b831716-0b1e-4c33-8ab7-c85429a698e7",
-//            "username": "vindisel",
-//            "password": "!Qaz2wsx",
-//            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6InZpbmRpc2VsIiwicGFzc3dvcmQiOiIhUWF6MndzeCIsImlhdCI6MTczNDgwMzMwM30.h_g6tM5UkSnjYYE8EGqQBbSQht2aLMxuMTFlUhVrvMk",
-//            "expires": "2024-12-28T17:48:23.000Z",
-//            "created_date": "2024-12-21T17:32:39.000Z",
-//            "isActive": false
-//    }
-
