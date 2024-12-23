@@ -3,6 +3,7 @@ package api.demoqa;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import config.TestConfig;
+import helpers.WithLogin;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
@@ -12,14 +13,12 @@ import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.Cookie;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static constants.Constants.ApiActions.LOGIN;
 import static constants.Constants.CREDENTIALS.PASSWORD;
 import static constants.Constants.CREDENTIALS.USER_NAME;
@@ -32,7 +31,7 @@ import static specs.LoginSpecs.accountV1LoginRequestSpecification;
 import static specs.LoginSpecs.accountV1LoginResponseSpecification;
 
 @Tag("API")
-public class DemoQaApiNewTests extends TestConfig {
+public class DemoQaApiWithLoginTests extends TestConfig {
 
 
     @AfterEach
@@ -55,7 +54,9 @@ public class DemoQaApiNewTests extends TestConfig {
         });
     }
 
+
     @Test
+    @WithLogin
     public void AddItemToCartDemoQa() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         Response authResponse = getResponse(USER_NAME, PASSWORD);
@@ -72,12 +73,8 @@ public class DemoQaApiNewTests extends TestConfig {
 
         clearBooks(bearerToken, userId, isbn);
 
-        addBook(bearerToken, bookData1); // TODO Возможно не стоит убирать мы же тест на добавление как раз делдаем// ASSERT FROM UI
+        addBook(bearerToken, bookData1);
         step("Открыта страница профиля и подложены куки", () -> {
-            open("/favicon.ico");
-            getWebDriver().manage().addCookie(new Cookie("userID", userId));
-            getWebDriver().manage().addCookie(new Cookie("expires", expires));
-            getWebDriver().manage().addCookie(new Cookie("token", token));
             open("/profile");
         });
 

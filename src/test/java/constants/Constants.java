@@ -24,6 +24,7 @@ public class Constants {
         public static final String BOOKS = "/Books";
     }
 
+
     public static class HEADERS {
         public static final String APPLICATION_JSON_UTF_8 = "application/json; charset=utf-8";
     }

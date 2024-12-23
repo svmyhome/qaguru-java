@@ -1,5 +1,6 @@
 package helpers;
 
+import io.restassured.response.Response;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
@@ -11,15 +12,14 @@ import static constants.Constants.CREDENTIALS.USER_NAME;
 
 public class LoginExtension implements BeforeEachCallback {
 
-    private static final String ALLURE_TESTOPS_SESSION = "ALLURE_TESTOPS_SESSION";
-
     @Override
     public void beforeEach(ExtensionContext context) {
-//        String cookies = SupportRequest.getRequest(USER_NAME, PASSWORD);
-        String cookies = SupportRequest.getRequest(USER_NAME, PASSWORD).asString();
+        Response response = SupportRequest.getResponse(USER_NAME, PASSWORD);
 
         open("/favicon.ico");
-        getWebDriver().manage().addCookie(new Cookie(ALLURE_TESTOPS_SESSION, cookies));
+        getWebDriver().manage().addCookie(new Cookie("userID", response.path("userId")));
+        getWebDriver().manage().addCookie(new Cookie("expires", response.path("expires")));
+        getWebDriver().manage().addCookie(new Cookie("token", response.path("token")));
     }
 
 }

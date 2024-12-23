@@ -20,7 +20,7 @@ import static specs.LoginSpecs.*;
 public class SupportRequest {
 
     @Step("Получить респонс для {userName} ")
-    public static Response getRequest(String userName, String password) {
+    public static Response getResponse(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
         return step("Authorize user", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
