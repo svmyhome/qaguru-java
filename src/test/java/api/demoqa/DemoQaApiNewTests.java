@@ -4,7 +4,6 @@ import com.codeborne.selenide.Selenide;
 import config.TestConfig;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
-import models.books.DeleteBookRequestModel;
 import models.books.Isbn;
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
@@ -19,16 +18,17 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static constants.Constants.ApiActions.*;
+import static constants.Constants.ApiActions.LOGIN;
+import static constants.Constants.ApiActions.USER;
 import static constants.Constants.CREDENTIALS.PASSWORD;
 import static constants.Constants.CREDENTIALS.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
-import static constants.Constants.Path.BOOKSTORE_V1;
 import static helpers.SupportRequest.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.LoginSpecs.*;
+import static specs.LoginSpecs.accountV1LoginRequestSpecification;
+import static specs.LoginSpecs.accountV1LoginResponseSpecification;
 
 @Tag("API")
 public class DemoQaApiNewTests extends TestConfig {
@@ -79,24 +79,25 @@ public class DemoQaApiNewTests extends TestConfig {
 
 
         // DELETE BOOK
-        if (response.size() == 1) {
-            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
-            given(deleteBookStoreV1LoginRequestSpecification)
-                    .header("Authorization", "Bearer " + token)
-                    .body(bookDataDelete)
-                    .when()
-                    .delete(BOOKSTORE_V1 + BOOK)
-                    .then()
-                    .spec(deleteBookStoreV1LoginResponseSpecification);
-        } else if (response.size() > 1) {
-            given(deleteBookStoreV1LoginRequestSpecification)
-                    .header("Authorization", "Bearer " + token)
-                    .queryParam("UserId", userId)
-                    .when()
-                    .delete(BOOKSTORE_V1 + BOOKS)
-                    .then()
-                    .spec(deleteBookStoreV1LoginResponseSpecification);
-        }
+        deleteBook(token, userId, isbn);
+//        if (response.size() == 1) {
+//            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
+//            given(deleteBookStoreV1LoginRequestSpecification)
+//                    .header("Authorization", "Bearer " + token)
+//                    .body(bookDataDelete)
+//                    .when()
+//                    .delete(BOOKSTORE_V1 + BOOK)
+//                    .then()
+//                    .spec(deleteBookStoreV1LoginResponseSpecification);
+//        } else if (response.size() > 1) {
+//            given(deleteBookStoreV1LoginRequestSpecification)
+//                    .header("Authorization", "Bearer " + token)
+//                    .queryParam("UserId", userId)
+//                    .when()
+//                    .delete(BOOKSTORE_V1 + BOOKS)
+//                    .then()
+//                    .spec(deleteBookStoreV1LoginResponseSpecification);
+//        }
 
 
         // ADD BOOK

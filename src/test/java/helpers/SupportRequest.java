@@ -3,10 +3,13 @@ package helpers;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
+import models.books.DeleteBookRequestModel;
+import models.books.Isbn;
 import models.login.LoginRequestBodyModel;
 
-import static constants.Constants.ApiActions.BOOKS;
-import static constants.Constants.ApiActions.LOGIN;
+import java.util.List;
+
+import static constants.Constants.ApiActions.*;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static constants.Constants.Path.BOOKSTORE_V1;
 import static io.qameta.allure.Allure.step;
@@ -48,5 +51,68 @@ public class SupportRequest {
                     .spec(bookStoreV1LoginResponseSpecification);
         });
     }
+
+    @Step("Удалить книги из профиля")
+    public static void deleteBook(String token, String userId, Isbn isbn) {
+        step("Удаление книг из профиля", () -> {// VERIFY THAT CART EMPTY
+            List<String> response = given(accountV1LoginRequestSpecification)
+                    .header("Authorization", "Bearer " + token)
+                    .when()
+                    .get(ACCOUNT_V1 + USER + userId)
+                    .then()
+                    .spec(accountV1LoginResponseSpecification)
+                    .statusCode(200).extract().path("books");
+
+            // DELETE BOOK
+            if (response.size() == 1) {
+                deleteOneBook(token, userId, isbn);
+//                DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
+//                given(deleteBookStoreV1LoginRequestSpecification)
+//                        .header("Authorization", "Bearer " + token)
+//                        .body(bookDataDelete)
+//                        .when()
+//                        .delete(BOOKSTORE_V1 + BOOK)
+//                        .then()
+//                        .spec(deleteBookStoreV1LoginResponseSpecification);
+            } else if (response.size() > 1) {
+                deleteAllBooks(token, userId);
+//                given(deleteBookStoreV1LoginRequestSpecification)
+//                        .header("Authorization", "Bearer " + token)
+//                        .queryParam("UserId", userId)
+//                        .when()
+//                        .delete(BOOKSTORE_V1 + BOOKS)
+//                        .then()
+//                        .spec(deleteBookStoreV1LoginResponseSpecification);
+            }
+        });
+    }
+
+    @Step("Удалить одну книги из профиля")
+    public static void deleteOneBook(String token, String userId, Isbn isbn) {
+        step("Удаление одной книги из профиля", () -> {
+            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
+            given(deleteBookStoreV1LoginRequestSpecification)
+                    .header("Authorization", "Bearer " + token)
+                    .body(bookDataDelete)
+                    .when()
+                    .delete(BOOKSTORE_V1 + BOOK)
+                    .then()
+                    .spec(deleteBookStoreV1LoginResponseSpecification);
+        });
+    }
+
+    @Step("Удалить все книги из профиля")
+    public static void deleteAllBooks(String token, String userId) {
+        step("Удаление всех книг из профиля", () -> {
+            given(deleteBookStoreV1LoginRequestSpecification)
+                    .header("Authorization", "Bearer " + token)
+                    .queryParam("UserId", userId)
+                    .when()
+                    .delete(BOOKSTORE_V1 + BOOKS)
+                    .then()
+                    .spec(deleteBookStoreV1LoginResponseSpecification);
+        });
+    }
+
 
 }
