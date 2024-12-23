@@ -1,7 +1,9 @@
 package api.demoqa;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import config.TestConfig;
+import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
 import models.books.Isbn;
@@ -19,7 +21,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static constants.Constants.ApiActions.LOGIN;
-import static constants.Constants.ApiActions.USER;
 import static constants.Constants.CREDENTIALS.PASSWORD;
 import static constants.Constants.CREDENTIALS.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
@@ -56,65 +57,22 @@ public class DemoQaApiNewTests extends TestConfig {
 
     @Test
     public void AddItemToCartDemoQa() {
-        LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
+        SelenideLogger.addListener("allure", new AllureSelenide());
         Response authResponse = getRequest(USER_NAME, PASSWORD);
-        String authResponse1 = getAuthorizationToken(USER_NAME, PASSWORD);
 
         String userId = authResponse.path("userId");
         String expires = authResponse.path("expires");
         String token = getAuthorizationToken(USER_NAME, PASSWORD);
+        String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
         String bookIsbn = "9781449365035";
         Isbn isbn = new Isbn(bookIsbn);
         List<Isbn> listIsbn = List.of(isbn);
+
         AddBookRequestModel bookData1 = new AddBookRequestModel(userId, listIsbn);
 
-        // VERIFY THAT CART EMPTY
-        List<String> response = given(accountV1LoginRequestSpecification)
-                .header("Authorization", "Bearer " + token)
-                .when()
-                .get(ACCOUNT_V1 + USER + userId)
-                .then()
-                .spec(accountV1LoginResponseSpecification)
-                .statusCode(200).extract().path("books");
+        clearBooks(bearerToken, userId, isbn);
 
-
-        // DELETE BOOK
-        deleteBook(token, userId, isbn);
-//        if (response.size() == 1) {
-//            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
-//            given(deleteBookStoreV1LoginRequestSpecification)
-//                    .header("Authorization", "Bearer " + token)
-//                    .body(bookDataDelete)
-//                    .when()
-//                    .delete(BOOKSTORE_V1 + BOOK)
-//                    .then()
-//                    .spec(deleteBookStoreV1LoginResponseSpecification);
-//        } else if (response.size() > 1) {
-//            given(deleteBookStoreV1LoginRequestSpecification)
-//                    .header("Authorization", "Bearer " + token)
-//                    .queryParam("UserId", userId)
-//                    .when()
-//                    .delete(BOOKSTORE_V1 + BOOKS)
-//                    .then()
-//                    .spec(deleteBookStoreV1LoginResponseSpecification);
-//        }
-
-
-        // ADD BOOK
-
-        addBook(token, bookData1); // TODO Возможно не стоит убирать мы же тест на добавление как раз делдаем
-//        step("Добавлена книга с ISBN {bookIsbn}", () -> {
-//            given(bookStoreV1LoginRequestSpecification)
-//                    .header("Authorization", "Bearer " + token)
-//                    .body(bookData1)
-//                    .when()
-//                    .post(BOOKSTORE_V1 + BOOKS)
-//                    .then()
-//                    .spec(bookStoreV1LoginResponseSpecification);
-//        });
-
-
-        // ASSERT FROM UI
+        addBook(bearerToken, bookData1); // TODO Возможно не стоит убирать мы же тест на добавление как раз делдаем// ASSERT FROM UI
         step("Открыта страница профиля и подложены куки", () -> {
             open("/favicon.ico");
             getWebDriver().manage().addCookie(new Cookie("userID", userId));
