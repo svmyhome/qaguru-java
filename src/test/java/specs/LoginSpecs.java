@@ -13,12 +13,12 @@ import static io.restassured.http.ContentType.JSON;
 
 public class LoginSpecs {
 
-    public static RequestSpecification account_v1_login_request_specification = with()
+    public static RequestSpecification accountV1LoginRequestSpecification = with()
             .filter(withCustomTemplates())
             .contentType(JSON)
             .log().all();
 
-    public static ResponseSpecification account_v1_login_response_specification = new ResponseSpecBuilder()
+    public static ResponseSpecification accountV1LoginResponseSpecification = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectHeader("Content-type", APPLICATION_JSON_UTF_8)
             .log(STATUS)
@@ -34,6 +34,18 @@ public class LoginSpecs {
     public static ResponseSpecification bookStoreV1LoginResponseSpecification = new ResponseSpecBuilder()
             .expectStatusCode(201)
             .expectHeader("Content-type", APPLICATION_JSON_UTF_8)
+            .log(STATUS)
+            .log(BODY)
+            .build();
+
+    public static RequestSpecification deleteBookStoreV1LoginRequestSpecification = with()
+            .filter(withCustomTemplates())
+            .contentType(JSON)
+            .log().all();
+
+
+    public static ResponseSpecification deleteBookStoreV1LoginResponseSpecification = new ResponseSpecBuilder()
+            .expectStatusCode(204)
             .log(STATUS)
             .log(BODY)
             .build();

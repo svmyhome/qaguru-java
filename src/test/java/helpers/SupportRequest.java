@@ -19,20 +19,20 @@ public class SupportRequest {
     @Step("Получить респонс для {userName} ")
     public static Response getRequest(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Authorize user", () -> given(account_v1_login_request_specification)
+        return step("Authorize user", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(account_v1_login_response_specification)
+                .then().spec(accountV1LoginResponseSpecification)
                 .body("username", is(userName)).extract().response());
     }
 
     @Step("Получить авторизационный токен для {userName} ")
     public static String getAuthorizationToken(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Authorize user", () -> given(account_v1_login_request_specification)
+        return step("Authorize user", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(account_v1_login_response_specification)
+                .then().spec(accountV1LoginResponseSpecification)
                 .body("username", is(userName)).extract().response().path("token"));
     }
 

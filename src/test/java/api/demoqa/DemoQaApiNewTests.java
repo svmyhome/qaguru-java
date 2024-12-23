@@ -27,10 +27,8 @@ import static constants.Constants.Path.BOOKSTORE_V1;
 import static helpers.SupportRequest.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.LoginSpecs.account_v1_login_request_specification;
-import static specs.LoginSpecs.account_v1_login_response_specification;
+import static specs.LoginSpecs.*;
 
 @Tag("API")
 public class DemoQaApiNewTests extends TestConfig {
@@ -41,16 +39,13 @@ public class DemoQaApiNewTests extends TestConfig {
         Selenide.closeWebDriver();
     }
 
-    String firstName = "Vin";
-    String lastName = "Dsel";
-
     @Test
     public void AuthorizeDemoQa() {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
-        LoginResponseBodyModel response = step("Authorize user", () -> given(account_v1_login_request_specification)
+        LoginResponseBodyModel response = step("Authorize user", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(account_v1_login_response_specification)
+                .then().spec(accountV1LoginResponseSpecification)
                 .extract().as(LoginResponseBodyModel.class));
 
         step("Assert that ", () -> {
@@ -74,50 +69,33 @@ public class DemoQaApiNewTests extends TestConfig {
         AddBookRequestModel bookData1 = new AddBookRequestModel(userId, listIsbn);
 
         // VERIFY THAT CART EMPTY
-        List<String> response = given()
-                .log().uri()
-                .log().method()
-                .log().body()
-                .contentType(JSON)
+        List<String> response = given(accountV1LoginRequestSpecification)
                 .header("Authorization", "Bearer " + token)
                 .when()
                 .get(ACCOUNT_V1 + USER + userId)
                 .then()
-                .log().status()
-                .log().body()
+                .spec(accountV1LoginResponseSpecification)
                 .statusCode(200).extract().path("books");
 
 
         // DELETE BOOK
         if (response.size() == 1) {
             DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
-            given()
-                    .log().uri()
-                    .log().method()
-                    .log().body()
-                    .contentType(JSON)
+            given(deleteBookStoreV1LoginRequestSpecification)
                     .header("Authorization", "Bearer " + token)
                     .body(bookDataDelete)
                     .when()
                     .delete(BOOKSTORE_V1 + BOOK)
                     .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(204);
+                    .spec(deleteBookStoreV1LoginResponseSpecification);
         } else if (response.size() > 1) {
-            given()
-                    .log().uri()
-                    .log().method()
-                    .log().body()
-                    .contentType(JSON)
+            given(deleteBookStoreV1LoginRequestSpecification)
                     .header("Authorization", "Bearer " + token)
                     .queryParam("UserId", userId)
                     .when()
                     .delete(BOOKSTORE_V1 + BOOKS)
                     .then()
-                    .log().status()
-                    .log().body()
-                    .statusCode(204);
+                    .spec(deleteBookStoreV1LoginResponseSpecification);
         }
 
 
