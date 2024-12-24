@@ -21,6 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static constants.Constants.ApiActions.LOGIN;
+import static constants.Constants.BOOKS.BOOK_ISBN_JAVASCRIPT;
 import static constants.Constants.CREDENTIALS.PASSWORD;
 import static constants.Constants.CREDENTIALS.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
@@ -70,7 +71,7 @@ public class DemoQaApiNewTests extends TestConfig {
 
         AddBookRequestModel bookData1 = new AddBookRequestModel(userId, listIsbn);
 
-        clearBooks(bearerToken, userId, isbn);
+        clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
 
         addBook(bearerToken, bookData1); // TODO Возможно не стоит убирать мы же тест на добавление как раз делдаем// ASSERT FROM UI
         step("Открыта страница профиля и подложены куки", () -> {

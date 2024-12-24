@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
 import models.books.DeleteBookRequestModel;
-import models.books.Isbn;
 import models.login.LoginRequestBodyModel;
 
 import java.util.List;
@@ -15,6 +14,7 @@ import static constants.Constants.Path.BOOKSTORE_V1;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpecs.*;
 
 public class SupportRequest {
@@ -53,8 +53,8 @@ public class SupportRequest {
     }
 
     @Step("Очистка профиля от книг")
-    public static void clearBooks(String bearerToken, String userId, Isbn isbn) {
-        DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
+    public static void clearBooks(String bearerToken, String userId, String isbn) {
+        DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn, userId);
         step("Очистка профиля от книг", () -> {
             List<String> response = getProfileInfo(bearerToken, userId);
             if (response.size() == 1) {
@@ -79,7 +79,6 @@ public class SupportRequest {
     @Step("Удалить одну книги из профиля")
     public static void deleteOneBook(String bearerToken, DeleteBookRequestModel bookDataDelete) {
         step("Удаление одной книги из профиля", () -> {
-//            DeleteBookRequestModel bookDataDelete = new DeleteBookRequestModel(isbn.getIsbn(), userId);
             given(deleteBookStoreV1LoginRequestSpecification)
                     .header("Authorization", bearerToken)
                     .body(bookDataDelete)
@@ -101,6 +100,11 @@ public class SupportRequest {
                     .then()
                     .spec(deleteBookStoreV1LoginResponseSpecification);
         });
+    }
+
+    @Step("Значение совпадает c {expected}")
+    public static void compareValues(String expected, String actual) {
+        assertEquals(expected, actual);
     }
 
 

@@ -11,6 +11,7 @@ import models.books.Isbn;
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +21,13 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.ApiActions.LOGIN;
+import static constants.Constants.BOOKS.BOOK_ISBN_JAVASCRIPT;
 import static constants.Constants.CREDENTIALS.PASSWORD;
 import static constants.Constants.CREDENTIALS.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static helpers.SupportRequest.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpecs.accountV1LoginRequestSpecification;
 import static specs.LoginSpecs.accountV1LoginResponseSpecification;
 
@@ -40,45 +41,44 @@ public class DemoQaApiWithLoginTests extends TestConfig {
     }
 
     @Test
-    public void AuthorizeDemoQa() {
+    @DisplayName("Успешная авторизация в личном кабинет")
+    public void successfullyLoginToBookStoreTest() {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
-        LoginResponseBodyModel response = step("Authorize user", () -> given(accountV1LoginRequestSpecification)
+        LoginResponseBodyModel response = step("Авторизация пользователя", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().spec(accountV1LoginResponseSpecification)
                 .extract().as(LoginResponseBodyModel.class));
 
-        step("Assert that ", () -> {
-            assertEquals(authBody.getUserName(), response.getUsername());
-            assertEquals("false", response.getIsActive());
+        step("Пользователь авторизовался успешно", () -> {
+            compareValues(authBody.getUserName(), response.getUsername());
+            compareValues("false", response.getIsActive());
         });
     }
 
 
     @Test
     @WithLogin
-    public void AddItemToCartDemoQa() {
+    @DisplayName("Успешное добавление книги в личный кабинет")
+    public void AddItemToCartBookStoreTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         Response authResponse = getResponse(USER_NAME, PASSWORD);
 
         String userId = authResponse.path("userId");
-        String expires = authResponse.path("expires");
-        String token = getAuthorizationToken(USER_NAME, PASSWORD);
         String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
-        String bookIsbn = "9781449365035";
-        Isbn isbn = new Isbn(bookIsbn);
-        List<Isbn> listIsbn = List.of(isbn);
+        List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
 
-        AddBookRequestModel bookData1 = new AddBookRequestModel(userId, listIsbn);
+        AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);
 
-        clearBooks(bearerToken, userId, isbn);
+        clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
 
-        addBook(bearerToken, bookData1);
-        step("Открыта страница профиля и подложены куки", () -> {
+        addBook(bearerToken, bookData);
+
+        step("Открыта страница профиля", () -> {
             open("/profile");
         });
 
-        step("В профиле есть книга", () ->
+        step("Книга добавлена в профиль", () ->
                 $(".ReactTable").shouldHave(text("Speaking JavaScript")));
 
     }

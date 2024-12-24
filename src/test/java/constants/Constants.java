@@ -33,4 +33,8 @@ public class Constants {
         public static final String USER_NAME = "vindisel";
         public static final String PASSWORD = "!Qaz2wsx";
     }
+
+    public static class BOOKS {
+        public static final String BOOK_ISBN_JAVASCRIPT = "9781449365035";
+    }
 }
