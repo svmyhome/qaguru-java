@@ -44,7 +44,7 @@ public class DemoQaApiWithLoginTests extends TestConfig {
     @DisplayName("Успешная авторизация в личном кабинет")
     public void successfullyLoginToBookStoreTest() {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
-        LoginResponseBodyModel response = step("Авторизация пользователя", () -> given(accountV1LoginRequestSpecification)
+        LoginResponseBodyModel response = step("Запрос на авторизацию пользователя", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().spec(accountV1LoginResponseSpecification)
@@ -56,6 +56,31 @@ public class DemoQaApiWithLoginTests extends TestConfig {
         });
     }
 
+    @Test
+    @WithLogin
+    @DisplayName("Успешное удаление одной книги из личного кабинета")
+    public void DeleteItemFromCartBookStoreTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        Response authResponse = getResponse(USER_NAME, PASSWORD);
+        String userId = authResponse.path("userId");
+        String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
+        List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
+        AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);
+
+        clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
+        getProfileInfo(bearerToken, userId);
+
+        addBook(bearerToken, bookData);
+
+        clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
+
+        step("Открыта страница профиля", () -> {
+            open("/profile");
+        });
+
+        step("Книга удалена из профиля", () ->
+                $(".ReactTable").shouldNotHave(text("Speaking JavaScript")));
+    }
 
     @Test
     @WithLogin
@@ -63,7 +88,6 @@ public class DemoQaApiWithLoginTests extends TestConfig {
     public void AddItemToCartBookStoreTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
         Response authResponse = getResponse(USER_NAME, PASSWORD);
-
         String userId = authResponse.path("userId");
         String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
         List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));

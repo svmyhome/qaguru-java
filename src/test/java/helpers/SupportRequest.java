@@ -19,29 +19,29 @@ import static specs.LoginSpecs.*;
 
 public class SupportRequest {
 
-    @Step("Получить респонс для {userName} ")
+    @Step("Получить респонс для  пользователя {userName} ")
     public static Response getResponse(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Authorize user", () -> given(accountV1LoginRequestSpecification)
+        return step("REQUEST AND RESPONSE DATA", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().spec(accountV1LoginResponseSpecification)
                 .body("username", is(userName)).extract().response());
     }
 
-    @Step("Получить авторизационный токен для {userName} ")
+    @Step("Получить авторизационный токен для пользователя {userName}")
     public static String getAuthorizationToken(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Authorize user", () -> given(accountV1LoginRequestSpecification)
+        return step("REQUEST AND RESPONSE DATA", () -> given(accountV1LoginRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().spec(accountV1LoginResponseSpecification)
                 .body("username", is(userName)).extract().response().path("token"));
     }
 
-    @Step("Добавить книгу")
+    @Step("Добавить книгу с ISBN {bookIsbn}")
     public static void addBook(String bearerToken, AddBookRequestModel bookData) {
-        step("Добавлена книга с ISBN {bookIsbn}", () -> {
+        step("Книга добавлена", () -> {
             given(bookStoreV1LoginRequestSpecification)
                     .header("Authorization", bearerToken)
                     .body(bookData)
