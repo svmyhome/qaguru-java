@@ -15,7 +15,7 @@ public class TestConfig {
 
 
     @BeforeAll
-    public static void setUP() {
+    public static void setUp() {
         RestAssured.baseURI = server;
 
         Configuration.browser = System.getProperty("browser", "chrome");
