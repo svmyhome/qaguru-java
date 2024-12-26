@@ -22,6 +22,7 @@ public class Constants {
         public static final String USER = "/User/";
         public static final String BOOK = "/Book";
         public static final String BOOKS = "/Books";
+        public static final String PROFILE = "/profile";
     }
 
 
