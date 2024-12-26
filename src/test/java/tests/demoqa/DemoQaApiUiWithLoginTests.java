@@ -1,7 +1,6 @@
-package api.demoqa;
+package tests.demoqa;
 
 import com.codeborne.selenide.Selenide;
-import config.TestConfig;
 import helpers.Attach;
 import helpers.WithLogin;
 import io.restassured.response.Response;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import static io.qameta.allure.Allure.step;
 
 @Tag("API")
 @DisplayName("API + UI")
-public class DemoQaApiUiWithLoginTests extends TestConfig {
+public class DemoQaApiUiWithLoginTests extends TestBase {
 
     @AfterEach
     void afterEach() {

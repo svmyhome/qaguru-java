@@ -1,4 +1,4 @@
-package config;
+package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static constants.Constants.RunVariables.server;
 
-public class TestConfig {
+public class TestBase {
 
 
     @BeforeAll

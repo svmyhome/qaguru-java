@@ -1,13 +1,13 @@
-package api.demoqa;
+package tests.demoqa;
 
 import com.codeborne.selenide.Selenide;
-import config.TestConfig;
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static constants.Constants.ApiActions.LOGIN;
 import static constants.Constants.Credentials.PASSWORD;
@@ -21,7 +21,7 @@ import static specs.LoginSpecs.accountV1LoginResponseSpecification;
 
 @Tag("API")
 @DisplayName("API")
-public class DemoQaApiWithLoginTests extends TestConfig {
+public class DemoQaApiWithLoginTests extends TestBase {
 
 
     @AfterEach
