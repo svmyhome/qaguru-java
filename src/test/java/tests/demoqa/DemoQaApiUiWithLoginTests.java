@@ -24,6 +24,9 @@ import static helpers.SupportRequest.*;
 @DisplayName("API + UI")
 public class DemoQaApiUiWithLoginTests extends TestBase {
 
+    ProfilePage profilePage = new ProfilePage();
+    public static final String BOOK = "Speaking JavaScript";
+
     @AfterEach
     void afterEach() {
         Attach.screenshotAs("Финальный скриншот");
@@ -33,13 +36,11 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         Selenide.closeWebDriver();
     }
 
-    public static final String BOOK = "Speaking JavaScript";
 
     @Test
     @WithLogin
     @DisplayName("Успешное удаление одной книги из личного кабинета")
     public void deleteItemFromCartBookStoreTest() {
-        ProfilePage profilePage = new ProfilePage();
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
         String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
@@ -51,29 +52,16 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         addBook(bearerToken, bookData);
 
         profilePage.openProfilePage(USER_NAME)
-                .bookExistFromProfile(BOOK)
+                .assertBookExistInProfile(BOOK)
                 .deleteBook()
-                .assertDeleteBook(BOOK);
-
-//
-//        step("Книга добавлена в профиль", () ->
-//                $(".ReactTable").shouldHave(text("Speaking JavaScript")));
-
-
-//        step("Удаление книги из профиля", () -> {
-//            $("#delete-record-undefined").click();
-//            $("#closeSmallModal-ok").click();
-//        });
-
-//        step("Книга удалена из профиля", () ->
-//                $(".ReactTable").shouldNotHave(text("Speaking JavaScript")));
+                .assertBookIsDeleted(BOOK);
     }
 
     @Test
     @WithLogin
     @DisplayName("Успешное добавление книги в личный кабинет")
     public void addItemToCartBookStoreTest() {
-        ProfilePage profilePage = new ProfilePage();
+
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
         String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
@@ -83,14 +71,7 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
         addBook(bearerToken, bookData);
 
-        profilePage.openProfilePage(USER_NAME).bookExistFromProfile(BOOK);
-//        step("Открыта страница профиля", () -> {
-//            open("/profile");
-//        });
-//
-//        step("Книга добавлена в профиль", () ->
-//                $(".ReactTable").shouldHave(text("Speaking JavaScript")));
-
+        profilePage.openProfilePage(USER_NAME).assertBookExistInProfile(BOOK);
     }
 
 }

@@ -12,18 +12,18 @@ import static io.qameta.allure.Allure.step;
 
 public class ProfilePage {
 
-    @Step("Открыт профиль {userName}")
+    @Step("Открыт профиль пользователя {userName}")
     public ProfilePage openProfilePage(String userName) {
         step("Открыта страница профиля", () -> {
             open(PROFILE);
         });
-        step("Профиль {userName}", () ->
+        step("Профиль принадлежит пользователю " + userName, () ->
                 $("#userName-value").shouldHave(text(USER_NAME)));
         return this;
     }
 
-    @Step("В профиле есть книга {book}")
-    public ProfilePage bookExistFromProfile(String book) {
+    @Step("Книга {book} есть в профиле")
+    public ProfilePage assertBookExistInProfile(String book) {
         $(".ReactTable").shouldHave(text(book));
         return this;
     }
@@ -40,9 +40,8 @@ public class ProfilePage {
     }
 
     @Step("Книга {book} удалена из профиля")
-    public ProfilePage assertDeleteBook(String book) {
+    public ProfilePage assertBookIsDeleted(String book) {
         $(".ReactTable").shouldNotHave(text(book));
         return this;
     }
-
 }
