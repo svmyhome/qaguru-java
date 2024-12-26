@@ -25,16 +25,16 @@ public class Constants {
     }
 
 
-    public static class HEADERS {
+    public static class Headers {
         public static final String APPLICATION_JSON_UTF_8 = "application/json; charset=utf-8";
     }
 
-    public static class CREDENTIALS {
+    public static class Credentials {
         public static final String USER_NAME = "vindisel";
         public static final String PASSWORD = "!Qaz2wsx";
     }
 
-    public static class BOOKS {
+    public static class Books {
         public static final String BOOK_ISBN_JAVASCRIPT = "9781449365035";
     }
 }

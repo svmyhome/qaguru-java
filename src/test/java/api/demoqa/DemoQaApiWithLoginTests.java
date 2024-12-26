@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static constants.Constants.ApiActions.LOGIN;
-import static constants.Constants.CREDENTIALS.PASSWORD;
-import static constants.Constants.CREDENTIALS.USER_NAME;
+import static constants.Constants.Credentials.PASSWORD;
+import static constants.Constants.Credentials.USER_NAME;
 import static constants.Constants.Path.ACCOUNT_V1;
 import static helpers.SupportRequest.compareValues;
 import static io.qameta.allure.Allure.step;

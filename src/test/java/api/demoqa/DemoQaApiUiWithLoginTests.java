@@ -17,9 +17,9 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
-import static constants.Constants.BOOKS.BOOK_ISBN_JAVASCRIPT;
-import static constants.Constants.CREDENTIALS.PASSWORD;
-import static constants.Constants.CREDENTIALS.USER_NAME;
+import static constants.Constants.Books.BOOK_ISBN_JAVASCRIPT;
+import static constants.Constants.Credentials.PASSWORD;
+import static constants.Constants.Credentials.USER_NAME;
 import static helpers.SupportRequest.*;
 import static io.qameta.allure.Allure.step;
 
@@ -39,7 +39,7 @@ public class DemoQaApiUiWithLoginTests extends TestConfig {
     @Test
     @WithLogin
     @DisplayName("Успешное удаление одной книги из личного кабинета")
-    public void DeleteItemFromCartBookStoreTest() {
+    public void deleteItemFromCartBookStoreTest() {
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
         String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
@@ -64,7 +64,7 @@ public class DemoQaApiUiWithLoginTests extends TestConfig {
     @Test
     @WithLogin
     @DisplayName("Успешное добавление книги в личный кабинет")
-    public void AddItemToCartBookStoreTest() {
+    public void addItemToCartBookStoreTest() {
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
         String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);

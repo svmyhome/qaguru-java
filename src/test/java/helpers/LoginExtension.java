@@ -7,8 +7,8 @@ import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static constants.Constants.CREDENTIALS.PASSWORD;
-import static constants.Constants.CREDENTIALS.USER_NAME;
+import static constants.Constants.Credentials.PASSWORD;
+import static constants.Constants.Credentials.USER_NAME;
 
 public class LoginExtension implements BeforeEachCallback {
 

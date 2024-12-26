@@ -15,14 +15,14 @@ def restAssuredVersion = "5.5.0",
     allureVersion = "2.29.0"
 
 allure {
-    report { // секция репора<latest>
+    report {
         version.set(allureVersion)
     }
-    adapter {  // отвечает за появление папки build/allure-results
-        aspectjWeaver.set(true) //  обработка аннотации @step
+    adapter {
+        aspectjWeaver.set(true)
         frameworks {
-            junit5 { //название фреймворка
-                adapterVersion.set(allureVersion) // версия интеграции фреимворка и Aallure
+            junit5 {
+                adapterVersion.set(allureVersion)
             }
         }
     }
@@ -48,14 +48,6 @@ dependencies {
     testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
     testImplementation 'io.qameta.allure:allure-rest-assured:2.29.1'
 
-
-//    testImplementation(
-//            'com.codeborne:selenide:7.5.1',
-//            'org.junit.jupiter:junit-jupiter:5.11.2',
-//            'com.github.javafaker:javafaker:1.0.2',
-//            'org.slf4j:slf4j-simple:2.0.16'
-//
-//    )
 }
 
 tasks.withType(Test) {

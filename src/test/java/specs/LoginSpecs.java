@@ -4,7 +4,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import static constants.Constants.HEADERS.APPLICATION_JSON_UTF_8;
+import static constants.Constants.Headers.APPLICATION_JSON_UTF_8;
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.BODY;
