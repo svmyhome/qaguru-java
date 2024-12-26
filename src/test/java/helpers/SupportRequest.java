@@ -39,7 +39,7 @@ public class SupportRequest {
                 .body("username", is(userName)).extract().response().path("token"));
     }
 
-    @Step("Добавить книгу с ISBN {bookIsbn}")
+    @Step("Добавить книгу в профиль")
     public static void addBook(String bearerToken, AddBookRequestModel bookData) {
         step("Книга добавлена", () -> {
             given(bookStoreV1LoginRequestSpecification)
