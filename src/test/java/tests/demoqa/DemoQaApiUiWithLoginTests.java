@@ -47,14 +47,27 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);
 
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
-        getProfileInfo(bearerToken, userId);
+        getProfileInfo(bearerToken, userId); // TODO точно нужно?
 
         addBook(bearerToken, bookData);
 
-        clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
+//        clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
 
         step("Открыта страница профиля", () -> {
             open("/profile");
+        });
+
+//- проверка отображения User Name в UI
+        step("Открыт профиль {USER_NAME}", () ->
+                $("#userName-value").shouldHave(text(USER_NAME)));
+
+        step("Книга добавлена в профиль", () ->
+                $(".ReactTable").shouldHave(text("Speaking JavaScript")));
+
+
+        step("Удаление книги из профиля", () -> {
+            $("#delete-record-undefined").click();
+            $("#closeSmallModal-ok").click();
         });
 
         step("Книга удалена из профиля", () ->
@@ -84,9 +97,5 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
                 $(".ReactTable").shouldHave(text("Speaking JavaScript")));
 
     }
-    // TODO скриншоты
-    // TODO чтобы было видно в селениеде включить
-    // gradle api_test -Dremote=https://user1:1234@selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000
-
 
 }
