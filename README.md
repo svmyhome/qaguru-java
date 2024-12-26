@@ -100,3 +100,6 @@ localStorage
 sessionStorage
 
 AWAITILITY ожидание для RESTASSURED
+
+Запуск в селеноиде // gradle api_test -Dremote=https://user1:1234@selenoid.autotests.cloud/wd/hub -Dbrowser=chrome
+-DbrowserVersion=126.0 -DbrowserSize=1000x2000
