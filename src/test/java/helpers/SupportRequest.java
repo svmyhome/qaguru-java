@@ -22,33 +22,33 @@ public class SupportRequest {
     @Step("Получить респонс для  пользователя {userName} ")
     public static Response getResponse(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("REQUEST AND RESPONSE DATA", () -> given(accountV1LoginRequestSpecification)
+        return step("REQUEST AND RESPONSE DATA", () -> given(baseRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(accountV1LoginResponseSpecification)
+                .then().spec(statusCode200ResponseSpecification)
                 .body("username", is(userName)).extract().response());
     }
 
     @Step("Получить авторизационный токен для пользователя {userName}")
     public static String getAuthorizationToken(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("REQUEST AND RESPONSE DATA", () -> given(accountV1LoginRequestSpecification)
+        return step("REQUEST AND RESPONSE DATA", () -> given(baseRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(accountV1LoginResponseSpecification)
+                .then().spec(statusCode200ResponseSpecification)
                 .body("username", is(userName)).extract().response().path("token"));
     }
 
     @Step("Добавить книгу в профиль")
     public static void addBook(String bearerToken, AddBookRequestModel bookData) {
         step("Книга добавлена", () -> {
-            given(bookStoreV1LoginRequestSpecification)
+            given(baseRequestSpecification)
                     .header("Authorization", bearerToken)
                     .body(bookData)
                     .when()
                     .post(BOOKSTORE_V1 + BOOKS)
                     .then()
-                    .spec(bookStoreV1LoginResponseSpecification);
+                    .spec(statusCode201ResponseSpecification);
         });
     }
 
@@ -67,38 +67,38 @@ public class SupportRequest {
 
     @Step("Запрос информации профиля")
     public static List<String> getProfileInfo(String bearerToken, String userId) {
-        return given(accountV1LoginRequestSpecification)
+        return given(baseRequestSpecification)
                 .header("Authorization", bearerToken)
                 .when()
                 .get(ACCOUNT_V1 + USER + userId)
                 .then()
-                .spec(accountV1LoginResponseSpecification)
+                .spec(statusCode200ResponseSpecification)
                 .statusCode(200).extract().path("books");
     }
 
     @Step("Удалить одну книги из профиля")
     public static void deleteOneBook(String bearerToken, DeleteBookRequestModel bookDataDelete) {
         step("Удаление одной книги из профиля", () -> {
-            given(deleteBookStoreV1LoginRequestSpecification)
+            given(baseRequestSpecification)
                     .header("Authorization", bearerToken)
                     .body(bookDataDelete)
                     .when()
                     .delete(BOOKSTORE_V1 + BOOK)
                     .then()
-                    .spec(deleteBookStoreV1LoginResponseSpecification);
+                    .spec(statusCode204ResponseSpecification);
         });
     }
 
     @Step("Удалить все книги из профиля")
     public static void deleteAllBooks(String bearerToken, String userId) {
         step("Удаление всех книг из профиля", () -> {
-            given(deleteBookStoreV1LoginRequestSpecification)
+            given(baseRequestSpecification)
                     .header("Authorization", bearerToken)
                     .queryParam("UserId", userId)
                     .when()
                     .delete(BOOKSTORE_V1 + BOOKS)
                     .then()
-                    .spec(deleteBookStoreV1LoginResponseSpecification);
+                    .spec(statusCode204ResponseSpecification);
         });
     }
 
