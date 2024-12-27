@@ -15,10 +15,12 @@ import tests.TestBase;
 
 import java.util.List;
 
+import static api.AccountApi.getResponse;
+import static api.BooksApi.addBook;
+import static api.BooksApi.clearBooks;
 import static constants.Constants.Books.BOOK_ISBN_JAVASCRIPT;
 import static constants.Constants.Credentials.PASSWORD;
 import static constants.Constants.Credentials.USER_NAME;
-import static helpers.SupportRequest.*;
 
 @Tag("API")
 @DisplayName("API + UI")
@@ -43,12 +45,11 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
     public void deleteItemFromCartBookStoreTest() {
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
-        String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
+        String bearerToken = "Bearer " + authResponse.path("token");
         List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
         AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);
 
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
-        getProfileInfo(bearerToken, userId); // TODO точно нужно?
         addBook(bearerToken, bookData);
 
         profilePage.openProfilePage(USER_NAME)
@@ -64,7 +65,7 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
 
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
-        String bearerToken = "Bearer " + getAuthorizationToken(USER_NAME, PASSWORD);
+        String bearerToken = "Bearer " + authResponse.path("token");
         List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
 
         AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);

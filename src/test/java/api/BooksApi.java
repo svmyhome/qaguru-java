@@ -1,43 +1,19 @@
-package helpers;
+package api;
 
 import io.qameta.allure.Step;
-import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
 import models.books.DeleteBookRequestModel;
-import models.login.LoginRequestBodyModel;
 
 import java.util.List;
 
-import static constants.Constants.ApiActions.*;
-import static constants.Constants.Path.ACCOUNT_V1;
-import static constants.Constants.Path.BOOKSTORE_V1;
+import static api.AccountApi.getProfileInfo;
+import static constants.Constants.ApiActions.BOOKSTORE_V1_BOOK;
+import static constants.Constants.ApiActions.BOOKSTORE_V1_BOOKS;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LoginSpecs.*;
 
-public class SupportRequest {
-
-    @Step("Получить респонс для  пользователя {userName} ")
-    public static Response getResponse(String userName, String password) {
-        LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Запрос и ответ", () -> given(baseRequestSpecification)
-                .body(authBody)
-                .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(statusCode200ResponseSpecification)
-                .body("username", is(userName)).extract().response());
-    }
-
-    @Step("Получить авторизационный токен для пользователя {userName}")
-    public static String getAuthorizationToken(String userName, String password) {
-        LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Запрос и ответ", () -> given(baseRequestSpecification)
-                .body(authBody)
-                .when().post(ACCOUNT_V1 + LOGIN)
-                .then().spec(statusCode200ResponseSpecification)
-                .body("username", is(userName)).extract().response().path("token"));
-    }
+public class BooksApi {
 
     @Step("Добавить книгу в профиль")
     public static void addBook(String bearerToken, AddBookRequestModel bookData) {
@@ -46,7 +22,7 @@ public class SupportRequest {
                     .header("Authorization", bearerToken)
                     .body(bookData)
                     .when()
-                    .post(BOOKSTORE_V1 + BOOKS)
+                    .post(BOOKSTORE_V1_BOOKS)
                     .then()
                     .spec(statusCode201ResponseSpecification);
         });
@@ -65,17 +41,6 @@ public class SupportRequest {
         });
     }
 
-    @Step("Запрос информации профиля")
-    public static List<String> getProfileInfo(String bearerToken, String userId) {
-        return given(baseRequestSpecification)
-                .header("Authorization", bearerToken)
-                .when()
-                .get(ACCOUNT_V1 + USER + userId)
-                .then()
-                .spec(statusCode200ResponseSpecification)
-                .statusCode(200).extract().path("books");
-    }
-
     @Step("Удалить одну книги из профиля")
     public static void deleteOneBook(String bearerToken, DeleteBookRequestModel bookDataDelete) {
         step("Удаление одной книги из профиля", () -> {
@@ -83,7 +48,7 @@ public class SupportRequest {
                     .header("Authorization", bearerToken)
                     .body(bookDataDelete)
                     .when()
-                    .delete(BOOKSTORE_V1 + BOOK)
+                    .delete(BOOKSTORE_V1_BOOK)
                     .then()
                     .spec(statusCode204ResponseSpecification);
         });
@@ -96,16 +61,9 @@ public class SupportRequest {
                     .header("Authorization", bearerToken)
                     .queryParam("UserId", userId)
                     .when()
-                    .delete(BOOKSTORE_V1 + BOOKS)
+                    .delete(BOOKSTORE_V1_BOOKS)
                     .then()
                     .spec(statusCode204ResponseSpecification);
         });
     }
-
-    @Step("Значение совпадает c {expected}")
-    public static void compareValues(String expected, String actual) {
-        assertEquals(expected, actual);
-    }
-
-
 }

@@ -9,11 +9,10 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
-import static constants.Constants.ApiActions.LOGIN;
+import static api.AccountApi.compareValues;
+import static constants.Constants.ApiActions.ACCOUNT_V1_LOGIN;
 import static constants.Constants.Credentials.PASSWORD;
 import static constants.Constants.Credentials.USER_NAME;
-import static constants.Constants.Path.ACCOUNT_V1;
-import static helpers.SupportRequest.compareValues;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static specs.LoginSpecs.baseRequestSpecification;
@@ -35,7 +34,7 @@ public class DemoQaApiWithLoginTests extends TestBase {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
         LoginResponseBodyModel response = step("Запрос на авторизацию пользователя", () -> given(baseRequestSpecification)
                 .body(authBody)
-                .when().post(ACCOUNT_V1 + LOGIN)
+                .when().post(ACCOUNT_V1_LOGIN)
                 .then().spec(statusCode200ResponseSpecification)
                 .extract().as(LoginResponseBodyModel.class));
 

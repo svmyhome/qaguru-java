@@ -9,14 +9,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
-import static constants.Constants.RunVariables.server;
-
 public class TestBase {
 
 
     @BeforeAll
     public static void setUp() {
-        RestAssured.baseURI = server;
+        RestAssured.baseURI = "https://demoqa.com";
 
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "100.0");
