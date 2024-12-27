@@ -16,7 +16,10 @@ public class LoginExtension implements BeforeEachCallback {
         Response response = AccountApi.getResponse(USER_NAME, PASSWORD);
         MainPage faviconPage = new MainPage();
 
+        ResponseCredentials.setAuthResponse(response);
+
         faviconPage.openFaviconPage(response);
+        context.getStore(ExtensionContext.Namespace.GLOBAL).put("authResponse", response);
     }
 
 }
