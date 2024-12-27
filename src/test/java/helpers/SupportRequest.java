@@ -22,7 +22,7 @@ public class SupportRequest {
     @Step("Получить респонс для  пользователя {userName} ")
     public static Response getResponse(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("REQUEST AND RESPONSE DATA", () -> given(baseRequestSpecification)
+        return step("Запрос и ответ", () -> given(baseRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().spec(statusCode200ResponseSpecification)
@@ -32,7 +32,7 @@ public class SupportRequest {
     @Step("Получить авторизационный токен для пользователя {userName}")
     public static String getAuthorizationToken(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("REQUEST AND RESPONSE DATA", () -> given(baseRequestSpecification)
+        return step("Запрос и ответ", () -> given(baseRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1 + LOGIN)
                 .then().spec(statusCode200ResponseSpecification)

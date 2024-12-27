@@ -23,6 +23,7 @@ public class Constants {
         public static final String BOOK = "/Book";
         public static final String BOOKS = "/Books";
         public static final String PROFILE = "/profile";
+        public static final String FAVICON = "/favicon.ico";
     }
 
 
