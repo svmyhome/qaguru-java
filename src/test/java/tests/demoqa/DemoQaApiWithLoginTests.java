@@ -1,9 +1,7 @@
 package tests.demoqa;
 
-import com.codeborne.selenide.Selenide;
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -21,12 +19,6 @@ import static specs.LoginSpecs.statusCode200ResponseSpecification;
 @Tag("API")
 @DisplayName("API")
 public class DemoQaApiWithLoginTests extends TestBase {
-
-
-    @AfterEach
-    public void afterEach() {
-        Selenide.closeWebDriver();
-    }
 
     @Test
     @DisplayName("Успешная авторизация в личном кабинет")

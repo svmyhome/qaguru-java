@@ -1,12 +1,9 @@
 package tests.demoqa;
 
-import com.codeborne.selenide.Selenide;
-import helpers.Attach;
 import helpers.WithLogin;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
 import models.books.Isbn;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,21 +20,12 @@ import static constants.Constants.Credentials.PASSWORD;
 import static constants.Constants.Credentials.USER_NAME;
 
 @Tag("API")
+@Tag("full")
 @DisplayName("API + UI")
 public class DemoQaApiUiWithLoginTests extends TestBase {
 
     ProfilePage profilePage = new ProfilePage();
     public static final String BOOK = "Speaking JavaScript";
-
-    @AfterEach
-    void afterEach() {
-        Attach.screenshotAs("Финальный скриншот");
-        Attach.pageSource();
-        Attach.browserConsoleLogs();
-        Attach.addVideo();
-        Selenide.closeWebDriver();
-    }
-
 
     @Test
     @WithLogin
@@ -48,7 +36,6 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         String bearerToken = "Bearer " + authResponse.path("token");
         List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
         AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);
-
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
         addBook(bearerToken, bookData);
 
@@ -62,7 +49,6 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
     @WithLogin
     @DisplayName("Успешное добавление книги в личный кабинет")
     public void addItemToCartBookStoreTest() {
-
         Response authResponse = getResponse(USER_NAME, PASSWORD);
         String userId = authResponse.path("userId");
         String bearerToken = "Bearer " + authResponse.path("token");
