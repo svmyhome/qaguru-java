@@ -1,4 +1,4 @@
-package tests.demoqa;
+package tests;
 
 import helpers.WithLogin;
 import io.restassured.response.Response;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
-import tests.TestBase;
 
 import java.util.List;
 

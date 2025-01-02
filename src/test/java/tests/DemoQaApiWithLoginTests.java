@@ -1,11 +1,10 @@
-package tests.demoqa;
+package tests;
 
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import tests.TestBase;
 
 import static api.AccountApi.compareValues;
 import static constants.Constants.ApiActions.ACCOUNT_V1_LOGIN;

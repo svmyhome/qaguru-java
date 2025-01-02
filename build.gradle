@@ -12,6 +12,7 @@ plugins {
 }
 
 def restAssuredVersion = "5.5.0",
+        allureRestAssured = "2.29.1",
     allureVersion = "2.29.0"
 
 allure {
@@ -46,7 +47,7 @@ dependencies {
     testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
     testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
     testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
-    testImplementation 'io.qameta.allure:allure-rest-assured:2.29.1'
+    testImplementation "io.qameta.allure:allure-rest-assured:$allureRestAssured"
 
 }
 
