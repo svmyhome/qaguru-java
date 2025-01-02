@@ -32,14 +32,6 @@ public class MainPage {
     @Step("Авторизоваться в браузере с использованием Cookies")
     public MainPage openFaviconPage(Response response) {
         openMainPage().setAuthorizationCookies(response);
-//        step("Открыта страница " + FAVICON, () -> {
-//            open(FAVICON);
-//        });
-//        step("Установлены авторизационные cookies", () -> {
-//            setCookie.setCookie("userID", response.path("userId"));
-//            setCookie.setCookie("expires", response.path("expires"));
-//            setCookie.setCookie("token", response.path("token"));
-//        });
         return this;
     }
 

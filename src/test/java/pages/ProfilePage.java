@@ -13,12 +13,7 @@ public class ProfilePage {
 
     @Step("Открыт профиль пользователя {userName}")
     public ProfilePage openProfile(String userName) {
-//        step("Открыта страница профиля", () -> {
-//            open(PROFILE);
-//        });
         openProfilePage().assertProfileBelongsToUser(userName);
-//        step("Профиль принадлежит пользователю " + userName, () ->
-//                $("#userName-value").shouldHave(text(USER_NAME)));
         return this;
     }
 
@@ -57,12 +52,6 @@ public class ProfilePage {
     @Step("Удаление книги из профиля")
     public ProfilePage deleteBook() {
         clickOnTrashBin().confirmingBookDeletion();
-//        step("Кликнуть на иконку корзины", () -> {
-//            $("#delete-record-undefined").click();
-//        });
-//        step("Подтвердить удаление книги", () -> {
-//            $("#closeSmallModal-ok").click();
-//        });
         return this;
     }
 
