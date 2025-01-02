@@ -19,11 +19,10 @@ public class TestBase {
     @BeforeAll
     public static void setUp() {
         RestAssured.baseURI = "https://demoqa.com";
-
+        Configuration.baseUrl = "https://demoqa.com";
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "100.0");
         Configuration.browserSize = System.getProperty("browserSize", "1000x1900");
-        Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = System.getProperty("remote");
 

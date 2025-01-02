@@ -10,7 +10,7 @@ import static constants.Constants.ApiActions.FAVICON;
 import static io.qameta.allure.Allure.step;
 
 public class MainPage {
-    CookieManagement setCookie = new CookieManagement();
+    CookieManagement setCustomCookie = new CookieManagement();
 
 
     @Step("Открыта страница" + FAVICON)
@@ -22,9 +22,9 @@ public class MainPage {
     @Step("Установлены авторизационные cookies")
     public MainPage setAuthorizationCookies(Response response) {
         step("Cookies", () -> {
-            setCookie.setCookie("userID", response.path("userId"));
-            setCookie.setCookie("expires", response.path("expires"));
-            setCookie.setCookie("token", response.path("token"));
+            setCustomCookie.setCookie("userID", response.path("userId"));
+            setCustomCookie.setCookie("expires", response.path("expires"));
+            setCustomCookie.setCookie("token", response.path("token"));
         });
         return this;
     }
