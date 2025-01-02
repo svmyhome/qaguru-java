@@ -37,7 +37,7 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
         addBook(bearerToken, bookData);
 
-        profilePage.openProfilePage(USER_NAME)
+        profilePage.openProfile(USER_NAME)
                 .assertBookExistInProfile(BOOK)
                 .deleteBook()
                 .assertBookIsDeleted(BOOK);
@@ -56,7 +56,7 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
         addBook(bearerToken, bookData);
 
-        profilePage.openProfilePage(USER_NAME).assertBookExistInProfile(BOOK);
+        profilePage.openProfile(USER_NAME).assertBookExistInProfile(BOOK);
     }
 
 }

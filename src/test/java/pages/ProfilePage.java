@@ -8,19 +8,32 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.ApiActions.PROFILE;
 import static constants.Constants.Credentials.USER_NAME;
-import static io.qameta.allure.Allure.step;
 
 public class ProfilePage {
 
     @Step("Открыт профиль пользователя {userName}")
-    public ProfilePage openProfilePage(String userName) {
-        step("Открыта страница профиля", () -> {
-            open(PROFILE);
-        });
-        step("Профиль принадлежит пользователю " + userName, () ->
-                $("#userName-value").shouldHave(text(USER_NAME)));
+    public ProfilePage openProfile(String userName) {
+//        step("Открыта страница профиля", () -> {
+//            open(PROFILE);
+//        });
+        openProfilePage().assertProfileBelongsToUser(userName);
+//        step("Профиль принадлежит пользователю " + userName, () ->
+//                $("#userName-value").shouldHave(text(USER_NAME)));
         return this;
     }
+
+    @Step("Открыта страница профиля")
+    public ProfilePage openProfilePage() {
+        open(PROFILE);
+        return this;
+    }
+
+    @Step("Профиль принадлежит пользователю {userName}")
+    public ProfilePage assertProfileBelongsToUser(String userName) {
+        $("#userName-value").shouldHave(text(USER_NAME));
+        return this;
+    }
+
 
     @Step("Книга {book} есть в профиле")
     public ProfilePage assertBookExistInProfile(String book) {
@@ -28,14 +41,28 @@ public class ProfilePage {
         return this;
     }
 
+    @Step("Кликнуть на иконку корзины")
+    public ProfilePage clickOnTrashBin() {
+        $("#delete-record-undefined").click();
+        return this;
+    }
+
+    @Step("Подтвердить удаление книги")
+    public ProfilePage confirmingBookDeletion() {
+        $("#closeSmallModal-ok").click();
+        return this;
+    }
+
+
     @Step("Удаление книги из профиля")
     public ProfilePage deleteBook() {
-        step("Кликнуть на иконку корзины", () -> {
-            $("#delete-record-undefined").click();
-        });
-        step("Подтвердить удаление книги", () -> {
-            $("#closeSmallModal-ok").click();
-        });
+        clickOnTrashBin().confirmingBookDeletion();
+//        step("Кликнуть на иконку корзины", () -> {
+//            $("#delete-record-undefined").click();
+//        });
+//        step("Подтвердить удаление книги", () -> {
+//            $("#closeSmallModal-ok").click();
+//        });
         return this;
     }
 

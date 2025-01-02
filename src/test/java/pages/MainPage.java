@@ -12,16 +12,34 @@ import static io.qameta.allure.Allure.step;
 public class MainPage {
     CookieManagement setCookie = new CookieManagement();
 
-    @Step("Установить авторизационные Cookies")
-    public MainPage openFaviconPage(Response response) {
-        step("Открыта страница " + FAVICON, () -> {
-            open(FAVICON);
-        });
-        step("Установлены авторизационные cookies", () -> {
+
+    @Step("Открыта страница" + FAVICON)
+    public MainPage openMainPage() {
+        open(FAVICON);
+        return this;
+    }
+
+    @Step("Установлены авторизационные cookies")
+    public MainPage setAuthorizationCookies(Response response) {
+        step("Cookies", () -> {
             setCookie.setCookie("userID", response.path("userId"));
             setCookie.setCookie("expires", response.path("expires"));
             setCookie.setCookie("token", response.path("token"));
         });
+        return this;
+    }
+
+    @Step("Авторизоваться в браузере с использованием Cookies")
+    public MainPage openFaviconPage(Response response) {
+        openMainPage().setAuthorizationCookies(response);
+//        step("Открыта страница " + FAVICON, () -> {
+//            open(FAVICON);
+//        });
+//        step("Установлены авторизационные cookies", () -> {
+//            setCookie.setCookie("userID", response.path("userId"));
+//            setCookie.setCookie("expires", response.path("expires"));
+//            setCookie.setCookie("token", response.path("token"));
+//        });
         return this;
     }
 
