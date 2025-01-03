@@ -23,8 +23,6 @@ public class Constants {
         static AuthConfig config = ConfigFactory.create(AuthConfig.class, System.getProperties());
         public static final String USER_NAME = System.getProperty("userName", config.userName());
         public static final String PASSWORD = System.getProperty("userPassword", config.userPassword());
-//        public static final String USER_NAME ="vindisel1";
-//        public static final String PASSWORD = "Q!az2wsx";
     }
 
 

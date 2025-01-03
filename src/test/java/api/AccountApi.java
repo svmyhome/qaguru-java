@@ -8,7 +8,6 @@ import models.login.LoginResponseBodyModel;
 import java.util.List;
 
 import static constants.Constants.ApiActions.*;
-import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,17 +32,17 @@ public class AccountApi {
         return "Bearer " + authResponse.path("token");
     }
 
-    @Step("Получить респонс для  пользователя {userName} ")
+    @Step("Получен респонс для пользователя {userName} ")
     public static Response getResponse(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
-        return step("Запрос и ответ", () -> given(baseRequestSpecification)
+        return given(baseRequestSpecification)
                 .body(authBody)
                 .when().post(ACCOUNT_V1_LOGIN)
                 .then().spec(statusCode200ResponseSpecification)
-                .body("username", is(userName)).extract().response());
+                .body("username", is(userName)).extract().response();
     }
 
-    @Step("Запрос информации профиля")
+    @Step("Получена информации о профиле")
     public static List<String> getProfileInfo(String bearerToken, String userId) {
         return given(baseRequestSpecification)
                 .header("Authorization", bearerToken)
