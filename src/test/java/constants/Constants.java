@@ -17,9 +17,12 @@ public class Constants {
     }
 
     public static class Credentials {
-        public static final String USER_NAME = "vindisel";
-        public static final String PASSWORD = "!Qaz2wsx";
+        public static final String USER_NAME = System.getProperty("userName");
+        public static final String PASSWORD = System.getProperty("userPassword");
+//        public static final String USER_NAME ="vindisel1";
+//        public static final String PASSWORD = "Q!az2wsx";
     }
+
 
     public static class Books {
         public static final String BOOK_ISBN_JAVASCRIPT = "9781449365035";
