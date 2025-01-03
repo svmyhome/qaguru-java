@@ -48,6 +48,7 @@ dependencies {
     testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
     testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
     testImplementation "io.qameta.allure:allure-rest-assured:$allureRestAssured"
+    testImplementation 'org.aeonbits.owner:owner:1.0.12'
 
 }
 

@@ -1,5 +1,8 @@
 package constants;
 
+import config.AuthConfig;
+import org.aeonbits.owner.ConfigFactory;
+
 public class Constants {
 
     public static class ApiActions {
@@ -17,8 +20,9 @@ public class Constants {
     }
 
     public static class Credentials {
-        public static final String USER_NAME = System.getProperty("userName");
-        public static final String PASSWORD = System.getProperty("userPassword");
+        static AuthConfig config = ConfigFactory.create(AuthConfig.class, System.getProperties());
+        public static final String USER_NAME = System.getProperty("userName", config.userName());
+        public static final String PASSWORD = System.getProperty("userPassword", config.userPassword());
 //        public static final String USER_NAME ="vindisel1";
 //        public static final String PASSWORD = "Q!az2wsx";
     }
