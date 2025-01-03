@@ -3,6 +3,7 @@ package api;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import models.login.LoginRequestBodyModel;
+import models.login.LoginResponseBodyModel;
 
 import java.util.List;
 
@@ -55,9 +56,18 @@ public class AccountApi {
 
 
     @Step("Значение совпадает c {expected}")
-    public static void compareValues(String expected, String actual) {
+    public AccountApi compareValues(String expected, String actual) {
         assertEquals(expected, actual);
+        return this;
     }
 
+    @Step("Запрос на авторизацию пользователя")
+    public LoginResponseBodyModel getResponse(LoginRequestBodyModel authBody) {
+        return given(baseRequestSpecification)
+                .body(authBody)
+                .when().post(ACCOUNT_V1_LOGIN)
+                .then().spec(statusCode200ResponseSpecification)
+                .extract().as(LoginResponseBodyModel.class);
+    }
 
 }
