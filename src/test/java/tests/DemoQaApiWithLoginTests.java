@@ -19,9 +19,11 @@ import static specs.LoginSpecs.statusCode200ResponseSpecification;
 @DisplayName("API")
 public class DemoQaApiWithLoginTests extends TestBase {
 
+
     @Test
     @DisplayName("Успешная авторизация в личном кабинет")
     public void successfullyLoginToBookStoreTest() {
+
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(USER_NAME, PASSWORD);
         LoginResponseBodyModel response = step("Запрос на авторизацию пользователя", () -> given(baseRequestSpecification)
                 .body(authBody)

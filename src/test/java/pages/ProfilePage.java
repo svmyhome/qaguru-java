@@ -29,7 +29,6 @@ public class ProfilePage {
         return this;
     }
 
-
     @Step("Книга {book} есть в профиле")
     public ProfilePage assertBookExistInProfile(String book) {
         $(".ReactTable").shouldHave(text(book));

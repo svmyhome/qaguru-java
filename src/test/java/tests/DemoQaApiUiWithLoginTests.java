@@ -11,6 +11,8 @@ import pages.ProfilePage;
 
 import java.util.List;
 
+import static api.AccountApi.getToken;
+import static api.AccountApi.getUserId;
 import static api.BooksApi.addBook;
 import static api.BooksApi.clearBooks;
 import static constants.Constants.Books.BOOK_ISBN_JAVASCRIPT;
@@ -30,10 +32,11 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
     @DisplayName("Успешное удаление одной книги из личного кабинета")
     public void deleteItemFromCartBookStoreTest() {
         Response authResponse = getAuthResponse();
-        String userId = authResponse.path("userId");
-        String bearerToken = "Bearer " + authResponse.path("token");
+        String userId = getUserId(authResponse);
+        String bearerToken = getToken(authResponse);
         List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
         AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);
+
         clearBooks(bearerToken, userId, BOOK_ISBN_JAVASCRIPT);
         addBook(bearerToken, bookData);
 
@@ -48,8 +51,8 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
     @DisplayName("Успешное добавление книги в личный кабинет")
     public void addItemToCartBookStoreTest() {
         Response authResponse = getAuthResponse();
-        String userId = authResponse.path("userId");
-        String bearerToken = "Bearer " + authResponse.path("token");
+        String userId = getUserId(authResponse);
+        String bearerToken = getToken(authResponse);
         List<Isbn> listIsbn = List.of(new Isbn(BOOK_ISBN_JAVASCRIPT));
 
         AddBookRequestModel bookData = new AddBookRequestModel(userId, listIsbn);

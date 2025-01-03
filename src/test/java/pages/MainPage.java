@@ -7,7 +7,6 @@ import pages.components.CookieManagement;
 
 import static com.codeborne.selenide.Selenide.open;
 import static constants.Constants.ApiActions.FAVICON;
-import static io.qameta.allure.Allure.step;
 
 public class MainPage {
     CookieManagement setCustomCookie = new CookieManagement();
@@ -21,11 +20,9 @@ public class MainPage {
 
     @Step("Установлены авторизационные cookies")
     public MainPage setAuthorizationCookies(Response response) {
-        step("Cookies", () -> {
-            setCustomCookie.setCookie("userID", response.path("userId"));
-            setCustomCookie.setCookie("expires", response.path("expires"));
-            setCustomCookie.setCookie("token", response.path("token"));
-        });
+        setCustomCookie.setCookie("userID", response.path("userId"));
+        setCustomCookie.setCookie("expires", response.path("expires"));
+        setCustomCookie.setCookie("token", response.path("token"));
         return this;
     }
 

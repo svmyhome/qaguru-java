@@ -24,6 +24,14 @@ public class AccountApi {
                 .body("result", is("User authorized successfully."));
     }
 
+    public static String getUserId(Response authResponse) {
+        return authResponse.path("userId");
+    }
+
+    public static String getToken(Response authResponse) {
+        return "Bearer " + authResponse.path("token");
+    }
+
     @Step("Получить респонс для  пользователя {userName} ")
     public static Response getResponse(String userName, String password) {
         LoginRequestBodyModel authBody = new LoginRequestBodyModel(userName, password);
