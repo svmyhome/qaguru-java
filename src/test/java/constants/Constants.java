@@ -3,6 +3,7 @@ package constants;
 public class Constants {
 
     public static class ApiActions {
+        public static final String ACCOUNT_V1_GENERATE_TOKEN = "/Account/v1/GenerateToken";
         public static final String ACCOUNT_V1_LOGIN = "/Account/v1/Login";
         public static final String ACCOUNT_V1_USER = "/Account/v1/User/";
         public static final String BOOKSTORE_V1_BOOK = "/BookStore/v1/Book";

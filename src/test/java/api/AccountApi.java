@@ -6,8 +6,7 @@ import models.login.LoginRequestBodyModel;
 
 import java.util.List;
 
-import static constants.Constants.ApiActions.ACCOUNT_V1_LOGIN;
-import static constants.Constants.ApiActions.ACCOUNT_V1_USER;
+import static constants.Constants.ApiActions.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
@@ -16,6 +15,14 @@ import static specs.LoginSpecs.baseRequestSpecification;
 import static specs.LoginSpecs.statusCode200ResponseSpecification;
 
 public class AccountApi {
+
+    public static void generateNewToken(String userName, String password) {
+        given(baseRequestSpecification)
+                .body(new LoginRequestBodyModel(userName, password))
+                .when().post(ACCOUNT_V1_GENERATE_TOKEN)
+                .then().spec(statusCode200ResponseSpecification)
+                .body("result", is("User authorized successfully."));
+    }
 
     @Step("Получить респонс для  пользователя {userName} ")
     public static Response getResponse(String userName, String password) {

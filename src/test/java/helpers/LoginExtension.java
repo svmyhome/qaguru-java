@@ -13,6 +13,7 @@ public class LoginExtension implements BeforeEachCallback {
 
     @Override
     public void beforeEach(ExtensionContext context) {
+        AccountApi.generateNewToken(USER_NAME, PASSWORD);
         Response response = AccountApi.getResponse(USER_NAME, PASSWORD);
         MainPage faviconPage = new MainPage();
 
