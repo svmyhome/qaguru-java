@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static constants.Constants.Credentials.PASSWORD;
 import static constants.Constants.Credentials.USER_NAME;
+import static io.qameta.allure.Allure.step;
 
 @Tag("API")
 @DisplayName("API")
@@ -22,8 +23,9 @@ public class DemoQaApiWithLoginTests extends TestBase {
     public void successfullyLoginToBookStoreTest() {
         LoginResponseBodyModel response = api.getResponse(authBody);
 
-        api.compareValues(authBody.getUserName(), response.getUsername())
-                .compareValues("false", response.getIsActive());
+        step("Успешное получение ответа", () -> {
+            api.compareValues(authBody.getUserName(), response.getUsername())
+                    .compareValues("false", response.getIsActive());
+        });
     }
-
 }

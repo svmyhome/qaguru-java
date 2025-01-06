@@ -16,6 +16,7 @@ import static specs.LoginSpecs.statusCode200ResponseSpecification;
 
 public class AccountApi {
 
+    @Step("Сгенерирован новый токен для пользователя {userName}")
     public static void generateNewToken(String userName, String password) {
         given(baseRequestSpecification)
                 .body(new LoginRequestBodyModel(userName, password))
