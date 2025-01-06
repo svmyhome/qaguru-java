@@ -5,6 +5,8 @@
 15. REST API. Пишем автотесты с REST Assured
 16. REST API. Модели. Спецификации
 17. [17-18 REST API. Декомпозируем UI-тесты](https://school.qa.guru/pl/teach/control/lesson/view?id=334644399)  https://jenkins.autotests.cloud/job/lesson18-1/   https://jenkins.autotests.cloud/job/lesson18-2/
+19. Библиотека Owner. Артём Ерошенко
+    19.1 Чистый конфиг
 
 В devTools перейти в консоль и ввесли локтор через$ или $$. Можно увидеть один или несколько найдется
 

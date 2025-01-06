@@ -49,6 +49,7 @@ dependencies {
     testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
     testImplementation "io.qameta.allure:allure-rest-assured:$allureRestAssured"
     testImplementation 'org.aeonbits.owner:owner:1.0.12'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
 
 }
 
@@ -73,5 +74,10 @@ task api_test(type: Test) {
 task api_full(type: Test) {
     useJUnitPlatform {
         includeTags("full")
+    }
+}
+task test_config(type: Test) {
+    useJUnitPlatform {
+        includeTags("TEST_CONFIG")
     }
 }
