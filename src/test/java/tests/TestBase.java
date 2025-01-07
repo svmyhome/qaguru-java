@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import configOwner.AuthConfig;
 import configOwner.LocalWebDriverConfig;
 import configOwner.RemoteWebDriverConfig;
 import helpers.Attach;
@@ -19,13 +20,14 @@ import java.util.Map;
 public class TestBase {
     static LocalWebDriverConfig localWebDriverConfig = ConfigFactory.create(LocalWebDriverConfig.class, System.getProperties());
     static RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory.create(RemoteWebDriverConfig.class, System.getProperties());
+    static AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
 
     @BeforeAll
     public static void setUp() {
         boolean isRemoteStart = "true".equals(System.getProperty("remoteStart"));
         Configuration.pageLoadStrategy = "eager";
         if (isRemoteStart) {
-            Configuration.remote = remoteWebDriverConfig.getRemoteUrl();
+            Configuration.remote = "https://" + authConfig.selenoidUser() + ":" + authConfig.selenoindPassword() + remoteWebDriverConfig.getRemoteUrl();
             RestAssured.baseURI = remoteWebDriverConfig.getApiUrl();
             Configuration.baseUrl = remoteWebDriverConfig.getBaseUrl();
             Configuration.browser = remoteWebDriverConfig.getBrowserName();

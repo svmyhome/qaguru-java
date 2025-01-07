@@ -8,20 +8,20 @@ import org.aeonbits.owner.Config;
 public interface RemoteWebDriverConfig extends Config {
 
     @Key("remote.url")
-    public String getRemoteUrl();
+    String getRemoteUrl();
 
     @Key("webdriver.baseUrl")
-    public String getBaseUrl();
+    String getBaseUrl();
 
     @Key("service.apiUrl")
-    public String getApiUrl();
+    String getApiUrl();
 
     @Key("browser.name")
-    public String getBrowserName();
+    String getBrowserName();
 
     @Key("browser.version")
-    public String getBrowserVersion();
+    String getBrowserVersion();
 
     @Key("browser.size")
-    public String getBrowserSize();
+    String getBrowserSize();
 }
