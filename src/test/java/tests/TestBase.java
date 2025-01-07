@@ -15,38 +15,34 @@ import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class TestBase {
-    static LocalWebDriverConfig localWebDriverConfig;
-    static RemoteWebDriverConfig remoteWebDriverConfig;
+    static LocalWebDriverConfig localWebDriverConfig = ConfigFactory.create(LocalWebDriverConfig.class, System.getProperties());
+    static RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory.create(RemoteWebDriverConfig.class, System.getProperties());
 
     @BeforeAll
     public static void setUp() {
-        String remote = System.getProperty("remoteStart");
-        if (Objects.isNull(remote)) {
-            localWebDriverConfig = ConfigFactory.create(LocalWebDriverConfig.class, System.getProperties());
-            RestAssured.baseURI = localWebDriverConfig.getApiUrl();
-            Configuration.baseUrl = localWebDriverConfig.getBaseUrl();
-            Configuration.browser = localWebDriverConfig.getBrowserName();
-            Configuration.browserVersion = localWebDriverConfig.getBrowserVersion();
-            Configuration.browserSize = localWebDriverConfig.getBrowserSize();
-            Configuration.pageLoadStrategy = "eager";
-        } else {
-            remoteWebDriverConfig = ConfigFactory.create(RemoteWebDriverConfig.class, System.getProperties());
+        boolean isRemoteStart = "true".equals(System.getProperty("remoteStart"));
+        Configuration.pageLoadStrategy = "eager";
+        if (isRemoteStart) {
             Configuration.remote = remoteWebDriverConfig.getRemoteUrl();
             RestAssured.baseURI = remoteWebDriverConfig.getApiUrl();
             Configuration.baseUrl = remoteWebDriverConfig.getBaseUrl();
             Configuration.browser = remoteWebDriverConfig.getBrowserName();
             Configuration.browserVersion = remoteWebDriverConfig.getBrowserVersion();
             Configuration.browserSize = remoteWebDriverConfig.getBrowserSize();
-            Configuration.pageLoadStrategy = "eager";
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                     "enableVNC", true,
                     "enableVideo", true
             ));
             Configuration.browserCapabilities = capabilities;
+        } else {
+            RestAssured.baseURI = localWebDriverConfig.getApiUrl();
+            Configuration.baseUrl = localWebDriverConfig.getBaseUrl();
+            Configuration.browser = localWebDriverConfig.getBrowserName();
+            Configuration.browserVersion = localWebDriverConfig.getBrowserVersion();
+            Configuration.browserSize = localWebDriverConfig.getBrowserSize();
         }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
