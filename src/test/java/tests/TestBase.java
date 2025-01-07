@@ -18,10 +18,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
 
 public class TestBase {
-    static LocalWebDriverConfig localWebDriverConfig = ConfigFactory
-            .create(LocalWebDriverConfig.class, System.getProperties());
-    static RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory
-            .create(RemoteWebDriverConfig.class, System.getProperties());
     static AuthConfig authConfig = ConfigFactory
             .create(AuthConfig.class, System.getProperties());
 
@@ -30,6 +26,8 @@ public class TestBase {
         boolean isRemoteStart = "true".equals(System.getProperty("remoteStart"));
         Configuration.pageLoadStrategy = "eager";
         if (isRemoteStart) {
+            RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory
+                    .create(RemoteWebDriverConfig.class, System.getProperties());
             Configuration.remote = "https://" + authConfig.selenoidUser() + ":" + authConfig.selenoindPassword() + remoteWebDriverConfig.getRemoteUrl();
             RestAssured.baseURI = remoteWebDriverConfig.getApiUrl();
             Configuration.baseUrl = remoteWebDriverConfig.getBaseUrl();
@@ -43,6 +41,8 @@ public class TestBase {
             ));
             Configuration.browserCapabilities = capabilities;
         } else {
+            LocalWebDriverConfig localWebDriverConfig = ConfigFactory
+                    .create(LocalWebDriverConfig.class, System.getProperties());
             RestAssured.baseURI = localWebDriverConfig.getApiUrl();
             Configuration.baseUrl = localWebDriverConfig.getBaseUrl();
             Configuration.browser = localWebDriverConfig.getBrowserName();
