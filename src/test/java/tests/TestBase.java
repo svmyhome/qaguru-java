@@ -17,15 +17,18 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Map;
 
+import static config.WebDriverConfig.isRemoteStart;
+
 public class TestBase {
     static AuthConfig authConfig = ConfigFactory
             .create(AuthConfig.class, System.getProperties());
 
     @BeforeAll
     public static void setUp() {
-        boolean isRemoteStart = "true".equals(System.getProperty("remoteStart"));
-        Configuration.pageLoadStrategy = "eager";
-        if (isRemoteStart) {
+//        boolean isRemoteStart = "true".equals(System.getProperty("remoteStart"));
+
+
+        if (isRemoteStart()) {
             RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory
                     .create(RemoteWebDriverConfig.class, System.getProperties());
             Configuration.remote = "https://" + authConfig.selenoidUser() + ":" + authConfig.selenoindPassword() + remoteWebDriverConfig.getRemoteUrl();
@@ -34,6 +37,7 @@ public class TestBase {
             Configuration.browser = remoteWebDriverConfig.getBrowserName();
             Configuration.browserVersion = remoteWebDriverConfig.getBrowserVersion();
             Configuration.browserSize = remoteWebDriverConfig.getBrowserSize();
+            Configuration.pageLoadStrategy = remoteWebDriverConfig.getLoadStrategy();
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                     "enableVNC", true,
@@ -48,6 +52,7 @@ public class TestBase {
             Configuration.browser = localWebDriverConfig.getBrowserName();
             Configuration.browserVersion = localWebDriverConfig.getBrowserVersion();
             Configuration.browserSize = localWebDriverConfig.getBrowserSize();
+            Configuration.pageLoadStrategy = localWebDriverConfig.getLoadStrategy();
         }
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
