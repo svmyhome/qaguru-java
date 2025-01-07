@@ -7,7 +7,7 @@ import org.aeonbits.owner.Config;
 })
 public interface ApiTestingConfig extends Config {
 
-    @Key("service.api.url")
+    @Key("service.apiUrl")
     String apiUrl();
 
     @Key("service.api.username")

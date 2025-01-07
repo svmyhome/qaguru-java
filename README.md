@@ -8,6 +8,9 @@
 19. Библиотека Owner. Артём Ерошенко
     19.1 [Чистый конфиг](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-selenium)
 
+gradle clean api_test -DuserName=vindisel2 -DuserPassword=Qaz2@wsx -Dremote=https://user1:1234
+@selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000
+
 В devTools перейти в консоль и ввесли локтор через$ или $$. Можно увидеть один или несколько найдется
 
 ```$$("ul.list-style-none")```
