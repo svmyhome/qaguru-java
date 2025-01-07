@@ -50,6 +50,7 @@ dependencies {
     testImplementation "io.qameta.allure:allure-rest-assured:$allureRestAssured"
     testImplementation 'org.aeonbits.owner:owner:1.0.12'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
+    testImplementation 'org.assertj:assertj-core:3.26.3'
 
 }
 

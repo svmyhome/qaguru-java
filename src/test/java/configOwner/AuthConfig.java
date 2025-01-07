@@ -1,9 +1,9 @@
-package config;
+package configOwner;
 
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "file:/secret.properties",
+        "file:secret.properties",
         "classpath:auth.properties"
 })
 public interface AuthConfig extends Config {

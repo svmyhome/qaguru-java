@@ -1,6 +1,6 @@
 package tests.owner;
 
-import configSelenium.WebDriverProvider;
+import configOwner.WebDriverProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;

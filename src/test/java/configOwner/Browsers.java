@@ -1,4 +1,4 @@
-package configSelenium;
+package configOwner;
 
 public enum Browsers {
     FIREFOX,
