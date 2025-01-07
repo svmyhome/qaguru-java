@@ -18,9 +18,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.Map;
 
 public class TestBase {
-    static LocalWebDriverConfig localWebDriverConfig = ConfigFactory.create(LocalWebDriverConfig.class, System.getProperties());
-    static RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory.create(RemoteWebDriverConfig.class, System.getProperties());
-    static AuthConfig authConfig = ConfigFactory.create(AuthConfig.class, System.getProperties());
+    static LocalWebDriverConfig localWebDriverConfig = ConfigFactory
+            .create(LocalWebDriverConfig.class, System.getProperties());
+    static RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory
+            .create(RemoteWebDriverConfig.class, System.getProperties());
+    static AuthConfig authConfig = ConfigFactory
+            .create(AuthConfig.class, System.getProperties());
 
     @BeforeAll
     public static void setUp() {
