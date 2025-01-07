@@ -1,9 +1,9 @@
-package configOwner;
+package config;
 
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:remote.properties"
+        "classpath:config/remote.properties"
 })
 public interface RemoteWebDriverConfig extends Config {
 
@@ -24,4 +24,8 @@ public interface RemoteWebDriverConfig extends Config {
 
     @Key("browser.size")
     String getBrowserSize();
+
+    @Config.Key("load.strategy")
+    @Config.DefaultValue("eager")
+    String getLoadStrategy();
 }

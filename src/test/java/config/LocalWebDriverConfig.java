@@ -1,9 +1,9 @@
-package configOwner;
+package config;
 
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:local.properties"
+        "classpath:config/local.properties"
 })
 public interface LocalWebDriverConfig extends Config {
 
@@ -26,4 +26,8 @@ public interface LocalWebDriverConfig extends Config {
     @Config.Key("browser.size")
     @Config.DefaultValue("1000x1300")
     String getBrowserSize();
+
+    @Config.Key("load.strategy")
+    @Config.DefaultValue("eager")
+    String getLoadStrategy();
 }

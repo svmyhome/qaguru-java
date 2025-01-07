@@ -3,8 +3,8 @@ package config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "file:/secret.properties",
-        "classpath:auth.properties"
+        "file:secret.properties",
+        "classpath:config/auth.properties"
 })
 public interface AuthConfig extends Config {
 
@@ -13,4 +13,10 @@ public interface AuthConfig extends Config {
 
     @Key("userPassword")
     String userPassword();
+
+    @Key("selenoidUser")
+    String selenoidUser();
+
+    @Key("selenoindPassword")
+    String selenoindPassword();
 }
