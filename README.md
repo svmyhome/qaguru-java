@@ -5,8 +5,13 @@
 15. REST API. Пишем автотесты с REST Assured
 16. REST API. Модели. Спецификации
 17. [17-18 REST API. Декомпозируем UI-тесты](https://school.qa.guru/pl/teach/control/lesson/view?id=334644399)  https://jenkins.autotests.cloud/job/lesson18-1/   https://jenkins.autotests.cloud/job/lesson18-2/
-19. Библиотека Owner. Артём Ерошенко
+19. Библиотека Owner. Артём
+    Ерошенко [домашнее задание](https://jenkins.autotests.cloud/job/lesson-19/) https://github.com/svmyhome/qaguru-java/tree/lesson-19
+    Локальный запуск: gradle clean test или gradle clean test -DremoteStart=false
+    Удаленный запуск: gradle clean test -DremoteStart=true
     19.1 [Чистый конфиг](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-selenium)
+    18.2 [OWNER](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-owner)
+20.
 
 gradle clean api_test -DuserName=vindisel2 -DuserPassword=Qaz2@wsx -Dremote=https://user1:1234
 @selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000
