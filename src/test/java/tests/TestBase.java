@@ -17,33 +17,9 @@ public class TestBase {
     public static void setUp() {
         if (isRemoteStart()) {
             remoteWebDriverConfig();
-//            RemoteWebDriverConfig remoteWebDriverConfig = ConfigFactory
-//                    .create(RemoteWebDriverConfig.class, System.getProperties());
-//            Configuration.remote = "https://" + authConfig.selenoidUser() + ":" + authConfig.selenoindPassword() + remoteWebDriverConfig.getRemoteUrl();
-//            RestAssured.baseURI = remoteWebDriverConfig.getApiUrl();
-//            Configuration.baseUrl = remoteWebDriverConfig.getBaseUrl();
-//            Configuration.browser = remoteWebDriverConfig.getBrowserName();
-//            Configuration.browserVersion = remoteWebDriverConfig.getBrowserVersion();
-//            Configuration.browserSize = remoteWebDriverConfig.getBrowserSize();
-//            Configuration.pageLoadStrategy = remoteWebDriverConfig.getLoadStrategy();
-//            DesiredCapabilities capabilities = new DesiredCapabilities();
-//            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-//                    "enableVNC", true,
-//                    "enableVideo", true
-//            ));
-//            Configuration.browserCapabilities = capabilities;
         } else {
             localWebDriverConfig();
-//            LocalWebDriverConfig localWebDriverConfig = ConfigFactory
-//                    .create(LocalWebDriverConfig.class, System.getProperties());
-//            RestAssured.baseURI = localWebDriverConfig.getApiUrl();
-//            Configuration.baseUrl = localWebDriverConfig.getBaseUrl();
-//            Configuration.browser = localWebDriverConfig.getBrowserName();
-//            Configuration.browserVersion = localWebDriverConfig.getBrowserVersion();
-//            Configuration.browserSize = localWebDriverConfig.getBrowserSize();
-//            Configuration.pageLoadStrategy = localWebDriverConfig.getLoadStrategy();
         }
-
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
