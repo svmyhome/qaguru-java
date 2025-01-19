@@ -1,5 +1,7 @@
 package helpers;
 
+import static config.Constants.Credentials.PASSWORD;
+import static config.Constants.Credentials.USER_NAME;
 import static io.restassured.RestAssured.given;
 
 public class BrowserstackHelper {
@@ -11,7 +13,7 @@ public class BrowserstackHelper {
     public static String videoUrl(String sessionId) {
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
         return given()
-                .auth().basic("petrpetr_SsBEec", "B3Ux6EuEBuEEWDGbLZeK")
+                .auth().basic(USER_NAME, PASSWORD)
                 .get(url)
                 .then()
                 .log().status()

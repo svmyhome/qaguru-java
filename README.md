@@ -45,7 +45,12 @@ tasks.register('test-by-tag', Test) {
 }
 ```
 
-gradle test-by-tag -PincludedTags=SMOKE
+### Запуск тестов по тегу:
+
+```
+gradle test -DincludeTags=android
+gradle test -DincludeTags=android -Ddevice=onePlus9
+```
 
 ## ALLURE
 

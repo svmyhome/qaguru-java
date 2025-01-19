@@ -5,10 +5,10 @@ import org.aeonbits.owner.Config;
 @Config.Sources({
         "classpath:config/auth.properties"
 })
-public interface Credentials extends Config {
+public interface AuthConfig extends Config {
 
     @Key("userBrowserStack")
-    String getLogin();
+    String getUserName();
 
     @Key("passwordBrowserStack")
     String getPassword();
