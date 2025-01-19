@@ -19,11 +19,11 @@ public class BrowserStackDriver implements WebDriverProvider {
         BrowserStackAndroidConfig config = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
         UiAutomator2Options options = new UiAutomator2Options();
 
-        String pathToApp = System.getProperty("userName", config.getApp());
-        String deviceName = System.getProperty("userName", config.getDeviceName());
+        String PATH_TO_APP = System.getProperty("userName", config.getApp());
+        String DEVICE_NAME = System.getProperty("userName", config.getDeviceName());
 
-        options.setCapability("appium:app", pathToApp);
-        options.setCapability("appium:deviceName", "Samsung Galaxy S22 Ultra");
+        options.setCapability("appium:app", PATH_TO_APP);
+        options.setCapability("appium:deviceName", DEVICE_NAME);
         options.setCapability("appium:platformVersion", "12.0");
         options.setCapability("project", "First Java Project");
         options.setCapability("build", "browserstack-build-1");
