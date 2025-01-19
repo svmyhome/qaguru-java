@@ -11,7 +11,7 @@
     Удаленный запуск: gradle clean test -DremoteStart=true
     19.1 [Чистый конфиг](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-selenium)
     18.2 [OWNER](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-owner)
-20.
+20. Мобильная автоматизация #1. Разрабатываем автотесты с Browserstack
 
 gradle clean api_test -DuserName=vindisel2 -DuserPassword=Qaz2@wsx -Dremote=https://user1:1234
 @selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000

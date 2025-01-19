@@ -12,8 +12,12 @@ plugins {
 }
 
 def restAssuredVersion = "5.5.0",
-        allureRestAssured = "2.29.1",
-    allureVersion = "2.29.0"
+    allureRestAssured = "2.29.1",
+    allureVersion = "2.29.0",
+    selenideVersion = "7.5.1",
+    appiumVersion = "9.3.0",
+    junitVersion = "5.11.2",
+    slf4jVersion = "2.0.16"
 
 allure {
     report {
@@ -41,9 +45,9 @@ compileTestJava {
 
 dependencies {
 
-    testImplementation 'com.codeborne:selenide:7.5.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.2'
-    testImplementation 'org.slf4j:slf4j-simple:2.0.16'
+    testImplementation "com.codeborne:selenide:$selenideVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testImplementation "org.slf4j:slf4j-simple:$slf4jVersion"
     testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
     testImplementation "io.rest-assured:rest-assured:$restAssuredVersion"
     testImplementation "io.rest-assured:json-schema-validator:$restAssuredVersion"
@@ -51,6 +55,7 @@ dependencies {
     testImplementation 'org.aeonbits.owner:owner:1.0.12'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
     testImplementation 'org.assertj:assertj-core:3.26.3'
+    testImplementation "io.appium:java-client:$appiumVersion"
 
 }
 
@@ -67,18 +72,13 @@ tasks.withType(Test) {
     systemProperties(System.getProperties())
 }
 
-task api_test(type: Test) {
+task android(type: Test) {
     useJUnitPlatform {
-        includeTags("API")
+        includeTags("android")
     }
 }
-task api_full(type: Test) {
+task ios(type: Test) {
     useJUnitPlatform {
-        includeTags("full")
-    }
-}
-task test_config(type: Test) {
-    useJUnitPlatform {
-        includeTags("TEST_CONFIG")
+        includeTags("ios")
     }
 }
