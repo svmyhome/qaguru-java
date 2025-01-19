@@ -26,8 +26,8 @@ public interface BrowserStackAndroidConfig extends Config {
     @DefaultValue("browserstack-build-1")
     String getAndroidBuild();
 
-    @Key("android.name")
+    @Key("android.testName")
     @DefaultValue("first_test")
-    String getAndroidName();
+    String getAndroidTestName();
 
 }

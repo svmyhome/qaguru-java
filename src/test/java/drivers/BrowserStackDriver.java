@@ -16,18 +16,15 @@ public class BrowserStackDriver implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        BrowserStackAndroidConfig config = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
+        BrowserStackAndroidConfig androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
         UiAutomator2Options options = new UiAutomator2Options();
 
-        String PATH_TO_APP = System.getProperty("userName", config.getApp());
-        String DEVICE_NAME = System.getProperty("userName", config.getDeviceName());
-
-        options.setCapability("appium:app", PATH_TO_APP);
-        options.setCapability("appium:deviceName", DEVICE_NAME);
-        options.setCapability("appium:platformVersion", "12.0");
-        options.setCapability("project", "First Java Project");
-        options.setCapability("build", "browserstack-build-1");
-        options.setCapability("name", "first_test");
+        options.setCapability("appium:app", androidConfig.getApp());
+        options.setCapability("appium:deviceName", androidConfig.getDeviceName());
+        options.setCapability("appium:platformVersion", androidConfig.getPlatformVersion());
+        options.setCapability("project", androidConfig.getProjectName());
+        options.setCapability("build", androidConfig.getAndroidBuild());
+        options.setCapability("name", androidConfig.getAndroidTestName());
 
 
         try {
