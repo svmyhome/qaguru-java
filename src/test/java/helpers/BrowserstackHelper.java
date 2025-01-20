@@ -1,5 +1,8 @@
 package helpers;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static config.Constants.Credentials.PASSWORD;
 import static config.Constants.Credentials.USER_NAME;
 import static io.restassured.RestAssured.given;
@@ -9,6 +12,13 @@ public class BrowserstackHelper {
 
     //    curl -u "petrpetr_SsBEec:B3Ux6EuEBuEEWDGbLZeK" -X GET "https://api.browserstack.com/app-automate/sessions/fe145bd08b140a7c488eb274f66aa2577d1abaf5.json"
 
+    public static URL getBrowserstackUrl() {
+        try {
+            return new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", USER_NAME, PASSWORD));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static String videoUrl(String sessionId) {
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);

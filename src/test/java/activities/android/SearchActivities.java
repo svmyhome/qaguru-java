@@ -1,4 +1,4 @@
-package activities;
+package activities.android;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

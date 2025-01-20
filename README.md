@@ -48,8 +48,12 @@ tasks.register('test-by-tag', Test) {
 ### Запуск тестов по тегу:
 
 ```
-gradle test -DincludeTags=android
-gradle test -DincludeTags=android -Ddevice=onePlus9
+gradle android -Dplatform=android
+gradle android -Dplatform=android -Ddevice=samsungS22Ultra
+```
+```
+gradle ios -Dplatform=ios
+gradle ios -Dplatform=ios -Ddevice=iphone12
 ```
 
 ## ALLURE

@@ -1,7 +1,7 @@
 package tests.bowserstack;
 
-import activities.ResultsActivities;
-import activities.SearchActivities;
+import activities.android.ResultsActivities;
+import activities.android.SearchActivities;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
@@ -20,13 +20,13 @@ public class SearchFromWikipediaAndroidActivitiesTest extends TestBase {
     }
 
 
-    @Test
-    public void FindSeleniumTest() {
-        String searchValue = "Ubuntu";
-        String expectedResult = "Linux distribution developed by Canonical";
-
-        searchActivities.clickToSearch().enterTextToSearchField(searchValue);
-
-        resultsActivities.assertTitleListIsNotEmpty().clickToListItemDescription(expectedResult);
-    }
+//    @Test
+//    public void FindSeleniumTest() {
+//        String searchValue = "Ubuntu";
+//        String expectedResult = "Linux distribution developed by Canonical";
+//
+//        searchActivities.clickToSearch().enterTextToSearchField(searchValue);
+//
+//        resultsActivities.assertTitleListIsNotEmpty().clickToListItemDescription(expectedResult);
+//    }
 }

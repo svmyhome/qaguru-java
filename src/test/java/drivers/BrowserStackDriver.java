@@ -12,11 +12,11 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nonnull;
-import java.net.MalformedURLException;
-import java.net.URL;
 
-import static config.Constants.Credentials.PASSWORD;
-import static config.Constants.Credentials.USER_NAME;
+import static config.Constants.Project.*;
+import static config.Constants.isAndroid;
+import static config.Constants.isIos;
+import static helpers.BrowserstackHelper.getBrowserstackUrl;
 
 public class BrowserStackDriver implements WebDriverProvider {
     BrowserStackAndroidConfig androidConfig;
@@ -28,13 +28,13 @@ public class BrowserStackDriver implements WebDriverProvider {
     @Nonnull
     @Override
     public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-        String platformName = System.getProperty("platformName");
-        if ("android".equals(platformName)) {
+        if (isAndroid) {
             return createAndroidDriver();
-        } else if ("ios".equals(platformName)) {
+        } else if (isIos) {
             return createIosDriver();
+        } else {
+            throw new UnsupportedOperationException("Unsupported platform: neither Android nor iOS.");
         }
-        return null; //TODO переделеть на сообщение
     }
 
 
@@ -50,17 +50,12 @@ public class BrowserStackDriver implements WebDriverProvider {
         androidOptions.setCapability("appium:app", androidConfig.getApp());
         androidOptions.setCapability("appium:deviceName", androidConfig.getDeviceName());
         androidOptions.setCapability("appium:platformVersion", androidConfig.getPlatformVersion());
-        androidOptions.setCapability("project", androidConfig.getProjectName());
-        androidOptions.setCapability("build", androidConfig.getAndroidBuild());
-        androidOptions.setCapability("name", androidConfig.getAndroidTestName());
+        androidOptions.setCapability("project", PROJECT_NAME);
+        androidOptions.setCapability("build", BUILD_NAME + " Android");
+        androidOptions.setCapability("name", TEST_NAME + " " + device);
 
-
-        try {
-            return new AndroidDriver(
-                    new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", USER_NAME, PASSWORD)), androidOptions);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        return new AndroidDriver(
+                getBrowserstackUrl(), androidOptions);
     }
 
     public IOSDriver createIosDriver() {
@@ -69,23 +64,17 @@ public class BrowserStackDriver implements WebDriverProvider {
             device = "iphoneXS";
             System.setProperty("device", device);
         }
-        iosOptions = new XCUITestOptions();
 
+        iosConfig = ConfigFactory.create(BrowserStackIosConfig.class, System.getProperties());
+
+        iosOptions = new XCUITestOptions();
         iosOptions.setCapability("appium:app", iosConfig.getApp());
         iosOptions.setCapability("appium:deviceName", iosConfig.getDeviceName());
         iosOptions.setCapability("appium:platformVersion", iosConfig.getPlatformVersion());
-        iosOptions.setCapability("project", androidConfig.getProjectName());
-        iosOptions.setCapability("build", androidConfig.getAndroidBuild());
-        iosOptions.setCapability("name", androidConfig.getAndroidTestName());
+        iosOptions.setCapability("project", PROJECT_NAME);
+        iosOptions.setCapability("build", BUILD_NAME + " Ios");
+        iosOptions.setCapability("name", TEST_NAME + " " + device);
 
-
-        try {
-            return new IOSDriver(
-                    new URL(String.format("https://%s:%s@hub.browserstack.com/wd/hub", USER_NAME, PASSWORD)), iosOptions);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        return new IOSDriver(getBrowserstackUrl(), iosOptions);
     }
-
-
 }
