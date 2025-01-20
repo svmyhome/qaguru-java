@@ -16,14 +16,4 @@ public interface BrowserStackAndroidConfig extends Config {
 
     @Key("android.platformVersion")
     String getPlatformVersion();
-
-    @Key("android.project")
-    String getProjectName();
-
-    @Key("android.build")
-    String getAndroidBuild();
-
-    @Key("android.testName")
-    String getAndroidTestName();
-
 }

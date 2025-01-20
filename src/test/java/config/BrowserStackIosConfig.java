@@ -15,14 +15,4 @@ public interface BrowserStackIosConfig extends Config {
 
     @Key("ios.platformVersion")
     String getPlatformVersion();
-
-    @Key("ios.project")
-    String getProjectName();
-
-    @Key("ios.build")
-    String getAndroidBuild();
-
-    @Key("ios.testName")
-    String getAndroidTestName();
-
 }
