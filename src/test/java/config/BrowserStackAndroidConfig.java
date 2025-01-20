@@ -3,9 +3,9 @@ package config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:config/${device}.properties",
-        "classpath:config/onePlus9.properties",
-        "classpath:config/samsungS22Ultra.properties"
+        "classpath:config/android/${device}.properties",
+        "classpath:config/android/onePlus9.properties",
+        "classpath:config/android/samsungS22Ultra.properties"
 })
 public interface BrowserStackAndroidConfig extends Config {
     @Key("android.app")
