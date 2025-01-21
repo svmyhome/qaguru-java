@@ -1,6 +1,5 @@
 package config;
 
-import org.aeonbits.owner.Config;
 import org.aeonbits.owner.ConfigFactory;
 
 public class Constants {

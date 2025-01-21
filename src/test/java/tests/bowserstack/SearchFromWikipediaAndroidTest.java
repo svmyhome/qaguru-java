@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
 @Tag("android")
-public class SearchFromWikipediaAndroidActivitiesTest extends TestBase {
+public class SearchFromWikipediaAndroidTest extends TestBase {
     SearchActivities searchActivities = new SearchActivities();
     ResultsActivities resultsActivities = new ResultsActivities();
 
     @Test
-    public void WikipediaTest() {
+    public void testSearchWikipedia() {
         String searchValue = "Appium";
 
         searchActivities.clickToSearch().enterTextToSearchField(searchValue);
@@ -20,13 +20,13 @@ public class SearchFromWikipediaAndroidActivitiesTest extends TestBase {
     }
 
 
-//    @Test
-//    public void FindSeleniumTest() {
-//        String searchValue = "Ubuntu";
-//        String expectedResult = "Linux distribution developed by Canonical";
-//
-//        searchActivities.clickToSearch().enterTextToSearchField(searchValue);
-//
-//        resultsActivities.assertTitleListIsNotEmpty().clickToListItemDescription(expectedResult);
-//    }
+    @Test
+    public void testSearchSelenium() {
+        String searchValue = "Ubuntu";
+        String expectedResult = "Linux distribution developed by Canonical";
+
+        searchActivities.clickToSearch().enterTextToSearchField(searchValue);
+
+        resultsActivities.assertTitleListIsNotEmpty().clickToListItemDescription(expectedResult);
+    }
 }
