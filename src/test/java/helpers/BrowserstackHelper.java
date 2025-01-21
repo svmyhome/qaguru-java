@@ -5,6 +5,7 @@ import java.net.URL;
 
 import static config.Constants.Credentials.PASSWORD;
 import static config.Constants.Credentials.USER_NAME;
+import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.given;
 
 public class BrowserstackHelper {
@@ -19,7 +20,7 @@ public class BrowserstackHelper {
 
     public static String videoUrl(String sessionId) {
         String url = String.format("https://api.browserstack.com/app-automate/sessions/%s.json", sessionId);
-        return given()
+        return given().filter(withCustomTemplates())
                 .auth().basic(USER_NAME, PASSWORD)
                 .get(url)
                 .then()
