@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
 @Tag("android")
-public class SearchPageTests extends TestBase {
+public class WikipediaSearchTests extends TestBase {
 
     OnBoardingActivities onBoardingActivities = new OnBoardingActivities();
     SearchActivities searchActivities = new SearchActivities();

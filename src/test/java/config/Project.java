@@ -6,10 +6,6 @@ public class Project {
 
     public static final String environment = System.getProperty("environment", "local");
 
-    public static final boolean localEnv = environment.equals("local");
-    public static final boolean virtualEnv = environment.equals("virtual");
-    public static final boolean remote = environment.equals("remote");
-
     public static final String platform = System.getProperty("platform", "android");
 
     public static final boolean isIos = platform.equals("ios");

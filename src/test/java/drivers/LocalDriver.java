@@ -1,8 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.BrowserStackAndroidConfig;
 import config.BrowserStackIosConfig;
+import config.LocalAndroidConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
@@ -22,7 +22,7 @@ import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
 public class LocalDriver implements WebDriverProvider {
-    BrowserStackAndroidConfig androidConfig;
+    LocalAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
     BrowserStackIosConfig iosConfig;
     XCUITestOptions iosOptions;
@@ -41,19 +41,19 @@ public class LocalDriver implements WebDriverProvider {
     }
 
     public AndroidDriver createAndroidDriver() {
-//        String device = System.getProperty("device");
-//        if (device == null) {
-//            device = "pixel6Pro";
-//            System.setProperty("device", device);
-//        }
-        androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
+        String device = System.getProperty("device");
+        if (device == null) {
+            device = "redmiNote4";
+            System.setProperty("device", device);
+        }
+        androidConfig = ConfigFactory.create(LocalAndroidConfig.class, System.getProperties());
 
         androidOptions = new UiAutomator2Options();
         androidOptions.setAutomationName(ANDROID_UIAUTOMATOR2);
         androidOptions.setPlatformName(ANDROID);
-        androidOptions.setPlatformVersion("7.0");
+        androidOptions.setPlatformVersion(androidConfig.getPlatformVersion());
 //        androidOptions.setDeviceName("Pixel_3a_API_34_extension_level_7_arm64");
-        androidOptions.setUdid("a7d39a720604");
+        androidOptions.setUdid(androidConfig.getUdid());
         androidOptions.setApp(getAppPath());
         androidOptions.setAppPackage("org.wikipedia.alpha");
         androidOptions.setAppActivity("org.wikipedia.main.MainActivity");

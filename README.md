@@ -60,6 +60,14 @@ gradle ios -Dplatform=ios
 gradle ios -Dplatform=ios -Ddevice=iphone12
 ```
 
+запуск локально
+
+```
+gradle android -Denvironment=local
+gradle android -Denvironment=remote -Dplatform=android -Ddevice=samsungS22Ultra
+gradle ios -Denvironment=remote -Dplatform=ios -Ddevice=iphone12
+```
+
 ## ALLURE
 
 ```

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
 @Tag("ios")
-public class SearchFromUiElementsIosTest extends TestBase {
+public class UiElementsSearchTest extends TestBase {
     MainActivities mainActivities = new MainActivities();
     ResultActivities resultActivities = new ResultActivities();
 
