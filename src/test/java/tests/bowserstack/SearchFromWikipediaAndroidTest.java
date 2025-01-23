@@ -1,15 +1,15 @@
 package tests.bowserstack;
 
-import activities.android.ResultsActivities;
-import activities.android.SearchActivities;
+import activities.android.SearchStepsScreen;
+import activities.android.SearchStepsScreenResult;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
 
 @Tag("android")
 public class SearchFromWikipediaAndroidTest extends TestBase {
-    SearchActivities searchActivities = new SearchActivities();
-    ResultsActivities resultsActivities = new ResultsActivities();
+    SearchStepsScreen searchActivities = new SearchStepsScreen();
+    SearchStepsScreenResult resultsActivities = new SearchStepsScreenResult();
 
     @Test
     public void testSearchWikipedia() {

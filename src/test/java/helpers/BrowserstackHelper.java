@@ -3,8 +3,8 @@ package helpers;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static config.Constants.Credentials.PASSWORD;
-import static config.Constants.Credentials.USER_NAME;
+import static config.Config.Credentials.PASSWORD;
+import static config.Config.Credentials.USER_NAME;
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.restassured.RestAssured.given;
 

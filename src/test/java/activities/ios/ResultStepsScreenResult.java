@@ -7,19 +7,19 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$;
 import static io.appium.java_client.AppiumBy.accessibilityId;
 
-public class ResultActivities {
+public class ResultStepsScreenResult {
     private final SelenideElement textInput = $(accessibilityId("Text Input")),
             textOutput = $(accessibilityId("Text Output"));
 
     @Step("Enter text {text} in the input")
-    public ResultActivities enterTextToInput(String text) {
+    public ResultStepsScreenResult enterTextToInput(String text) {
         textInput.sendKeys(text + "\n");
 
         return this;
     }
 
     @Step("Enter text {text} in the input")
-    public ResultActivities assertTextExist(String text) {
+    public ResultStepsScreenResult assertTextExist(String text) {
         textOutput.shouldHave(Condition.text(text));
 
         return this;

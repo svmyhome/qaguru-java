@@ -2,7 +2,7 @@ package config;
 
 import org.aeonbits.owner.ConfigFactory;
 
-public class Constants {
+public class Config {
 
     public static final String platform = System.getProperty("platform", "android");
 

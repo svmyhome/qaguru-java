@@ -13,9 +13,9 @@ import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nonnull;
 
-import static config.Constants.Project.*;
-import static config.Constants.isAndroid;
-import static config.Constants.isIos;
+import static config.Config.Project.*;
+import static config.Config.isAndroid;
+import static config.Config.isIos;
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
 
 public class BrowserStackDriver implements WebDriverProvider {
