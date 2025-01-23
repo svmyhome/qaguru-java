@@ -1,9 +1,9 @@
 package tests.bowserstack;
 
-import activities.android.SearchStepsScreen;
-import activities.android.SearchStepsScreenResult;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import screens.android.SearchStepsScreen;
+import screens.android.SearchStepsScreenResult;
 import tests.TestBase;
 
 @Tag("android")

@@ -1,4 +1,4 @@
-package activities.ios;
+package screens.ios;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

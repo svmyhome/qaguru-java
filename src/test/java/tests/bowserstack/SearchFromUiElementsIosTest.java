@@ -1,9 +1,9 @@
 package tests.bowserstack;
 
-import activities.ios.MainStepsScreen;
-import activities.ios.ResultStepsScreenResult;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import screens.ios.MainStepsScreen;
+import screens.ios.ResultStepsScreenResult;
 import tests.TestBase;
 
 @Tag("ios")

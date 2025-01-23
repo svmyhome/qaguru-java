@@ -1,4 +1,4 @@
-package activities.android;
+package screens.android;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
