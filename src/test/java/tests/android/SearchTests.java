@@ -1,7 +1,8 @@
-package tests.local;
+package tests.android;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import tests.TestBase;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.partialText;
@@ -13,8 +14,7 @@ import static io.appium.java_client.AppiumBy.id;
 import static io.qameta.allure.Allure.step;
 
 @Tag("android")
-public class SearchPageTests extends TestBaseLocal {
-
+public class SearchTests extends TestBase {
     @Test
     void successfulSearchTest() {
         $(id("org.wikipedia.alpha:id/primaryTextView")).shouldHave(partialText("The Free Encyclopedia"));

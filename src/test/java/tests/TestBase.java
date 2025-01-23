@@ -3,7 +3,6 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import drivers.BrowserStackDriver;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -12,12 +11,14 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
+import static config.Project.environment;
+import static drivers.GetMobileDriver.getMobileDriver;
 
 public class TestBase {
 
     @BeforeAll
     public static void beforeAll() {
-        Configuration.browser = BrowserStackDriver.class.getName();
+        Configuration.browser = getMobileDriver();
         Configuration.browserSize = null;
         Configuration.timeout = 30000;
     }
@@ -37,7 +38,9 @@ public class TestBase {
         Attach.screenshotAs("picture");
         Attach.pageSource();
         closeWebDriver();
-        Attach.addVideo(sessionId);
+        if ("remote".equals(environment)) {
+            Attach.addVideo(sessionId);
+        }
 
     }
 }

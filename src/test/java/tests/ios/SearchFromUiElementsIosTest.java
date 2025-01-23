@@ -1,4 +1,4 @@
-package tests.bowserstack;
+package tests.ios;
 
 import activities.ios.MainActivities;
 import activities.ios.ResultActivities;

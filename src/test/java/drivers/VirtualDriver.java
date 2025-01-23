@@ -16,9 +16,12 @@ import javax.annotation.Nonnull;
 import static config.Project.ProjectConfiguration.*;
 import static config.Project.isAndroid;
 import static config.Project.isIos;
-import static helpers.BrowserstackHelper.getBrowserstackUrl;
+import static helpers.LocalHelper.getAppPath;
+import static helpers.LocalHelper.getLocalUrl;
+import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
-public class BrowserStackDriver implements WebDriverProvider {
+public class VirtualDriver implements WebDriverProvider {
     BrowserStackAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
     BrowserStackIosConfig iosConfig;
@@ -37,25 +40,25 @@ public class BrowserStackDriver implements WebDriverProvider {
         }
     }
 
-
     public AndroidDriver createAndroidDriver() {
-        String device = System.getProperty("device");
-        if (device == null) {
-            device = "pixel6Pro";
-            System.setProperty("device", device);
-        }
+//        String device = System.getProperty("device");
+//        if (device == null) {
+//            device = "pixel6Pro";
+//            System.setProperty("device", device);
+//        }
         androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
 
         androidOptions = new UiAutomator2Options();
-        androidOptions.setCapability("appium:app", androidConfig.getApp());
-        androidOptions.setCapability("appium:deviceName", androidConfig.getDeviceName());
-        androidOptions.setCapability("appium:platformVersion", androidConfig.getPlatformVersion());
-        androidOptions.setCapability("project", PROJECT_NAME);
-        androidOptions.setCapability("build", BUILD_NAME + " Android");
-        androidOptions.setCapability("name", TEST_NAME + " " + device);
+        androidOptions.setAutomationName(ANDROID_UIAUTOMATOR2);
+        androidOptions.setPlatformName(ANDROID);
+        androidOptions.setPlatformVersion("7.0");
+//        androidOptions.setDeviceName("Pixel_3a_API_34_extension_level_7_arm64");
+        androidOptions.setUdid("a7d39a720604");
+        androidOptions.setApp(getAppPath());
+        androidOptions.setAppPackage("org.wikipedia.alpha");
+        androidOptions.setAppActivity("org.wikipedia.main.MainActivity");
 
-        return new AndroidDriver(
-                getBrowserstackUrl(), androidOptions);
+        return new AndroidDriver(getLocalUrl(), androidOptions);
     }
 
     public IOSDriver createIosDriver() {
@@ -75,6 +78,8 @@ public class BrowserStackDriver implements WebDriverProvider {
         iosOptions.setCapability("build", BUILD_NAME + " Ios");
         iosOptions.setCapability("name", TEST_NAME + " " + device);
 
-        return new IOSDriver(getBrowserstackUrl(), iosOptions);
+        return new IOSDriver(getLocalUrl(), iosOptions);
     }
+
+
 }

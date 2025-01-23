@@ -2,7 +2,13 @@ package config;
 
 import org.aeonbits.owner.ConfigFactory;
 
-public class Constants {
+public class Project {
+
+    public static final String environment = System.getProperty("environment", "local");
+
+    public static final boolean localEnv = environment.equals("local");
+    public static final boolean virtualEnv = environment.equals("virtual");
+    public static final boolean remote = environment.equals("remote");
 
     public static final String platform = System.getProperty("platform", "android");
 
@@ -15,7 +21,7 @@ public class Constants {
         public static final String PASSWORD = System.getProperty("passwordBrowserStack", config.getPassword());
     }
 
-    public static class Project {
+    public static class ProjectConfiguration {
         static ProjectConfig projectConfig = ConfigFactory.create(ProjectConfig.class, System.getProperties());
         public static final String PROJECT_NAME = System.getProperty("browserStack.project", projectConfig.getProjectName());
         public static final String BUILD_NAME = System.getProperty("browserStack.build", projectConfig.getBuildName());
