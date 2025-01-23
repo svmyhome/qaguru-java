@@ -2,7 +2,7 @@ package config;
 
 import org.aeonbits.owner.ConfigFactory;
 
-public class Config {
+public class Project {
 
     public static final String platform = System.getProperty("platform", "android");
 
@@ -15,7 +15,7 @@ public class Config {
         public static final String PASSWORD = System.getProperty("passwordBrowserStack", config.getPassword());
     }
 
-    public static class Project {
+    public static class ProjectConfiguration {
         static ProjectConfig projectConfig = ConfigFactory.create(ProjectConfig.class, System.getProperties());
         public static final String PROJECT_NAME = System.getProperty("browserStack.project", projectConfig.getProjectName());
         public static final String BUILD_NAME = System.getProperty("browserStack.build", projectConfig.getBuildName());
