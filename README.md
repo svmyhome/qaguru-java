@@ -123,3 +123,9 @@ localStorage
 sessionStorage
 
 AWAITILITY ожидание для RESTASSURED
+
+Мобильная автоматизация
+
+emulator -list-avds
+
+avdmanager list avd
