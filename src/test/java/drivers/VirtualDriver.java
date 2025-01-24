@@ -51,7 +51,7 @@ public class VirtualDriver implements WebDriverProvider {
         androidOptions = new UiAutomator2Options();
         androidOptions.setAutomationName(ANDROID_UIAUTOMATOR2);
         androidOptions.setPlatformName(ANDROID);
-        androidOptions.setPlatformVersion("11.0");
+        androidOptions.setPlatformVersion(androidConfig.getPlatformVersion());
 //        androidOptions.setDeviceName("Pixel_3a_API_34_extension_level_7_arm64");
         androidOptions.setUdid("emulator-5554");
         androidOptions.setApp(getAppPath());
