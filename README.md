@@ -64,8 +64,11 @@ gradle ios -Dplatform=ios -Ddevice=iphone12
 
 ```
 gradle android -Denvironment=local
+
 gradle android -Denvironment=remote -Dplatform=android -Ddevice=samsungS22Ultra
 gradle ios -Denvironment=remote -Dplatform=ios -Ddevice=iphone12
+
+gradle android -Denvironment=virtual
 ```
 
 ## ALLURE
@@ -137,3 +140,20 @@ AWAITILITY ожидание для RESTASSURED
 emulator -list-avds
 
 avdmanager list avd
+
+adb devices - List of devices attached emulator-5554 device
+
+Где emulator-5554 является так называемым udid устройства.
+
+С помощью udid можно получить другое полезное свойство устройства – avd_name:
+
+% adb -s emulator-5554 shell getprop ro.kernel.qemu.avd_name Pixel_4_XL_API_29 или
+
+% adb -s emulator-5554 emu avd name Pixel_4_XL_API_29
+
+OK Другой способ узнать avd_name – это открыть «Virtual Device Manager» и в деталях об устройстве увидеть avd_name в
+значении поля AvdId:
+
+Зная avd_name, мы можем запускать эмулятор из терминала (а не только из «Virtual Device Manager»):
+
+% emulator -avd Pixel_4_XL_API_29
