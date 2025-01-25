@@ -55,8 +55,8 @@ public class LocalDriver implements WebDriverProvider {
 //        androidOptions.setDeviceName("Pixel_3a_API_34_extension_level_7_arm64");
         androidOptions.setUdid(androidConfig.getUdid());
         androidOptions.setApp(getAppPath());
-        androidOptions.setAppPackage("org.wikipedia.alpha");
-        androidOptions.setAppActivity("org.wikipedia.main.MainActivity");
+        androidOptions.setAppPackage(androidConfig.getAppPackage());
+        androidOptions.setAppActivity(androidConfig.getAppActivity());
 
         return new AndroidDriver(getLocalUrl(), androidOptions);
     }
