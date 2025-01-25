@@ -1,8 +1,8 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.BrowserStackIosConfig;
 import config.LocalAndroidConfig;
+import config.LocalIosConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
@@ -15,6 +15,7 @@ import javax.annotation.Nonnull;
 
 import static config.Project.ProjectConfiguration.*;
 import static config.Project.*;
+import static drivers.GetMobileDriver.getMobileDevice;
 import static helpers.LocalHelper.getAppPath;
 import static helpers.LocalHelper.getLocalUrl;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
@@ -23,7 +24,7 @@ import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 public class LocalDriver implements WebDriverProvider {
     LocalAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
-    BrowserStackIosConfig iosConfig;
+    LocalIosConfig iosConfig;
     XCUITestOptions iosOptions;
 
 
@@ -40,12 +41,9 @@ public class LocalDriver implements WebDriverProvider {
     }
 
     public AndroidDriver createAndroidDriver() {
-        if (device == null) {
-            device = "redmiNote4";
-            System.setProperty("device", device);
-        }
-        androidConfig = ConfigFactory.create(LocalAndroidConfig.class, System.getProperties());
+        getMobileDevice("redmiNote4");
 
+        androidConfig = ConfigFactory.create(LocalAndroidConfig.class, System.getProperties());
         androidOptions = new UiAutomator2Options();
         androidOptions.setAutomationName(ANDROID_UIAUTOMATOR2);
         androidOptions.setPlatformName(ANDROID);
@@ -60,13 +58,9 @@ public class LocalDriver implements WebDriverProvider {
     }
 
     public IOSDriver createIosDriver() {
-        if (device == null) {
-            device = "iphoneXS";
-            System.setProperty("device", device);
-        }
+        getMobileDevice("iphoneXS");
 
-        iosConfig = ConfigFactory.create(BrowserStackIosConfig.class, System.getProperties());
-
+        iosConfig = ConfigFactory.create(LocalIosConfig.class, System.getProperties());
         iosOptions = new XCUITestOptions();
         iosOptions.setCapability("appium:app", iosConfig.getApp());
         iosOptions.setCapability("appium:deviceName", iosConfig.getDeviceName());

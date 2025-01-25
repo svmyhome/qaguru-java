@@ -15,6 +15,7 @@ import javax.annotation.Nonnull;
 
 import static config.Project.ProjectConfiguration.*;
 import static config.Project.*;
+import static drivers.GetMobileDriver.getMobileDevice;
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
 
 public class BrowserStackDriver implements WebDriverProvider {
@@ -36,14 +37,10 @@ public class BrowserStackDriver implements WebDriverProvider {
         }
     }
 
-
     public AndroidDriver createAndroidDriver() {
-        if (device == null) {
-            device = "pixel6Pro";
-            System.setProperty("device", device);
-        }
-        androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
+        getMobileDevice("pixel6Pro");
 
+        androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
         androidOptions = new UiAutomator2Options();
         androidOptions.setCapability("appium:app", androidConfig.getApp());
         androidOptions.setCapability("appium:deviceName", androidConfig.getDeviceName());
@@ -52,18 +49,13 @@ public class BrowserStackDriver implements WebDriverProvider {
         androidOptions.setCapability("build", BUILD_NAME + " Android");
         androidOptions.setCapability("name", TEST_NAME + " " + device);
 
-        return new AndroidDriver(
-                getBrowserstackUrl(), androidOptions);
+        return new AndroidDriver(getBrowserstackUrl(), androidOptions);
     }
 
     public IOSDriver createIosDriver() {
-        if (device == null) {
-            device = "iphoneXS";
-            System.setProperty("device", device);
-        }
+        getMobileDevice("iphoneXS");
 
         iosConfig = ConfigFactory.create(BrowserStackIosConfig.class, System.getProperties());
-
         iosOptions = new XCUITestOptions();
         iosOptions.setCapability("appium:app", iosConfig.getApp());
         iosOptions.setCapability("appium:deviceName", iosConfig.getDeviceName());

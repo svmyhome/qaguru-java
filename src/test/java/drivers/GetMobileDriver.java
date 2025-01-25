@@ -1,5 +1,6 @@
 package drivers;
 
+import static config.Project.device;
 import static config.Project.environment;
 
 public class GetMobileDriver {
@@ -14,4 +15,12 @@ public class GetMobileDriver {
             throw new UnsupportedOperationException("Unsupported platform: neither Android nor iOS.");
         }
     }
+
+    public static void getMobileDevice(String deviceName) {
+        if (device == null) {
+            device = deviceName;
+            System.setProperty("device", device);
+        }
+    }
+
 }
