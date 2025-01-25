@@ -14,8 +14,7 @@ import org.openqa.selenium.WebDriver;
 import javax.annotation.Nonnull;
 
 import static config.Project.ProjectConfiguration.*;
-import static config.Project.isAndroid;
-import static config.Project.isIos;
+import static config.Project.*;
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
 
 public class BrowserStackDriver implements WebDriverProvider {
@@ -39,7 +38,6 @@ public class BrowserStackDriver implements WebDriverProvider {
 
 
     public AndroidDriver createAndroidDriver() {
-        String device = System.getProperty("device");
         if (device == null) {
             device = "pixel6Pro";
             System.setProperty("device", device);
@@ -59,7 +57,6 @@ public class BrowserStackDriver implements WebDriverProvider {
     }
 
     public IOSDriver createIosDriver() {
-        String device = System.getProperty("device");
         if (device == null) {
             device = "iphoneXS";
             System.setProperty("device", device);

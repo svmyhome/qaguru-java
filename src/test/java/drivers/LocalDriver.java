@@ -14,8 +14,7 @@ import org.openqa.selenium.WebDriver;
 import javax.annotation.Nonnull;
 
 import static config.Project.ProjectConfiguration.*;
-import static config.Project.isAndroid;
-import static config.Project.isIos;
+import static config.Project.*;
 import static helpers.LocalHelper.getAppPath;
 import static helpers.LocalHelper.getLocalUrl;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
@@ -41,7 +40,6 @@ public class LocalDriver implements WebDriverProvider {
     }
 
     public AndroidDriver createAndroidDriver() {
-        String device = System.getProperty("device");
         if (device == null) {
             device = "redmiNote4";
             System.setProperty("device", device);
@@ -62,7 +60,6 @@ public class LocalDriver implements WebDriverProvider {
     }
 
     public IOSDriver createIosDriver() {
-        String device = System.getProperty("device");
         if (device == null) {
             device = "iphoneXS";
             System.setProperty("device", device);
