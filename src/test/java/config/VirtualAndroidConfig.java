@@ -3,8 +3,8 @@ package config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:config/virtual/android/${device}.properties",
-        "classpath:config/virtual/android/pixel4.properties"
+        "classpath:config/emulation/android/${device}.properties",
+        "classpath:config/emulation/android/pixel4.properties"
 })
 public interface VirtualAndroidConfig extends Config {
     @Key("android.app")
