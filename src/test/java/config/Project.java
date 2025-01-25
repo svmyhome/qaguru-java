@@ -4,7 +4,7 @@ import org.aeonbits.owner.ConfigFactory;
 
 public class Project {
 
-    public static final String environment = System.getProperty("environment", "real");
+    public static final String deviceHost = System.getProperty("deviceHost", "real");
 
     public static final String platform = System.getProperty("platform", "android");
 

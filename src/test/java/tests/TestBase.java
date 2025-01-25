@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
-import static config.Project.environment;
+import static config.Project.deviceHost;
 import static drivers.GetMobileDriver.getMobileDriver;
 
 public class TestBase {
@@ -38,7 +38,7 @@ public class TestBase {
         Attach.screenshotAs("picture");
         Attach.pageSource();
         closeWebDriver();
-        if ("remote".equals(environment)) {
+        if ("browserstack".equals(deviceHost)) {
             Attach.addVideo(sessionId);
         }
 
