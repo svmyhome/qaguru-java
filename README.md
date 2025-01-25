@@ -71,8 +71,8 @@ gradle android -Denvironment=real -Dplatform=android -Ddevice=redmiNote4
 ### Запуск эмулятора
 
 ```
-gradle android -Denvironment=virtual
-gradle android -Denvironment=virtual -Dplatform=android -Ddevice=pixel4
+gradle android -Denvironment=emulation
+gradle android -Denvironment=emulation -Dplatform=android -Ddevice=pixel4
 ```
 
 ## ALLURE

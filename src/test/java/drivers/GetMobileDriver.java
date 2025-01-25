@@ -7,7 +7,7 @@ public class GetMobileDriver {
     public static String getMobileDriver() {
         if ("real".equals(environment)) {
             return LocalDriver.class.getName();
-        } else if ("virtual".equals(environment)) {
+        } else if ("emulation".equals(environment)) {
             return VirtualDriver.class.getName();
         } else if ("remote".equals(environment)) {
             return BrowserStackDriver.class.getName();
