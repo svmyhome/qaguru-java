@@ -4,7 +4,7 @@ import org.aeonbits.owner.ConfigFactory;
 
 public class Project {
 
-    public static final String environment = System.getProperty("environment", "local");
+    public static final String environment = System.getProperty("environment", "config/local");
 
     public static final String platform = System.getProperty("platform", "android");
 
