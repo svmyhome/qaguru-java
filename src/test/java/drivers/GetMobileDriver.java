@@ -1,15 +1,14 @@
 package drivers;
 
-import static config.Project.device;
-import static config.Project.deviceHost;
+import static config.Project.*;
 
 public class GetMobileDriver {
     public static String getMobileDriver() {
-        if ("real".equals(deviceHost)) {
+        if (isRealDevice) {
             return LocalDriver.class.getName();
-        } else if ("emulation".equals(deviceHost)) {
+        } else if (isEmulationDevice) {
             return VirtualDriver.class.getName();
-        } else if ("browserstack".equals(deviceHost)) {
+        } else if (isBrowserStackDevice) {
             return BrowserStackDriver.class.getName();
         } else {
             throw new UnsupportedOperationException("Unsupported platform: neither Android nor iOS.");
