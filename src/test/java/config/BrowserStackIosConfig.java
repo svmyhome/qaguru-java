@@ -3,8 +3,8 @@ package config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "classpath:config/ios/${device}.properties",
-        "classpath:config/ios/iphone12.properties"
+        "classpath:config/browserstack/ios/${device}.properties",
+        "classpath:config/browserstack/ios/iphone12.properties"
 })
 public interface BrowserStackIosConfig extends Config {
     @Key("ios.app")
