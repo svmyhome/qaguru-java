@@ -15,7 +15,8 @@
     Browserstack https://github.com/svmyhome/qaguru-java/tree/lesson-20
     https://jenkins.autotests.cloud/job/lesson-20/3/allure/#suites/d553c9ac4032444613129d6c93fdfd90/11b504b6cfbf17e8/
     https://jenkins.autotests.cloud/job/lesson-20/4/allure/#suites/bdd7aaba57360a7d6ef5fdff817d9d2b/8f8a440d3d4e5bff/
-21. Мобильная автоматизация #2. Разрабатываем автотесты с эмулятором Android-устройства и на своем телефоне
+21. Мобильная автоматизация #2. Разрабатываем автотесты с эмулятором Android-устройства и на своем
+    телефоне  https://github.com/svmyhome/qaguru-java/tree/lesson-21-Mobile-automation-local
 
 gradle clean api_test -DuserName=vindisel2 -DuserPassword=Qaz2@wsx -Dremote=https://user1:1234
 @selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000
@@ -69,7 +70,6 @@ gradle android -DdeviceHost=real -Dplatform=android -Ddevice=redmiNote4
 ```
 
 ### Запуск эмулятора
-
 ```
 gradle android -DdeviceHost=emulation
 gradle android -DdeviceHost=emulation -Dplatform=android -Ddevice=pixel4
