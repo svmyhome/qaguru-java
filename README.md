@@ -49,26 +49,30 @@ tasks.register('test-by-tag', Test) {
 }
 ```
 
-### Запуск тестов по тегу:
+## Запуск тестов по тегу:
 
+### Запуск Browserstack
 ```
-gradle android -Dplatform=android
-gradle android -Dplatform=android -Ddevice=samsungS22Ultra
-```
-```
-gradle ios -Dplatform=ios
-gradle ios -Dplatform=ios -Ddevice=iphone12
+gradle android -Denvironment=remote
+gradle android -Denvironment=remote -Dplatform=android
+gradle android -Denvironment=remote -Dplatform=android -Ddevice=samsungS22Ultra
+
+gradle ios -Denvironment=remote -Dplatform=ios
+gradle ios -Denvironment=remote -Dplatform=ios -Ddevice=iphone12
 ```
 
-запуск локально
-
+### Запуск локально
 ```
 gradle android -Denvironment=local
+gradle android -Denvironment=local -Dplatform=android
+gradle android -Denvironment=local -Dplatform=android -Ddevice=redmiNote4
+```
 
-gradle android -Denvironment=remote -Dplatform=android -Ddevice=samsungS22Ultra
-gradle ios -Denvironment=remote -Dplatform=ios -Ddevice=iphone12
+### Запуск эмулятора
 
+```
 gradle android -Denvironment=virtual
+gradle android -Denvironment=virtual -Dplatform=android -Ddevice=pixel4
 ```
 
 ## ALLURE
