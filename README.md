@@ -63,9 +63,9 @@ gradle ios -Denvironment=remote -Dplatform=ios -Ddevice=iphone12
 
 ### Запуск локально
 ```
-gradle android -Denvironment=local
-gradle android -Denvironment=local -Dplatform=android
-gradle android -Denvironment=local -Dplatform=android -Ddevice=redmiNote4
+gradle android -Denvironment=real
+gradle android -Denvironment=real -Dplatform=android
+gradle android -Denvironment=real -Dplatform=android -Ddevice=redmiNote4
 ```
 
 ### Запуск эмулятора
