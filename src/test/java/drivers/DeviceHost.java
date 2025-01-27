@@ -2,8 +2,8 @@ package drivers;
 
 import static helpers.Project.*;
 
-public class GetMobileDriver {
-    public static String getMobileDriver() {
+public class DeviceHost {
+    public static String getDeviceHost() {
         if (isRealDevice) {
             return LocalDriver.class.getName();
         } else if (isEmulationDevice) {

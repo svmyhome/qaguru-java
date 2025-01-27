@@ -11,14 +11,14 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
+import static drivers.DeviceHost.getDeviceHost;
 import static helpers.Project.isBrowserStackDevice;
-import static drivers.GetMobileDriver.getMobileDriver;
 
 public class TestBase {
 
     @BeforeAll
     public static void beforeAll() {
-        Configuration.browser = getMobileDriver();
+        Configuration.browser = getDeviceHost();
         Configuration.browserSize = null;
         Configuration.timeout = 30000;
     }
