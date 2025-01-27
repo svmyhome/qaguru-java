@@ -4,8 +4,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import static helpers.CustomAllureListener.withCustomTemplates;
-import static helpers.Project.Credentials.PASSWORD;
-import static helpers.Project.Credentials.USER_NAME;
+import static helpers.ProjectSettings.Credentials.PASSWORD;
+import static helpers.ProjectSettings.Credentials.USER_NAME;
 import static io.restassured.RestAssured.given;
 
 public class BrowserstackHelper {

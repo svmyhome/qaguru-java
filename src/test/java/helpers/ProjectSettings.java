@@ -4,11 +4,9 @@ import config.AuthConfig;
 import config.ProjectConfig;
 import org.aeonbits.owner.ConfigFactory;
 
-public class Project {
+public class ProjectSettings {
 
     public static final String deviceHost = System.getProperty("deviceHost", "real");
-    public static final boolean isRealDevice = "real".equals(deviceHost);
-    public static final boolean isEmulationDevice = "emulation".equals(deviceHost);
     public static final boolean isBrowserStackDevice = "browserstack".equals(deviceHost);
 
     public static final String platform = System.getProperty("platform", "android");

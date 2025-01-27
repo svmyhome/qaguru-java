@@ -14,13 +14,13 @@ import java.time.LocalDateTime;
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
 import static helpers.LocalHelper.getAppPath;
 import static helpers.LocalHelper.getLocalUrl;
-import static helpers.Project.ProjectConfiguration.projectConfig;
-import static helpers.Project.isAndroid;
-import static helpers.Project.isBrowserStackDevice;
+import static helpers.ProjectSettings.ProjectConfiguration.projectConfig;
+import static helpers.ProjectSettings.isAndroid;
+import static helpers.ProjectSettings.isBrowserStackDevice;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
-public class SetDriver implements WebDriverProvider {
+public class CreateMobileDriver implements WebDriverProvider {
     DeviceAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
 
