@@ -10,7 +10,6 @@ public class Project {
     public static final boolean isBrowserStackDevice = "browserstack".equals(deviceHost);
 
     public static final String platform = System.getProperty("platform", "android");
-    public static final boolean isIos = platform.equals("ios");
     public static final boolean isAndroid = platform.equals("android");
     public static String device = System.getProperty("device");
 
