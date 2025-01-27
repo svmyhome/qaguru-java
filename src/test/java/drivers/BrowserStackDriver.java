@@ -9,6 +9,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nonnull;
+import java.time.LocalDateTime;
 
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
 import static helpers.Project.ProjectConfiguration.projectConfig;
@@ -16,7 +17,6 @@ import static helpers.Project.isAndroid;
 
 public class BrowserStackDriver implements WebDriverProvider {
     DeviceAndroidConfig androidConfig;
-    //    BrowserStackAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
 
     @Nonnull
@@ -30,14 +30,13 @@ public class BrowserStackDriver implements WebDriverProvider {
     }
 
     public AndroidDriver createAndroidDriver() {
-//        androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
         androidConfig = ConfigFactory.create(DeviceAndroidConfig.class, System.getProperties());
         androidOptions = new UiAutomator2Options();
         androidOptions.setCapability("appium:app", androidConfig.getApp());
         androidOptions.setCapability("appium:deviceName", androidConfig.getDeviceName());
         androidOptions.setCapability("appium:platformVersion", androidConfig.getPlatformVersion());
         androidOptions.setCapability("project", projectConfig.getProjectName());
-        androidOptions.setCapability("build", projectConfig.getProjectName() + " Android");
+        androidOptions.setCapability("build", projectConfig.getBuildName() + " " + LocalDateTime.now());
         androidOptions.setCapability("name", projectConfig.getTestName() + " " + androidConfig.getDeviceName());
 
         return new AndroidDriver(getBrowserstackUrl(), androidOptions);

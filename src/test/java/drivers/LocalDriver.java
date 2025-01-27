@@ -2,7 +2,6 @@ package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
 import config.DeviceAndroidConfig;
-import config.LocalAndroidConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.aeonbits.owner.ConfigFactory;
@@ -11,14 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nonnull;
 
-import static helpers.Project.isAndroid;
 import static helpers.LocalHelper.getAppPath;
 import static helpers.LocalHelper.getLocalUrl;
+import static helpers.Project.isAndroid;
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.MobilePlatform.ANDROID;
 
 public class LocalDriver implements WebDriverProvider {
-    //    LocalAndroidConfig androidConfig;
     DeviceAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
 
@@ -33,7 +31,6 @@ public class LocalDriver implements WebDriverProvider {
     }
 
     public AndroidDriver createAndroidDriver() {
-//        androidConfig = ConfigFactory.create(LocalAndroidConfig.class, System.getProperties());
         androidConfig = ConfigFactory.create(DeviceAndroidConfig.class, System.getProperties());
         androidOptions = new UiAutomator2Options();
         androidOptions.setAutomationName(ANDROID_UIAUTOMATOR2);
