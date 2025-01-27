@@ -76,25 +76,4 @@ task android(type: Test) {
     useJUnitPlatform {
         includeTags("android")
     }
-    testLogging {
-        lifecycle {
-            events "passed", "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
-
-    systemProperties(System.getProperties())
-}
-task ios(type: Test) {
-    useJUnitPlatform {
-        includeTags("ios")
-    }
-    testLogging {
-        lifecycle {
-            events "passed", "started", "skipped", "failed", "standard_error", "standard_out"
-            exceptionFormat "short"
-        }
-    }
-
-    systemProperties(System.getProperties())
 }

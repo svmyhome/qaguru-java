@@ -1,5 +1,7 @@
-package config;
+package helpers;
 
+import config.AuthConfig;
+import config.ProjectConfig;
 import org.aeonbits.owner.ConfigFactory;
 
 public class Project {
@@ -20,10 +22,6 @@ public class Project {
     }
 
     public static class ProjectConfiguration {
-        static ProjectConfig projectConfig = ConfigFactory.create(ProjectConfig.class, System.getProperties());
-        public static final String PROJECT_NAME = System.getProperty("browserStack.project", projectConfig.getProjectName());
-        public static final String BUILD_NAME = System.getProperty("browserStack.build", projectConfig.getBuildName());
-        public static final String TEST_NAME = System.getProperty("browserStack.testName", projectConfig.getTestName());
-
+        public static ProjectConfig projectConfig = ConfigFactory.create(ProjectConfig.class, System.getProperties());
     }
 }

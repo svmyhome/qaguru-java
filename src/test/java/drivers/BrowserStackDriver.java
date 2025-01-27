@@ -1,7 +1,7 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
-import config.BrowserStackAndroidConfig;
+import config.DeviceAndroidConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.aeonbits.owner.ConfigFactory;
@@ -10,14 +10,13 @@ import org.openqa.selenium.WebDriver;
 
 import javax.annotation.Nonnull;
 
-import static config.Project.ProjectConfiguration.*;
-import static config.Project.device;
-import static config.Project.isAndroid;
-import static drivers.GetMobileDriver.getMobileDevice;
 import static helpers.BrowserstackHelper.getBrowserstackUrl;
+import static helpers.Project.ProjectConfiguration.projectConfig;
+import static helpers.Project.isAndroid;
 
 public class BrowserStackDriver implements WebDriverProvider {
-    BrowserStackAndroidConfig androidConfig;
+    DeviceAndroidConfig androidConfig;
+    //    BrowserStackAndroidConfig androidConfig;
     UiAutomator2Options androidOptions;
 
     @Nonnull
@@ -31,16 +30,15 @@ public class BrowserStackDriver implements WebDriverProvider {
     }
 
     public AndroidDriver createAndroidDriver() {
-        getMobileDevice("pixel6Pro");
-
-        androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
+//        androidConfig = ConfigFactory.create(BrowserStackAndroidConfig.class, System.getProperties());
+        androidConfig = ConfigFactory.create(DeviceAndroidConfig.class, System.getProperties());
         androidOptions = new UiAutomator2Options();
         androidOptions.setCapability("appium:app", androidConfig.getApp());
         androidOptions.setCapability("appium:deviceName", androidConfig.getDeviceName());
         androidOptions.setCapability("appium:platformVersion", androidConfig.getPlatformVersion());
-        androidOptions.setCapability("project", PROJECT_NAME);
-        androidOptions.setCapability("build", BUILD_NAME + " Android");
-        androidOptions.setCapability("name", TEST_NAME + " " + device);
+        androidOptions.setCapability("project", projectConfig.getProjectName());
+        androidOptions.setCapability("build", projectConfig.getProjectName() + " Android");
+        androidOptions.setCapability("name", projectConfig.getTestName() + " " + androidConfig.getDeviceName());
 
         return new AndroidDriver(getBrowserstackUrl(), androidOptions);
     }

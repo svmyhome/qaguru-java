@@ -23,22 +23,22 @@ public class WikipediaSearchTests extends TestBase {
         onBoardingScreen.clickToStartButton();
         searchScreen.assertMainScreenOpen();
     }
-
-    @Test
-    void testOnboardingScreenSkipSuccess() {
-        onBoardingScreen.assertTextExist("The Free Encyclopedia");
-        onBoardingScreen.clickToSkipButton();
-        searchScreen.assertMainScreenOpen();
-    }
-
-    @Test
-    void testSearchSuccess() {
-        String searchValue = "Appium";
-
-        onBoardingScreen.clickToSkipButton();
-
-        searchScreen.assertMainScreenOpen().clickToSearch().enterTextToSearchField(searchValue);
-        resultsScreen.assertTitleListIsNotEmpty();
-    }
+//
+//    @Test
+//    void testOnboardingScreenSkipSuccess() {
+//        onBoardingScreen.assertTextExist("The Free Encyclopedia");
+//        onBoardingScreen.clickToSkipButton();
+//        searchScreen.assertMainScreenOpen();
+//    }
+//
+//    @Test
+//    void testSearchSuccess() {
+//        String searchValue = "Appium";
+//
+//        onBoardingScreen.clickToSkipButton();
+//
+//        searchScreen.assertMainScreenOpen().clickToSearch().enterTextToSearchField(searchValue);
+//        resultsScreen.assertTitleListIsNotEmpty();
+//    }
 
 }

@@ -1,6 +1,6 @@
 package drivers;
 
-import static config.Project.*;
+import static helpers.Project.*;
 
 public class GetMobileDriver {
     public static String getMobileDriver() {
@@ -12,13 +12,6 @@ public class GetMobileDriver {
             return BrowserStackDriver.class.getName();
         } else {
             throw new UnsupportedOperationException("Unsupported platform: neither Android nor iOS.");
-        }
-    }
-
-    public static void getMobileDevice(String deviceName) {
-        if (device == null) {
-            device = deviceName;
-            System.setProperty("device", device);
         }
     }
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
-import static config.Project.isBrowserStackDevice;
+import static helpers.Project.isBrowserStackDevice;
 import static drivers.GetMobileDriver.getMobileDriver;
 
 public class TestBase {

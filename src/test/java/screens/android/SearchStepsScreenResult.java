@@ -21,11 +21,4 @@ public class SearchStepsScreenResult {
         titleList.shouldHave(sizeGreaterThan(0));
         return this;
     }
-
-
-    @Step("Click to link")
-    public SearchStepsScreenResult clickToListItemDescription(String expectedResult) {
-        listItemDescription.shouldHave(text(expectedResult)).click();
-        return this;
-    }
 }
