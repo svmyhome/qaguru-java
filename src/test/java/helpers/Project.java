@@ -13,7 +13,6 @@ public class Project {
 
     public static final String platform = System.getProperty("platform", "android");
     public static final boolean isAndroid = platform.equals("android");
-//    public static String device = System.getProperty("device");
 
     public static class Credentials {
         static AuthConfig config = ConfigFactory.create(AuthConfig.class, System.getProperties());
