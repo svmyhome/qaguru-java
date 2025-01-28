@@ -109,4 +109,5 @@ document.cookie
 localStorage
 sessionStorage
 
-AWAITILITY ожидание для RESTASSURED
+AWAITILITY ожидание для RESTASSURE
+токен Дженкинс 82df2326-b269-4787-bb78-d7797955ab0e 

@@ -1,6 +1,9 @@
 package tests;
 
 import helpers.WithLogin;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import models.books.AddBookRequestModel;
 import models.books.Isbn;
@@ -21,6 +24,8 @@ import static helpers.ResponseCredentials.getAuthResponse;
 
 @Tag("API")
 @Tag("full")
+@Owner("Voldemar")
+@Feature("Feature 11111")
 @DisplayName("API + UI")
 public class DemoQaApiUiWithLoginTests extends TestBase {
 
@@ -29,6 +34,8 @@ public class DemoQaApiUiWithLoginTests extends TestBase {
 
     @Test
     @WithLogin
+    @Story("Story22222")
+
     @DisplayName("Успешное удаление одной книги из личного кабинета")
     public void deleteItemFromCartBookStoreTest() {
         Response authResponse = getAuthResponse();
