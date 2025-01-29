@@ -1,6 +1,7 @@
 package tests;
 
 import api.AccountApi;
+import io.qameta.allure.Feature;
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +13,7 @@ import static constants.Constants.Credentials.USER_NAME;
 import static io.qameta.allure.Allure.step;
 
 @Tag("API")
+@Feature("Feature 33333")
 @DisplayName("API")
 public class DemoQaApiWithLoginTests extends TestBase {
 
