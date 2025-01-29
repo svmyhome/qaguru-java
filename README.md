@@ -11,7 +11,16 @@
     Удаленный запуск: gradle clean test -DremoteStart=true
     19.1 [Чистый конфиг](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-selenium)
     18.2 [OWNER](https://github.com/svmyhome/qaguru-java/tree/lesson-19-config-owner)
-20.
+20. Мобильная автоматизация #1. Разрабатываем автотесты с
+    Browserstack https://github.com/svmyhome/qaguru-java/tree/lesson-20
+    https://jenkins.autotests.cloud/job/lesson-20/3/allure/#suites/d553c9ac4032444613129d6c93fdfd90/11b504b6cfbf17e8/
+    https://jenkins.autotests.cloud/job/lesson-20/4/allure/#suites/bdd7aaba57360a7d6ef5fdff817d9d2b/8f8a440d3d4e5bff/
+21. Мобильная автоматизация #2. Разрабатываем автотесты с эмулятором Android-устройства и на своем
+    телефоне  https://github.com/svmyhome/qaguru-java/tree/lesson-21-Mobile-automation-local
+22. Allure TestOps  https://github.com/svmyhome/qaguru-java/tree/lesson-22-Allure-TestOps
+    https://jenkins.autotests.cloud/job/lesson-22/
+    https://allure.autotests.cloud/project/4586/launches
+23.
 
 gradle clean api_test -DuserName=vindisel2 -DuserPassword=Qaz2@wsx -Dremote=https://user1:1234
 @selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000
@@ -45,7 +54,33 @@ tasks.register('test-by-tag', Test) {
 }
 ```
 
-gradle test-by-tag -PincludedTags=SMOKE
+## Запуск тестов по тегу:
+
+### Запуск Browserstack
+
+```
+gradle android -DdeviceHost=browserstack
+gradle android -DdeviceHost=browserstack -Dplatform=android
+gradle android -DdeviceHost=browserstack -Dplatform=android -Ddevice=samsungS22Ultra
+
+gradle ios -DdeviceHost=browserstack -Dplatform=ios
+gradle ios -DdeviceHost=browserstack -Dplatform=ios -Ddevice=iphone12
+```
+
+### Запуск локально
+
+```
+gradle android -DdeviceHost=real
+gradle android -DdeviceHost=real -Dplatform=android
+gradle android -DdeviceHost=real -Dplatform=android -Ddevice=redmiNote4
+```
+
+### Запуск эмулятора
+
+```
+gradle android -DdeviceHost=emulation
+gradle android -DdeviceHost=emulation -Dplatform=android -Ddevice=pixel4
+```
 
 ## ALLURE
 
@@ -109,5 +144,27 @@ document.cookie
 localStorage
 sessionStorage
 
-AWAITILITY ожидание для RESTASSURE
-токен Дженкинс 82df2326-b269-4787-bb78-d7797955ab0e 
+AWAITILITY ожидание для RESTASSURED
+
+Мобильная автоматизация
+
+emulator -list-avds
+
+avdmanager list avd
+
+adb devices - List of devices attached emulator-5554 device
+
+Где emulator-5554 является так называемым udid устройства.
+
+С помощью udid можно получить другое полезное свойство устройства – avd_name:
+
+% adb -s emulator-5554 shell getprop ro.kernel.qemu.avd_name Pixel_4_XL_API_29 или
+
+% adb -s emulator-5554 emu avd name Pixel_4_XL_API_29
+
+OK Другой способ узнать avd_name – это открыть «Virtual Device Manager» и в деталях об устройстве увидеть avd_name в
+значении поля AvdId:
+
+Зная avd_name, мы можем запускать эмулятор из терминала (а не только из «Virtual Device Manager»):
+
+% emulator -avd Pixel_4_XL_API_29
