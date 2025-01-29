@@ -24,8 +24,8 @@ import static helpers.ResponseCredentials.getAuthResponse;
 
 @Tag("API")
 @Tag("full")
-@Owner("Voldemar")
-@Feature("Feature 11111")
+@Owner("Ivan Ivanov")
+@Feature("Feature Automation")
 @DisplayName("API + UI")
 public class DemoQaApiUiWithLoginTests extends TestBase {
 

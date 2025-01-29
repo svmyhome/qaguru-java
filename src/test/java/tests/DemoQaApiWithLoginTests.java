@@ -2,6 +2,7 @@ package tests;
 
 import api.AccountApi;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import models.login.LoginRequestBodyModel;
 import models.login.LoginResponseBodyModel;
 import org.junit.jupiter.api.DisplayName;
@@ -13,7 +14,8 @@ import static constants.Constants.Credentials.USER_NAME;
 import static io.qameta.allure.Allure.step;
 
 @Tag("API")
-@Feature("Feature 33333")
+@Owner("Petr Petrov")
+@Feature("Feature Automation")
 @DisplayName("API")
 public class DemoQaApiWithLoginTests extends TestBase {
 
