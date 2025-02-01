@@ -20,7 +20,8 @@
 22. Allure TestOps  https://github.com/svmyhome/qaguru-java/tree/lesson-22-Allure-TestOps
     https://jenkins.autotests.cloud/job/lesson-22/
     https://allure.autotests.cloud/project/4586/launches
-23.
+23. Дополнительное занятие.
+    Selenoid  https://school.qa.guru/pl/teach/control/lesson/view?id=334644408   https://github.com/svmyhome/qaguru-java/tree/lesson-23-add-Selenoid
 
 gradle clean api_test -DuserName=vindisel2 -DuserPassword=Qaz2@wsx -Dremote=https://user1:1234
 @selenoid.autotests.cloud/wd/hub -Dbrowser=chrome -DbrowserVersion=126.0 -DbrowserSize=1000x2000
@@ -168,3 +169,7 @@ OK Другой способ узнать avd_name – это открыть «V
 Зная avd_name, мы можем запускать эмулятор из терминала (а не только из «Virtual Device Manager»):
 
 % emulator -avd Pixel_4_XL_API_29
+
+### DOCKER
+
+перчитать конфигурацию после изменеия браузера docker kill -sHUP selenoid
