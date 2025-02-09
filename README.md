@@ -1,6 +1,7 @@
 11. Jenkins. Создаем первую задачу
 12.
-13.
+13. Telegram-бот. Отправляем уведомления о результатах прохождении
+    автотестов https://github.com/svmyhome/qaguru-java/tree/lesson-13 https://jenkins.autotests.cloud/job/lesson-13/25/allure/
 14.
 15. REST API. Пишем автотесты с REST Assured
 16. REST API. Модели. Спецификации
